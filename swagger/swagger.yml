@@ -48,8 +48,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ActaRecibido'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - acta_recibido
@@ -65,8 +65,8 @@ paths:
       responses:
         "201":
           description: '{int} models.ActaRecibido'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /acta_recibido/{id}:
     get:
       tags:
@@ -84,8 +84,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ActaRecibido'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - acta_recibido
@@ -108,8 +108,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.ActaRecibido'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - acta_recibido
@@ -124,8 +124,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /documento_soporte_acta/:
     get:
       tags:
@@ -163,8 +163,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.DocumentoSoporteActa'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - documento_soporte_acta
@@ -180,8 +180,8 @@ paths:
       responses:
         "201":
           description: '{int} models.DocumentoSoporteActa'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /documento_soporte_acta/{id}:
     get:
       tags:
@@ -199,8 +199,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.DocumentoSoporteActa'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - documento_soporte_acta
@@ -223,8 +223,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.DocumentoSoporteActa'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - documento_soporte_acta
@@ -239,8 +239,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /elemento/:
     get:
       tags:
@@ -278,8 +278,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Elemento'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - elemento
@@ -295,8 +295,8 @@ paths:
       responses:
         "201":
           description: '{int} models.Elemento'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /elemento/{id}:
     get:
       tags:
@@ -314,8 +314,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Elemento'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - elemento
@@ -338,8 +338,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.Elemento'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - elemento
@@ -354,8 +354,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /estado_acta_recibido/:
     get:
       tags:
@@ -393,8 +393,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.EstadoActaRecibido'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - estado_acta_recibido
@@ -410,8 +410,8 @@ paths:
       responses:
         "201":
           description: '{int} models.EstadoActaRecibido'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /estado_acta_recibido/{id}:
     get:
       tags:
@@ -429,8 +429,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.EstadoActaRecibido'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - estado_acta_recibido
@@ -453,8 +453,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.EstadoActaRecibido'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - estado_acta_recibido
@@ -469,8 +469,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /estado_elemento/:
     get:
       tags:
@@ -508,8 +508,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.EstadoElemento'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - estado_elemento
@@ -525,8 +525,8 @@ paths:
       responses:
         "201":
           description: '{int} models.EstadoElemento'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /estado_elemento/{id}:
     get:
       tags:
@@ -544,8 +544,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.EstadoElemento'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - estado_elemento
@@ -568,8 +568,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.EstadoElemento'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - estado_elemento
@@ -584,8 +584,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
 definitions:
   models.ActaRecibido:
     title: ActaRecibido
