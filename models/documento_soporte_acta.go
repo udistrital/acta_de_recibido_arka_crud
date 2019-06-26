@@ -10,7 +10,7 @@ import (
 )
 
 type DocumentoSoporteActa struct {
-	Id             int           `orm:"column(id);pk"`
+	Id             int           `orm:"column(id);pk;auto"`
 	Documento      int           `orm:"column(documento)"`
 	ActaRecibidoId *ActaRecibido `orm:"column(acta_recibido_id);rel(fk)"`
 }
@@ -47,7 +47,7 @@ func GetDocumentoSoporteActaById(id int) (v *DocumentoSoporteActa, err error) {
 func GetAllDocumentoSoporteActa(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(DocumentoSoporteActa))
+	qs := o.QueryTable(new(DocumentoSoporteActa)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

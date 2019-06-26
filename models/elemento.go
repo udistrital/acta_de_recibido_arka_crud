@@ -10,7 +10,7 @@ import (
 )
 
 type Elemento struct {
-	Id               int             `orm:"column(id);pk"`
+	Id               int             `orm:"column(id);pk;auto"`
 	Cantidad         int             `orm:"column(cantidad)"`
 	Elemento         string          `orm:"column(elemento)"`
 	Marca            string          `orm:"column(marca);null"`
@@ -57,7 +57,7 @@ func GetElementoById(id int) (v *Elemento, err error) {
 func GetAllElemento(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Elemento))
+	qs := o.QueryTable(new(Elemento)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute

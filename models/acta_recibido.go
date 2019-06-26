@@ -11,7 +11,7 @@ import (
 )
 
 type ActaRecibido struct {
-	Id                   int                 `orm:"column(id);pk"`
+	Id                   int                 `orm:"column(id);pk;auto"`
 	Proveedor            int                 `orm:"column(proveedor)"`
 	Ubicacion            int                 `orm:"column(ubicacion)"`
 	FechaFactura         time.Time           `orm:"column(fecha_factura);type(date)"`
@@ -54,7 +54,7 @@ func GetActaRecibidoById(id int) (v *ActaRecibido, err error) {
 func GetAllActaRecibido(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(ActaRecibido))
+	qs := o.QueryTable(new(ActaRecibido)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
