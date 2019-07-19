@@ -9,6 +9,7 @@ import (
 
 	"github.com/astaxie/beego/plugins/cors"
 	"github.com/astaxie/beego/logs"
+	"github.com/udistrital/utils_oas/customerror"
 	
 )
 
@@ -33,7 +34,7 @@ func main() {
 	  }))
 
 	  logs.SetLogger(logs.AdapterFile, `{"filename":"/var/log/beego/acta_de_recibido_arka_crud/acta_de_recibido_arka_crud.log"}`)
-
+	  beego.ErrorController(&customerror.CustomErrorController{})
 	beego.Run()
 }
 
