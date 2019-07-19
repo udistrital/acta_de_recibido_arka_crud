@@ -8,7 +8,7 @@
 package routers
 
 import (
-	"github.com/ManuelMurillo/Acta_de_Recibido_CRUD/controllers"
+	"github.com/ManuelMurillo/acta_de_recibido_arka_crud/controllers"
 
 	"github.com/astaxie/beego"
 )
@@ -16,27 +16,39 @@ import (
 func init() {
 	ns := beego.NewNamespace("/v1",
 
+		beego.NSNamespace("/acta_recibido",
+			beego.NSInclude(
+				&controllers.ActaRecibidoController{},
+			),
+		),
+
 		beego.NSNamespace("/estado_elemento",
 			beego.NSInclude(
 				&controllers.EstadoElementoController{},
 			),
 		),
 
-		beego.NSNamespace("/estado_acta_recibido",
+		beego.NSNamespace("/historico_acta",
 			beego.NSInclude(
-				&controllers.EstadoActaRecibidoController{},
+				&controllers.HistoricoActaController{},
 			),
 		),
 
-		beego.NSNamespace("/documento_soporte_acta",
+		beego.NSNamespace("/soporte_acta",
 			beego.NSInclude(
-				&controllers.DocumentoSoporteActaController{},
+				&controllers.SoporteActaController{},
 			),
 		),
 
-		beego.NSNamespace("/acta_recibido",
+		beego.NSNamespace("/estado_acta",
 			beego.NSInclude(
-				&controllers.ActaRecibidoController{},
+				&controllers.EstadoActaController{},
+			),
+		),
+
+		beego.NSNamespace("/tipo_bien",
+			beego.NSInclude(
+				&controllers.TipoBienController{},
 			),
 		),
 

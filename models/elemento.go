@@ -5,24 +5,32 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 
 	"github.com/astaxie/beego/orm"
 )
 
 type Elemento struct {
-	Id               int             `orm:"column(id);pk;auto"`
-	Cantidad         int             `orm:"column(cantidad)"`
-	Elemento         string          `orm:"column(elemento)"`
-	Marca            string          `orm:"column(marca);null"`
-	Serie            string          `orm:"column(serie);null"`
-	VidaUtil         int             `orm:"column(vida_util);null"`
-	Descripcion      string          `orm:"column(descripcion);null"`
-	Unidad           int             `orm:"column(unidad)"`
-	Valor            int             `orm:"column(valor)"`
-	Iva              int             `orm:"column(iva)"`
-	SubgrupoCatalogo int             `orm:"column(subgrupo_catalogo)"`
-	ActaRecibidoId   *ActaRecibido   `orm:"column(acta_recibido_id);rel(fk)"`
-	EstadoElementoId *EstadoElemento `orm:"column(estado_elemento_id);rel(fk)"`
+	Id                 int             `orm:"column(id);pk;auto"`
+	Nombre             string          `orm:"column(nombre)"`
+	Cantidad           int             `orm:"column(cantidad)"`
+	Marca              string          `orm:"column(marca);null"`
+	Serie              string          `orm:"column(serie);null"`
+	UnidadMedida       int             `orm:"column(unidad_medida)"`
+	ValorUnitario      int             `orm:"column(valor_unitario)"`
+	Subtotal           int             `orm:"column(subtotal);null"`
+	Descuento          int             `orm:"column(descuento);null"`
+	ValorTotal         int             `orm:"column(valor_total);null"`
+	PorcentajeIvaId    int             `orm:"column(porcentaje_iva_id)"`
+	ValorIva           int             `orm:"column(valor_iva);null"`
+	ValorFinal         int             `orm:"column(valor_final);null"`
+	SubgrupoCatalogoId int             `orm:"column(subgrupo_catalogo_id)"`
+	TipoBienId         *TipoBien       `orm:"column(tipo_bien_id);rel(fk)"`
+	EstadoElementoId   *EstadoElemento `orm:"column(estado_elemento_id);rel(fk)"`
+	SoporteActaId      *SoporteActa    `orm:"column(soporte_acta_id);rel(fk)"`
+	Activo             bool            `orm:"column(activo)"`
+	FechaCreacion      time.Time       `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion  time.Time       `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
 }
 
 func (t *Elemento) TableName() string {

@@ -3,12 +3,11 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
-	"github.com/ManuelMurillo/Acta_de_Recibido_CRUD/models"
+	"github.com/ManuelMurillo/acta_de_recibido_arka_crud/models"
 	"strconv"
 	"strings"
 
 	"github.com/astaxie/beego"
-	"github.com/astaxie/beego/logs"
 )
 
 // ElementoController operations for Elemento
@@ -30,7 +29,7 @@ func (c *ElementoController) URLMapping() {
 // @Description create Elemento
 // @Param	body		body 	models.Elemento	true		"body for Elemento content"
 // @Success 201 {int} models.Elemento
-// @Failure 400 the request contains incorrect syntax
+// @Failure 403 body is empty
 // @router / [post]
 func (c *ElementoController) Post() {
 	var v models.Elemento
@@ -39,16 +38,10 @@ func (c *ElementoController) Post() {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = v
 		} else {
-logs.Error(err)
- //c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
-c.Data["system"] = err
- c.Abort("400")
+			c.Data["json"] = err.Error()
 		}
 	} else {
-logs.Error(err)
- //c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
-c.Data["system"] = err
- c.Abort("400")
+		c.Data["json"] = err.Error()
 	}
 	c.ServeJSON()
 }
@@ -58,17 +51,14 @@ c.Data["system"] = err
 // @Description get Elemento by id
 // @Param	id		path 	string	true		"The key for staticblock"
 // @Success 200 {object} models.Elemento
-// @Failure 404 not found resource
+// @Failure 403 :id is empty
 // @router /:id [get]
 func (c *ElementoController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetElementoById(id)
 	if err != nil {
-logs.Error(err)
- //c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
-c.Data["system"] = err
- c.Abort("404")
+		c.Data["json"] = err.Error()
 	} else {
 		c.Data["json"] = v
 	}
@@ -85,7 +75,7 @@ c.Data["system"] = err
 // @Param	limit	query	string	false	"Limit the size of result set. Must be an integer"
 // @Param	offset	query	string	false	"Start position of result set. Must be an integer"
 // @Success 200 {object} models.Elemento
-// @Failure 404 not found resource
+// @Failure 403
 // @router / [get]
 func (c *ElementoController) GetAll() {
 	var fields []string
@@ -131,15 +121,9 @@ func (c *ElementoController) GetAll() {
 
 	l, err := models.GetAllElemento(query, fields, sortby, order, offset, limit)
 	if err != nil {
-logs.Error(err)
- //c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
-c.Data["system"] = err
- c.Abort("404")
+		c.Data["json"] = err.Error()
 	} else {
-if l == nil {
- l = append(l, map[string]interface{}{})
- }
- c.Data["json"] = l
+		c.Data["json"] = l
 	}
 	c.ServeJSON()
 }
@@ -150,7 +134,7 @@ if l == nil {
 // @Param	id		path 	string	true		"The id you want to update"
 // @Param	body		body 	models.Elemento	true		"body for Elemento content"
 // @Success 200 {object} models.Elemento
-// @Failure 400 the request contains incorrect syntax
+// @Failure 403 :id is not int
 // @router /:id [put]
 func (c *ElementoController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
@@ -158,18 +142,12 @@ func (c *ElementoController) Put() {
 	v := models.Elemento{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
 		if err := models.UpdateElementoById(&v); err == nil {
-c.Data["json"] = v
+			c.Data["json"] = "OK"
 		} else {
-logs.Error(err)
- //c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
-c.Data["system"] = err
- c.Abort("400")
+			c.Data["json"] = err.Error()
 		}
 	} else {
-logs.Error(err)
- //c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
-c.Data["system"] = err
- c.Abort("400")
+		c.Data["json"] = err.Error()
 	}
 	c.ServeJSON()
 }
@@ -179,18 +157,15 @@ c.Data["system"] = err
 // @Description delete the Elemento
 // @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
-// @Failure 404 not found resource
+// @Failure 403 id is empty
 // @router /:id [delete]
 func (c *ElementoController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	if err := models.DeleteElemento(id); err == nil {
-c.Data["json"] = map[string]interface{}{"Id": id}
+		c.Data["json"] = "OK"
 	} else {
-logs.Error(err)
- //c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
-c.Data["system"] = err
- c.Abort("404")
+		c.Data["json"] = err.Error()
 	}
 	c.ServeJSON()
 }

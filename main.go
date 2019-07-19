@@ -1,7 +1,7 @@
 package main
 
 import (
-	_ "github.com/ManuelMurillo/Acta_de_Recibido_CRUD/routers"
+	_ "github.com/ManuelMurillo/acta_de_recibido_arka_crud/routers"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"

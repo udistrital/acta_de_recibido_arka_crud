@@ -11,15 +11,14 @@ import (
 )
 
 type ActaRecibido struct {
-	Id                   int                 `orm:"column(id);pk;auto"`
-	Proveedor            int                 `orm:"column(proveedor)"`
-	Ubicacion            int                 `orm:"column(ubicacion)"`
-	FechaFactura         time.Time           `orm:"column(fecha_factura);type(date)"`
-	FechaVistoBueno      time.Time           `orm:"column(fecha_visto_bueno);type(date);null"`
-	Revisor              string              `orm:"column(revisor)"`
-	Observaciones        string              `orm:"column(observaciones);null"`
-	Estado               int                 `orm:"column(estado)"`
-	EstadoActaRecibidoId *EstadoActaRecibido `orm:"column(estado_acta_recibido_id);rel(fk)"`
+	Id                int       `orm:"column(id);pk;auto"`
+	UbicacionId       int       `orm:"column(ubicacion_id)"`
+	FechaVistoBueno   time.Time `orm:"column(fecha_visto_bueno);type(date);null"`
+	RevisorId         int       `orm:"column(revisor_id)"`
+	Observaciones     string    `orm:"column(observaciones);null"`
+	Activo            bool      `orm:"column(activo)"`
+	FechaCreacion     time.Time `orm:"column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion time.Time `orm:"column(fecha_modificacion);type(timestamp without time zone)"`
 }
 
 func (t *ActaRecibido) TableName() string {

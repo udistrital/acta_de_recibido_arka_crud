@@ -67,8 +67,8 @@
                             "$ref": "#/definitions/models.ActaRecibido"
                         }
                     },
-                    "404": {
-                        "description": "not found resource"
+                    "403": {
+                        "description": ""
                     }
                 }
             },
@@ -93,8 +93,8 @@
                     "201": {
                         "description": "{int} models.ActaRecibido"
                     },
-                    "400": {
-                        "description": "the request contains incorrect syntax"
+                    "403": {
+                        "description": "body is empty"
                     }
                 }
             }
@@ -122,8 +122,8 @@
                             "$ref": "#/definitions/models.ActaRecibido"
                         }
                     },
-                    "404": {
-                        "description": "not found resource"
+                    "403": {
+                        "description": ":id is empty"
                     }
                 }
             },
@@ -158,8 +158,8 @@
                             "$ref": "#/definitions/models.ActaRecibido"
                         }
                     },
-                    "400": {
-                        "description": "the request contains incorrect syntax"
+                    "403": {
+                        "description": ":id is not int"
                     }
                 }
             },
@@ -182,181 +182,8 @@
                     "200": {
                         "description": "{string} delete success!"
                     },
-                    "404": {
-                        "description": "not found resource"
-                    }
-                }
-            }
-        },
-        "/documento_soporte_acta/": {
-            "get": {
-                "tags": [
-                    "documento_soporte_acta"
-                ],
-                "description": "get DocumentoSoporteActa",
-                "operationId": "DocumentoSoporteActaController.Get All",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "query",
-                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "fields",
-                        "description": "Fields returned. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "sortby",
-                        "description": "Sorted-by fields. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "limit",
-                        "description": "Limit the size of result set. Must be an integer",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "offset",
-                        "description": "Start position of result set. Must be an integer",
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.DocumentoSoporteActa"
-                        }
-                    },
-                    "404": {
-                        "description": "not found resource"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "documento_soporte_acta"
-                ],
-                "description": "create DocumentoSoporteActa",
-                "operationId": "DocumentoSoporteActaController.Post",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for DocumentoSoporteActa content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.DocumentoSoporteActa"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "{int} models.DocumentoSoporteActa"
-                    },
-                    "400": {
-                        "description": "the request contains incorrect syntax"
-                    }
-                }
-            }
-        },
-        "/documento_soporte_acta/{id}": {
-            "get": {
-                "tags": [
-                    "documento_soporte_acta"
-                ],
-                "description": "get DocumentoSoporteActa by id",
-                "operationId": "DocumentoSoporteActaController.Get One",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The key for staticblock",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.DocumentoSoporteActa"
-                        }
-                    },
-                    "404": {
-                        "description": "not found resource"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "documento_soporte_acta"
-                ],
-                "description": "update the DocumentoSoporteActa",
-                "operationId": "DocumentoSoporteActaController.Put",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to update",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for DocumentoSoporteActa content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.DocumentoSoporteActa"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.DocumentoSoporteActa"
-                        }
-                    },
-                    "400": {
-                        "description": "the request contains incorrect syntax"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "documento_soporte_acta"
-                ],
-                "description": "delete the DocumentoSoporteActa",
-                "operationId": "DocumentoSoporteActaController.Delete",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to delete",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{string} delete success!"
-                    },
-                    "404": {
-                        "description": "not found resource"
+                    "403": {
+                        "description": "id is empty"
                     }
                 }
             }
@@ -413,8 +240,8 @@
                             "$ref": "#/definitions/models.Elemento"
                         }
                     },
-                    "404": {
-                        "description": "not found resource"
+                    "403": {
+                        "description": ""
                     }
                 }
             },
@@ -439,8 +266,8 @@
                     "201": {
                         "description": "{int} models.Elemento"
                     },
-                    "400": {
-                        "description": "the request contains incorrect syntax"
+                    "403": {
+                        "description": "body is empty"
                     }
                 }
             }
@@ -468,8 +295,8 @@
                             "$ref": "#/definitions/models.Elemento"
                         }
                     },
-                    "404": {
-                        "description": "not found resource"
+                    "403": {
+                        "description": ":id is empty"
                     }
                 }
             },
@@ -504,8 +331,8 @@
                             "$ref": "#/definitions/models.Elemento"
                         }
                     },
-                    "400": {
-                        "description": "the request contains incorrect syntax"
+                    "403": {
+                        "description": ":id is not int"
                     }
                 }
             },
@@ -528,19 +355,19 @@
                     "200": {
                         "description": "{string} delete success!"
                     },
-                    "404": {
-                        "description": "not found resource"
+                    "403": {
+                        "description": "id is empty"
                     }
                 }
             }
         },
-        "/estado_acta_recibido/": {
+        "/estado_acta/": {
             "get": {
                 "tags": [
-                    "estado_acta_recibido"
+                    "estado_acta"
                 ],
-                "description": "get EstadoActaRecibido",
-                "operationId": "EstadoActaRecibidoController.Get All",
+                "description": "get EstadoActa",
+                "operationId": "EstadoActaController.Get All",
                 "parameters": [
                     {
                         "in": "query",
@@ -583,48 +410,48 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.EstadoActaRecibido"
+                            "$ref": "#/definitions/models.EstadoActa"
                         }
                     },
-                    "404": {
-                        "description": "not found resource"
+                    "403": {
+                        "description": ""
                     }
                 }
             },
             "post": {
                 "tags": [
-                    "estado_acta_recibido"
+                    "estado_acta"
                 ],
-                "description": "create EstadoActaRecibido",
-                "operationId": "EstadoActaRecibidoController.Post",
+                "description": "create EstadoActa",
+                "operationId": "EstadoActaController.Post",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "body for EstadoActaRecibido content",
+                        "description": "body for EstadoActa content",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.EstadoActaRecibido"
+                            "$ref": "#/definitions/models.EstadoActa"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.EstadoActaRecibido"
+                        "description": "{int} models.EstadoActa"
                     },
-                    "400": {
-                        "description": "the request contains incorrect syntax"
+                    "403": {
+                        "description": "body is empty"
                     }
                 }
             }
         },
-        "/estado_acta_recibido/{id}": {
+        "/estado_acta/{id}": {
             "get": {
                 "tags": [
-                    "estado_acta_recibido"
+                    "estado_acta"
                 ],
-                "description": "get EstadoActaRecibido by id",
-                "operationId": "EstadoActaRecibidoController.Get One",
+                "description": "get EstadoActa by id",
+                "operationId": "EstadoActaController.Get One",
                 "parameters": [
                     {
                         "in": "path",
@@ -638,20 +465,20 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.EstadoActaRecibido"
+                            "$ref": "#/definitions/models.EstadoActa"
                         }
                     },
-                    "404": {
-                        "description": "not found resource"
+                    "403": {
+                        "description": ":id is empty"
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "estado_acta_recibido"
+                    "estado_acta"
                 ],
-                "description": "update the EstadoActaRecibido",
-                "operationId": "EstadoActaRecibidoController.Put",
+                "description": "update the EstadoActa",
+                "operationId": "EstadoActaController.Put",
                 "parameters": [
                     {
                         "in": "path",
@@ -663,10 +490,10 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "body for EstadoActaRecibido content",
+                        "description": "body for EstadoActa content",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.EstadoActaRecibido"
+                            "$ref": "#/definitions/models.EstadoActa"
                         }
                     }
                 ],
@@ -674,20 +501,20 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.EstadoActaRecibido"
+                            "$ref": "#/definitions/models.EstadoActa"
                         }
                     },
-                    "400": {
-                        "description": "the request contains incorrect syntax"
+                    "403": {
+                        "description": ":id is not int"
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "estado_acta_recibido"
+                    "estado_acta"
                 ],
-                "description": "delete the EstadoActaRecibido",
-                "operationId": "EstadoActaRecibidoController.Delete",
+                "description": "delete the EstadoActa",
+                "operationId": "EstadoActaController.Delete",
                 "parameters": [
                     {
                         "in": "path",
@@ -701,8 +528,8 @@
                     "200": {
                         "description": "{string} delete success!"
                     },
-                    "404": {
-                        "description": "not found resource"
+                    "403": {
+                        "description": "id is empty"
                     }
                 }
             }
@@ -759,8 +586,8 @@
                             "$ref": "#/definitions/models.EstadoElemento"
                         }
                     },
-                    "404": {
-                        "description": "not found resource"
+                    "403": {
+                        "description": ""
                     }
                 }
             },
@@ -785,8 +612,8 @@
                     "201": {
                         "description": "{int} models.EstadoElemento"
                     },
-                    "400": {
-                        "description": "the request contains incorrect syntax"
+                    "403": {
+                        "description": "body is empty"
                     }
                 }
             }
@@ -814,8 +641,8 @@
                             "$ref": "#/definitions/models.EstadoElemento"
                         }
                     },
-                    "404": {
-                        "description": "not found resource"
+                    "403": {
+                        "description": ":id is empty"
                     }
                 }
             },
@@ -850,8 +677,8 @@
                             "$ref": "#/definitions/models.EstadoElemento"
                         }
                     },
-                    "400": {
-                        "description": "the request contains incorrect syntax"
+                    "403": {
+                        "description": ":id is not int"
                     }
                 }
             },
@@ -874,8 +701,527 @@
                     "200": {
                         "description": "{string} delete success!"
                     },
-                    "404": {
-                        "description": "not found resource"
+                    "403": {
+                        "description": "id is empty"
+                    }
+                }
+            }
+        },
+        "/historico_acta/": {
+            "get": {
+                "tags": [
+                    "historico_acta"
+                ],
+                "description": "get HistoricoActa",
+                "operationId": "HistoricoActaController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.HistoricoActa"
+                        }
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "historico_acta"
+                ],
+                "description": "create HistoricoActa",
+                "operationId": "HistoricoActaController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for HistoricoActa content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.HistoricoActa"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.HistoricoActa"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/historico_acta/{id}": {
+            "get": {
+                "tags": [
+                    "historico_acta"
+                ],
+                "description": "get HistoricoActa by id",
+                "operationId": "HistoricoActaController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.HistoricoActa"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "historico_acta"
+                ],
+                "description": "update the HistoricoActa",
+                "operationId": "HistoricoActaController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for HistoricoActa content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.HistoricoActa"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.HistoricoActa"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "historico_acta"
+                ],
+                "description": "delete the HistoricoActa",
+                "operationId": "HistoricoActaController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
+                    }
+                }
+            }
+        },
+        "/soporte_acta/": {
+            "get": {
+                "tags": [
+                    "soporte_acta"
+                ],
+                "description": "get SoporteActa",
+                "operationId": "SoporteActaController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.SoporteActa"
+                        }
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "soporte_acta"
+                ],
+                "description": "create SoporteActa",
+                "operationId": "SoporteActaController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for SoporteActa content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.SoporteActa"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.SoporteActa"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/soporte_acta/{id}": {
+            "get": {
+                "tags": [
+                    "soporte_acta"
+                ],
+                "description": "get SoporteActa by id",
+                "operationId": "SoporteActaController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.SoporteActa"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "soporte_acta"
+                ],
+                "description": "update the SoporteActa",
+                "operationId": "SoporteActaController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for SoporteActa content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.SoporteActa"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.SoporteActa"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "soporte_acta"
+                ],
+                "description": "delete the SoporteActa",
+                "operationId": "SoporteActaController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
+                    }
+                }
+            }
+        },
+        "/tipo_bien/": {
+            "get": {
+                "tags": [
+                    "tipo_bien"
+                ],
+                "description": "get TipoBien",
+                "operationId": "TipoBienController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoBien"
+                        }
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "tipo_bien"
+                ],
+                "description": "create TipoBien",
+                "operationId": "TipoBienController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for TipoBien content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoBien"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.TipoBien"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/tipo_bien/{id}": {
+            "get": {
+                "tags": [
+                    "tipo_bien"
+                ],
+                "description": "get TipoBien by id",
+                "operationId": "TipoBienController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoBien"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "tipo_bien"
+                ],
+                "description": "update the TipoBien",
+                "operationId": "TipoBienController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for TipoBien content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoBien"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoBien"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "tipo_bien"
+                ],
+                "description": "delete the TipoBien",
+                "operationId": "TipoBienController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
                     }
                 }
             }
@@ -886,14 +1232,14 @@
             "title": "ActaRecibido",
             "type": "object",
             "properties": {
-                "Estado": {
-                    "type": "integer",
-                    "format": "int64"
+                "Activo": {
+                    "type": "boolean"
                 },
-                "EstadoActaRecibidoId": {
-                    "$ref": "#/definitions/models.EstadoActaRecibido"
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
                 },
-                "FechaFactura": {
+                "FechaModificacion": {
                     "type": "string",
                     "format": "datetime"
                 },
@@ -908,31 +1254,11 @@
                 "Observaciones": {
                     "type": "string"
                 },
-                "Proveedor": {
+                "RevisorId": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "Revisor": {
-                    "type": "string"
-                },
-                "Ubicacion": {
-                    "type": "integer",
-                    "format": "int64"
-                }
-            }
-        },
-        "models.DocumentoSoporteActa": {
-            "title": "DocumentoSoporteActa",
-            "type": "object",
-            "properties": {
-                "ActaRecibidoId": {
-                    "$ref": "#/definitions/models.ActaRecibido"
-                },
-                "Documento": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Id": {
+                "UbicacionId": {
                     "type": "integer",
                     "format": "int64"
                 }
@@ -942,66 +1268,101 @@
             "title": "Elemento",
             "type": "object",
             "properties": {
-                "ActaRecibidoId": {
-                    "$ref": "#/definitions/models.ActaRecibido"
+                "Activo": {
+                    "type": "boolean"
                 },
                 "Cantidad": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "Descripcion": {
-                    "type": "string"
-                },
-                "Elemento": {
-                    "type": "string"
+                "Descuento": {
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "EstadoElementoId": {
                     "$ref": "#/definitions/models.EstadoElemento"
                 },
-                "Id": {
-                    "type": "integer",
-                    "format": "int64"
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
                 },
-                "Iva": {
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "Id": {
                     "type": "integer",
                     "format": "int64"
                 },
                 "Marca": {
                     "type": "string"
                 },
+                "Nombre": {
+                    "type": "string"
+                },
+                "PorcentajeIvaId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "Serie": {
                     "type": "string"
                 },
-                "SubgrupoCatalogo": {
+                "SoporteActaId": {
+                    "$ref": "#/definitions/models.SoporteActa"
+                },
+                "SubgrupoCatalogoId": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "Unidad": {
+                "Subtotal": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "Valor": {
+                "TipoBienId": {
+                    "$ref": "#/definitions/models.TipoBien"
+                },
+                "UnidadMedida": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "VidaUtil": {
+                "ValorFinal": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "ValorIva": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "ValorTotal": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "ValorUnitario": {
                     "type": "integer",
                     "format": "int64"
                 }
             }
         },
-        "models.EstadoActaRecibido": {
-            "title": "EstadoActaRecibido",
+        "models.EstadoActa": {
+            "title": "EstadoActa",
             "type": "object",
             "properties": {
+                "Activo": {
+                    "type": "boolean"
+                },
                 "CodigoAbreviacion": {
                     "type": "string"
                 },
                 "Descripcion": {
                     "type": "string"
                 },
-                "Estado": {
-                    "type": "boolean"
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
                 },
                 "Id": {
                     "type": "integer",
@@ -1010,7 +1371,7 @@
                 "Nombre": {
                     "type": "string"
                 },
-                "Orden": {
+                "NumeroOrden": {
                     "type": "number",
                     "format": "double"
                 }
@@ -1020,14 +1381,22 @@
             "title": "EstadoElemento",
             "type": "object",
             "properties": {
+                "Activo": {
+                    "type": "boolean"
+                },
                 "CodigoAbreviacion": {
                     "type": "string"
                 },
                 "Descripcion": {
                     "type": "string"
                 },
-                "Estado": {
-                    "type": "boolean"
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
                 },
                 "Id": {
                     "type": "integer",
@@ -1036,7 +1405,103 @@
                 "Nombre": {
                     "type": "string"
                 },
-                "Orden": {
+                "NumeroOrden": {
+                    "type": "number",
+                    "format": "double"
+                }
+            }
+        },
+        "models.HistoricoActa": {
+            "title": "HistoricoActa",
+            "type": "object",
+            "properties": {
+                "ActaRecibidoId": {
+                    "$ref": "#/definitions/models.ActaRecibido"
+                },
+                "Activo": {
+                    "type": "boolean"
+                },
+                "EstadoActaId": {
+                    "$ref": "#/definitions/models.EstadoActa"
+                },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "models.SoporteActa": {
+            "title": "SoporteActa",
+            "type": "object",
+            "properties": {
+                "ActaRecibidoId": {
+                    "$ref": "#/definitions/models.ActaRecibido"
+                },
+                "Activo": {
+                    "type": "boolean"
+                },
+                "Consecutivo": {
+                    "type": "string"
+                },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaSoporte": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "ProveedorId": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            }
+        },
+        "models.TipoBien": {
+            "title": "TipoBien",
+            "type": "object",
+            "properties": {
+                "Activo": {
+                    "type": "boolean"
+                },
+                "CodigoAbreviacion": {
+                    "type": "string"
+                },
+                "Descripcion": {
+                    "type": "string"
+                },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Nombre": {
+                    "type": "string"
+                },
+                "NumeroOrden": {
                     "type": "number",
                     "format": "double"
                 }
@@ -1045,20 +1510,28 @@
     },
     "tags": [
         {
+            "name": "acta_recibido",
+            "description": "ActaRecibidoController operations for ActaRecibido\n"
+        },
+        {
             "name": "estado_elemento",
             "description": "EstadoElementoController operations for EstadoElemento\n"
         },
         {
-            "name": "estado_acta_recibido",
-            "description": "EstadoActaRecibidoController operations for EstadoActaRecibido\n"
+            "name": "historico_acta",
+            "description": "HistoricoActaController operations for HistoricoActa\n"
         },
         {
-            "name": "documento_soporte_acta",
-            "description": "DocumentoSoporteActaController operations for DocumentoSoporteActa\n"
+            "name": "soporte_acta",
+            "description": "SoporteActaController operations for SoporteActa\n"
         },
         {
-            "name": "acta_recibido",
-            "description": "ActaRecibidoController operations for ActaRecibido\n"
+            "name": "estado_acta",
+            "description": "EstadoActaController operations for EstadoActa\n"
+        },
+        {
+            "name": "tipo_bien",
+            "description": "TipoBienController operations for TipoBien\n"
         },
         {
             "name": "elemento",
