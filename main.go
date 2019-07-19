@@ -8,6 +8,7 @@ import (
 	_ "github.com/lib/pq"
 
 	"github.com/astaxie/beego/plugins/cors"
+	"github.com/astaxie/beego/logs"
 	
 )
 
@@ -30,6 +31,9 @@ func main() {
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
 	  }))
+
+	  logs.SetLogger(logs.AdapterFile, `{"filename":"/var/log/beego/acta_de_recibido_arka_crud/acta_de_recibido_arka_crud.log"}`)
+
 	beego.Run()
 }
 
