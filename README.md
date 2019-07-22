@@ -53,43 +53,47 @@ go get
 
 Definir los valores de las siguientes variables de entorno:
 
- - `API_PRODUCCION_ACADEMICA_HTTP_PORT`: Puerto asignado para la ejecución del API
- - `PRODUCCION_ACADEMICA_CRUD__PGUSER`: Usuario de la base de datos
- - `PRODUCCION_ACADEMICA_CRUD__PGPASS`: Clave del usuario para la conexión a la base de datos  
- - `PRODUCCION_ACADEMICA_CRUD__PGURLS`: Host de conexión
- - `PRODUCCION_ACADEMICA_CRUD__PGDB`: Nombre de la base de datos
- - `PRODUCCION_ACADEMICA_CRUD__SCHEMA`: Esquema a utilizar en la base de datos
+ - `API_ACTA_RECIBIDO_HTTP_PORT`: Puerto asignado para la ejecución del API
+ - `ACTA_RECIBIDO_CRUD__PGUSER`: Usuario de la base de datos
+ - `ACTA_RECIBIDO_CRUD__PGPASS`: Clave del usuario para la conexión a la base de datos  
+ - `ACTA_RECIBIDO_CRUD__PGURLS`: Host de conexión
+ - `ACTA_RECIBIDO_CRUD__PGDB`: Nombre de la base de datos
+ - `ACTA_RECIBIDO_CRUD__SCHEMA`: Esquema a utilizar en la base de datos
+ - `ACTA_RECIBIDO_CRUD__LOG`: Archivo para logs
+ - `RUN_MODE`: Modo de ejecución del api.
 
 ## Ejemplo: 
- - `API_PRODUCCION_ACADEMICA_HTTP_PORT`: 8080
- - `PRODUCCION_ACADEMICA_CRUD__PGUSER`: postgres
- - `PRODUCCION_ACADEMICA_CRUD__PGPASS`: postgres
- - `PRODUCCION_ACADEMICA_CRUD__PGURLS`: 127.0.0.1
- - `PRODUCCION_ACADEMICA_CRUD__PGDB`: arka
- - `PRODUCCION_ACADEMICA_CRUD__SCHEMA`: acta_recibido
 
-
+ - `API_ACTA_RECIBIDO_HTTP_PORT`: 8080
+ - `ACTA_RECIBIDO_CRUD__PGUSER`: postgres
+ - `ACTA_RECIBIDO_CRUD__PGPASS`: 
+ - `ACTA_RECIBIDO_CRUD__PGURLS`: 127.0.0.1
+ - `ACTA_RECIBIDO_CRUD__PGDB`: arka
+ - `ACTA_RECIBIDO_CRUD__SCHEMA`: acta_recibido
+ - `ACTA_RECIBIDO_CRUD__LOG`:
+ - `RUN_MODE`: dev
 
 # Ejecución del proyecto
 Ubicado en la raíz del proyecto,
 ```shell 
 cd ~/go/src/github.com/udistrital/acta_recibido_crud
 ```
+A travez de un archivo con extension .sh se deben escribir las variables de entorno separadas con un espacio y seguidas del comando para la ejecucuin del proyecto
 
 - Ejecutar: 
 ```shell 
-bee run
+API_ACTA_RECIBIDO_HTTP_PORT=8080 ACTA_RECIBIDO_CRUD__PGUSER=postgres ACTA_RECIBIDO_CRUD__PGPASS= ACTA_RECIBIDO_CRUD__PGURLS=127.0.0.1 ACTA_RECIBIDO_CRUD__PGDB=arka ACTA_RECIBIDO_CRUD__SCHEMA=acta_recibido RUN_MODE=dev bee run
 ```
 - O si se quiere ejecutar el swager:
 
 ```shell 
-bee run -downdoc=true -gendoc=true
+API_ACTA_RECIBIDO_HTTP_PORT=8080 ACTA_RECIBIDO_CRUD__PGUSER=postgres ACTA_RECIBIDO_CRUD__PGPASS= ACTA_RECIBIDO_CRUD__PGURLS=127.0.0.1 ACTA_RECIBIDO_CRUD__PGDB=arka ACTA_RECIBIDO_CRUD__SCHEMA=acta_recibido RUN_MODE=dev bee run -downdoc=true -gendoc=true
 ```
 
-# Endpoint (la direccion depende de las variables de entorno)
+# Endpoint
 
 ## Ejemplo
 
-* El servidor se expone en el puerto: 127.0.0.1:8080 
+* para este caso, el servidor se expone en el puerto: 127.0.0.1:8080 
 
 * Para ver la documentación de swagger: [127.0.0.1:8080/swagger/](http://127.0.0.1:8080/swagger/)
