@@ -16,7 +16,7 @@ Para instalar el proyecto de debe relizar lo siguientes pasos:
 
 Ejecutar desde la terminal 'go get repositorio':
 ```shell 
-go get github.com/udistrital/acta_de_recibido_arka_crud.git
+go get github.com/udistrital/acta_de_recibido_crud.git
 ```
 
 ## Opción 2
@@ -29,12 +29,12 @@ cd ~go/src/github.com/udistrital
 2. Ejecutar:
 
 ```shell 
-git clone https://github.com/udistrital/acta_de_recibido_arka_crud.git
+git clone https://github.com/udistrital/acta_de_recibido_crud.git
 ```
 
 3. Ir a la carpeta del proyecto
 ```shell 
-cd acta_de_recibido_arka_crud
+cd acta_de_recibido_crud
 ```
 
 4. Instalar dependencias del proyecto:
@@ -46,7 +46,7 @@ go get
 # Ejecución del proyecto
 Ubicado en la raíz del proyecto,
 ```shell 
-cd ~/go/src/github.com/udistrital/acta_de_recibido_arka_crud
+cd ~/go/src/github.com/udistrital/acta_de_recibido_crud
 ```
 
 - Ejecutar: 
