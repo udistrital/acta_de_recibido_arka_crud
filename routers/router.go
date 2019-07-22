@@ -8,7 +8,7 @@
 package routers
 
 import (
-	"github.com/ManuelMurillo/acta_de_recibido_arka_crud/controllers"
+	"github.com/udistrital/acta_de_recibido_arka_crud/controllers"
 
 	"github.com/astaxie/beego"
 )
