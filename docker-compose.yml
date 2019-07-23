@@ -19,7 +19,8 @@ services:
       - ACTA_RECIBIDO_CRUD__PGPASS=${POSTGRES_PASSWORD}
       - ACTA_RECIBIDO_CRUD__PGURLS=${POSTGRES_HOST}
       - ACTA_RECIBIDO_CRUD__PGDB=${POSTGRES_DB}
-      - ACTA_RECIBIDO_CRUD__SCHEMA=${POSTGRES_SCHEMA}
+      - ACTA_RECIBIDO_CRUD__PGPORT=5432
+      - ACTA_RECIBIDO_CRUD__PGSCHEMA=${POSTGRES_SCHEMA}
       - ACTA_RECIBIDO_CRUD__LOG=${API_LOG}
       - RUN_MODE=${RUN_MODE}
       
@@ -31,7 +32,7 @@ services:
 
   db:
     container_name: ${POSTGRES_HOST}
-    image: postgres:9.5-alpine
+    image: postgres:9.5
     ports:
       - "${POSTGRES_PORT}:5432"
     volumes: 

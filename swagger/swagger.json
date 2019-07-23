@@ -1510,24 +1510,12 @@
     },
     "tags": [
         {
-            "name": "acta_recibido",
-            "description": "ActaRecibidoController operations for ActaRecibido\n"
-        },
-        {
             "name": "estado_elemento",
             "description": "EstadoElementoController operations for EstadoElemento\n"
         },
         {
-            "name": "historico_acta",
-            "description": "HistoricoActaController operations for HistoricoActa\n"
-        },
-        {
             "name": "soporte_acta",
             "description": "SoporteActaController operations for SoporteActa\n"
-        },
-        {
-            "name": "estado_acta",
-            "description": "EstadoActaController operations for EstadoActa\n"
         },
         {
             "name": "tipo_bien",
@@ -1536,6 +1524,18 @@
         {
             "name": "elemento",
             "description": "ElementoController operations for Elemento\n"
+        },
+        {
+            "name": "acta_recibido",
+            "description": "ActaRecibidoController operations for ActaRecibido\n"
+        },
+        {
+            "name": "estado_acta",
+            "description": "EstadoActaController operations for EstadoActa\n"
+        },
+        {
+            "name": "historico_acta",
+            "description": "HistoricoActaController operations for HistoricoActa\n"
         }
     ]
 }
