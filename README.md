@@ -97,3 +97,51 @@ API_ACTA_RECIBIDO_HTTP_PORT=8080 ACTA_RECIBIDO_CRUD__PGUSER=postgres ACTA_RECIBI
 * para este caso, el servidor se expone en el puerto: 127.0.0.1:8080 
 
 * Para ver la documentación de swagger: [127.0.0.1:8080/swagger/](http://127.0.0.1:8080/swagger/)
+
+
+- Correr el proyecto por docker compose 
+1. Crear red de contenedores denominada back_end con el comando (si ya esta creada no es necesario crearla):
+
+```sh
+docker network create back_end
+```
+
+2. Para construir y correr los contenedores:
+```sh
+docker-compose up --build
+```
+o
+```sh
+docker-compose build --no-cache
+```
+- Bajar los servicios de los contenedores
+```sh
+docker-compose down
+```
+- Subir los servicios de los contenedores ya construidos previamente
+```sh
+docker-compose up
+```
+# Archivos para variables de entorno: 
+
+- para definir puertos, dns y configuraciones internas dentro del archivo **.env**
+- para definir conexiones externas a otros apis se debe crear el archivo **custom.env** en la raiz del proyecto
+
+## Derechos de Autor
+
+This program is free software: you can redistribute it 
+and/or modify it under the terms of the GNU General Public 
+License as published by the Free Software Foundation, either
+version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+### UNIVERSIDAD DISTRITAL FRANCISCO JOSÉ DE CALDAS
+
+### OFICINA ASESORA DE SISTEMAS
+
+### 2019

@@ -1,0 +1,1 @@
+DROP SCHEMA IF EXISTS acta_recibido CASCADE;
