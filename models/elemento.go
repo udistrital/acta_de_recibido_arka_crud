@@ -25,6 +25,7 @@ type Elemento struct {
 	ValorIva           int             `orm:"column(valor_iva);null"`
 	ValorFinal         int             `orm:"column(valor_final);null"`
 	SubgrupoCatalogoId int             `orm:"column(subgrupo_catalogo_id)"`
+	Verificado 		   bool            `orm:"column(verificado)"`
 	TipoBienId         *TipoBien       `orm:"column(tipo_bien_id);rel(fk)"`
 	EstadoElementoId   *EstadoElemento `orm:"column(estado_elemento_id);rel(fk)"`
 	SoporteActaId      *SoporteActa    `orm:"column(soporte_acta_id);rel(fk)"`

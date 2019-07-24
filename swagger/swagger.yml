@@ -900,6 +900,8 @@ definitions:
       ValorUnitario:
         type: integer
         format: int64
+      Verificado:
+        type: boolean
   models.EstadoActa:
     title: EstadoActa
     type: object
@@ -1017,24 +1019,24 @@ definitions:
         type: number
         format: double
 tags:
-- name: acta_recibido
-  description: |
-    ActaRecibidoController operations for ActaRecibido
 - name: estado_elemento
   description: |
     EstadoElementoController operations for EstadoElemento
-- name: historico_acta
-  description: |
-    HistoricoActaController operations for HistoricoActa
 - name: soporte_acta
   description: |
     SoporteActaController operations for SoporteActa
-- name: estado_acta
-  description: |
-    EstadoActaController operations for EstadoActa
 - name: tipo_bien
   description: |
     TipoBienController operations for TipoBien
 - name: elemento
   description: |
     ElementoController operations for Elemento
+- name: acta_recibido
+  description: |
+    ActaRecibidoController operations for ActaRecibido
+- name: estado_acta
+  description: |
+    EstadoActaController operations for EstadoActa
+- name: historico_acta
+  description: |
+    HistoricoActaController operations for HistoricoActa
