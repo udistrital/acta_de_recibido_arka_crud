@@ -8,7 +8,7 @@
 package routers
 
 import (
-	"github.com/udistrital/acta_de_recibido_arka_crud/controllers"
+	"github.com/udistrital/acta_recibido_crud/controllers"
 
 	"github.com/astaxie/beego"
 )
@@ -16,33 +16,15 @@ import (
 func init() {
 	ns := beego.NewNamespace("/v1",
 
-		beego.NSNamespace("/acta_recibido",
-			beego.NSInclude(
-				&controllers.ActaRecibidoController{},
-			),
-		),
-
 		beego.NSNamespace("/estado_elemento",
 			beego.NSInclude(
 				&controllers.EstadoElementoController{},
 			),
 		),
 
-		beego.NSNamespace("/historico_acta",
-			beego.NSInclude(
-				&controllers.HistoricoActaController{},
-			),
-		),
-
 		beego.NSNamespace("/soporte_acta",
 			beego.NSInclude(
 				&controllers.SoporteActaController{},
-			),
-		),
-
-		beego.NSNamespace("/estado_acta",
-			beego.NSInclude(
-				&controllers.EstadoActaController{},
 			),
 		),
 
@@ -55,6 +37,24 @@ func init() {
 		beego.NSNamespace("/elemento",
 			beego.NSInclude(
 				&controllers.ElementoController{},
+			),
+		),
+
+		beego.NSNamespace("/acta_recibido",
+			beego.NSInclude(
+				&controllers.ActaRecibidoController{},
+			),
+		),
+
+		beego.NSNamespace("/estado_acta",
+			beego.NSInclude(
+				&controllers.EstadoActaController{},
+			),
+		),
+
+		beego.NSNamespace("/historico_acta",
+			beego.NSInclude(
+				&controllers.HistoricoActaController{},
 			),
 		),
 	)

@@ -1,7 +1,7 @@
 package main
 
 import (
-	_ "github.com/ManuelMurillo/acta_de_recibido_arka_crud/routers"
+	_ "github.com/udistrital/acta_recibido_crud/routers"
 
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
@@ -15,7 +15,13 @@ import (
 
 func main() {
 	orm.Debug = true
-	orm.RegisterDataBase("default", "postgres", beego.AppConfig.String("sqlconn"))
+	orm.RegisterDataBase("default", "postgres", "postgres://" + 
+		beego.AppConfig.String("PGuser") + ":" + 
+		beego.AppConfig.String("PGpass") + "@" + 
+		beego.AppConfig.String("PGurls") + ":" + 
+		beego.AppConfig.String("PGport") + "/" + 
+		beego.AppConfig.String("PGdb") + "?sslmode=disable&search_path=" + 
+		beego.AppConfig.String("PGschemas") + "")
 	if beego.BConfig.RunMode == "dev" {
 		beego.BConfig.WebConfig.DirectoryIndex = true
 		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
@@ -33,7 +39,11 @@ func main() {
 		AllowCredentials: true,
 	  }))
 
-	  logs.SetLogger(logs.AdapterFile, `{"filename":"/var/log/beego/acta_de_recibido_arka_crud/acta_de_recibido_arka_crud.log"}`)
+	  logPath := "{\"filename\":\""
+	  logPath += beego.AppConfig.String("logPath")
+	  logPath += "\"}"
+	  logs.SetLogger(logs.AdapterFile, logPath)
+	  
 	  beego.ErrorController(&customerror.CustomErrorController{})
 	beego.Run()
 }
