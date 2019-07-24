@@ -64,6 +64,7 @@ CREATE TABLE acta_recibido.elemento (
 	valor_iva integer,
 	valor_final integer,
 	subgrupo_catalogo_id integer NOT NULL,
+	verificado boolean NOT NULL,
 	tipo_bien_id integer NOT NULL,
 	estado_elemento_id integer NOT NULL,
 	soporte_acta_id integer NOT NULL,
@@ -255,3 +256,8 @@ ON DELETE RESTRICT ON UPDATE CASCADE;
 GRANT USAGE ON SCHEMA acta_recibido TO test;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA acta_recibido TO test;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA acta_recibido TO test;
+
+-- Permisos de usuario
+GRANT USAGE ON SCHEMA acta_recibido TO desarrollooas;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA acta_recibido TO desarrollooas;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA acta_recibido TO desarrollooas;

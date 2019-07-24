@@ -900,6 +900,8 @@ definitions:
       ValorUnitario:
         type: integer
         format: int64
+      Verificado:
+        type: boolean
   models.EstadoActa:
     title: EstadoActa
     type: object
