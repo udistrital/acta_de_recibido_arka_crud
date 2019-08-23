@@ -322,4 +322,13 @@ func init() {
             Filters: nil,
             Params: nil})
 
+    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:TransaccionActaRecibidoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:TransaccionActaRecibidoController"],
+        beego.ControllerComments{
+            Method: "Post",
+            Router: `/`,
+            AllowHTTPMethods: []string{"post"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
 }

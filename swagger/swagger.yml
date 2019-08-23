@@ -816,7 +816,28 @@ paths:
           description: '{string} delete success!'
         "404":
           description: not found resource
+  /transaccion_acta_recibido/:
+    post:
+      tags:
+      - transaccion_acta_recibido
+      description: create the TransaccionActaRecibido
+      operationId: TransaccionActaRecibidoController.PostTransaccionActaRecibido
+      parameters:
+      - in: body
+        name: body
+        description: body for TransaccionActaRecibido content
+        required: true
+        schema:
+          $ref: '#/definitions/models.TransaccionActaRecibido'
+      responses:
+        "201":
+          description: '{int} models.TransaccionActaRecibido'
+        "400":
+          description: the request contains incorrect syntax
 definitions:
+  4627.<nil>.TransaccionSoporteActa:
+    title: TransaccionSoporteActa
+    type: object
   models.ActaRecibido:
     title: ActaRecibido
     type: object
@@ -1018,6 +1039,14 @@ definitions:
       NumeroOrden:
         type: number
         format: double
+  models.TransaccionActaRecibido:
+    title: TransaccionActaRecibido
+    type: object
+    properties:
+      ActaRecibido:
+        $ref: '#/definitions/models.ActaRecibido'
+      SoportesActa:
+        $ref: '#/definitions/4627.<nil>.TransaccionSoporteActa'
 tags:
 - name: estado_elemento
   description: |
@@ -1040,3 +1069,6 @@ tags:
 - name: historico_acta
   description: |
     HistoricoActaController operations for HistoricoActa
+- name: transaccion_acta_recibido
+  description: |
+    operations for TransaccionActaRecibido
