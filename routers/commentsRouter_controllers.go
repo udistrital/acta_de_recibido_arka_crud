@@ -331,4 +331,22 @@ func init() {
             Filters: nil,
             Params: nil})
 
+    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:TransaccionActaRecibidoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:TransaccionActaRecibidoController"],
+        beego.ControllerComments{
+            Method: "GetAllById",
+            Router: `/:id`,
+            AllowHTTPMethods: []string{"get"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
+    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:TransaccionActaRecibidoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:TransaccionActaRecibidoController"],
+        beego.ControllerComments{
+            Method: "Put",
+            Router: `/:id`,
+            AllowHTTPMethods: []string{"put"},
+            MethodParams: param.Make(),
+            Filters: nil,
+            Params: nil})
+
 }

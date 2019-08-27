@@ -1253,6 +1253,71 @@
                     }
                 }
             }
+        },
+        "/transaccion_acta_recibido/{id}": {
+            "get": {
+                "tags": [
+                    "transaccion_acta_recibido"
+                ],
+                "description": "get TransaccionActaRecibidoController",
+                "operationId": "TransaccionActaRecibidoController.Get All By id",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.TransaccionActaRecibidoController"
+                        }
+                    },
+                    "404": {
+                        "description": "not found resource"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "transaccion_acta_recibido"
+                ],
+                "description": "update the TransaccionActaRecibido",
+                "operationId": "TransaccionActaRecibidoController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for TransaccionActaRecibido content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TransaccionActaRecibido"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.TransaccionActaRecibido"
+                        }
+                    },
+                    "400": {
+                        "description": "the request contains incorrect syntax"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -1553,6 +1618,10 @@
                     "$ref": "#/definitions/4627.\u003cnil\u003e.TransaccionSoporteActa"
                 }
             }
+        },
+        "models.TransaccionActaRecibidoController": {
+            "title": "TransaccionActaRecibidoController",
+            "type": "object"
         }
     },
     "tags": [
