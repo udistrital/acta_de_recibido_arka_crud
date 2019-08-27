@@ -10,7 +10,6 @@ type TransaccionActaRecibido struct {
 	SoportesActa			*[]TransaccionSoporteActa
 }
 
-
 // GetTransaccionActaRecibido Transacción para registrar toda la información del Acta de Recibido
 func GetTransaccionActaRecibido(id int) (v []interface{}, err error) {
 	o := orm.NewOrm()
@@ -128,8 +127,27 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 	fmt.Println(v)
 	if errTr := o.Read(&v); errTr == nil {
 		var num int64
+
 		if num, errTr = o.Update(m.ActaRecibido,"UbicacionId","FechaVistoBueno","RevisorId","Observaciones","FechaModificacion"); errTr == nil {
 			fmt.Println("Number of records updated in database:", num)
+
+			var Soportes []SoporteActa
+			var q []int
+
+			if _, errTr = o.QueryTable(new(SoporteActa)).RelatedSel().Filter("ActaRecibidoId__Id",m.ActaRecibido.Id).All(&Soportes); err == nil{
+			
+				for _, Soporte := range Soportes{
+					q = append(q,Soporte.Id)
+					fmt.Println(q)
+				}
+				fmt.Println(q)
+
+			} else {
+				err = errTr
+				fmt.Println(err)
+				_ = o.Rollback()
+				return
+			}
 
 				for _, w := range *m.SoportesActa {
 					var metadato SoporteActa
@@ -143,6 +161,25 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 							metadato.FechaModificacion = w.SoporteActa.FechaModificacion
 
 							if _, errTr = o.Update(&metadato); errTr == nil {
+
+								var Elementos []Elemento
+								var g []int
+
+								if _, errTr = o.QueryTable(new(Elemento)).RelatedSel().Filter("SoporteActaId__Id",metadato.Id).All(&Elementos); err == nil{
+								
+									for _, Elemento := range Elementos{
+										g = append(g,Elemento.Id)
+										fmt.Println(g)
+									}
+									fmt.Println(g)
+								
+								} else {
+									err = errTr
+									fmt.Println(err)
+									_ = o.Rollback()
+									return
+								}
+
 
 								for _, u := range *w.Elementos {
 
@@ -167,14 +204,17 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 											metadato_elemento.SubgrupoCatalogoId = u.SubgrupoCatalogoId
 											metadato_elemento.Verificado = u.Verificado
 											metadato_elemento.FechaModificacion = u.FechaModificacion
-											if _, errTr = o.Update(&metadato_elemento); errTr != nil {
+											if _, errTr = o.Update(&metadato_elemento); errTr == nil {
+
+												g = RemoveSoporte(g,metadato_elemento.Id)
+
+											} else {
 												err = errTr
 												fmt.Println(err)
 												_ = o.Rollback()
 												return
 											}
 										} else {
-
 											u.SoporteActaId.Id = metadato.Id
 											if _, errTr = o.Insert(&u); errTr != nil {
 												err = errTr
@@ -190,6 +230,27 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 										return
 									}
 								}
+
+								q = RemoveSoporte(q, metadato.Id)
+
+								if (g != nil){
+
+									var _Elemento Elemento
+									for _, Elemento := range g {
+										_Elemento.Id = Elemento
+										_Elemento.Activo = false
+										if _, errTr = o.Update(&_Elemento,"Activo"); err != nil{
+											err = errTr
+											fmt.Println(err)
+											_ = o.Rollback()
+											return
+										}
+					
+									}
+									fmt.Println(g)
+					
+								}
+
 							} else {
 								err = errTr
 								fmt.Println(err)
@@ -197,7 +258,6 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 								return
 							}
 						} else {
-
 							w.SoporteActa.ActaRecibidoId.Id = m.ActaRecibido.Id
 							if _, errTr = o.Insert(w.SoporteActa); errTr == nil {
 								
@@ -211,9 +271,7 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 										_ = o.Rollback()
 										return
 									}
-				
 								}
-
 							} else {
 								err = errTr
 								fmt.Println(err)
@@ -221,8 +279,6 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 								return
 							}
 						}
-
-						
 					} else {
 						err = errTr
 						fmt.Println(err)
@@ -230,7 +286,25 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 						return
 					}		
 				}
+			
+			if (q != nil){
+				fmt.Println(q)
+				var _Soporte SoporteActa
+				for _, Soporte := range q {
+					_Soporte.Id = Soporte
+					_Soporte.Activo = false
+					if _, errTr = o.Update(&_Soporte,"Activo"); err != nil{
+						err = errTr
+						fmt.Println(err)
+						_ = o.Rollback()
+						return
+					}
 
+				}
+
+			}
+			
+			
 			_ = o.Commit()
 		}	else {
 			err = errTr
@@ -245,3 +319,18 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 	}
 	return
 }
+
+func RemoveSoporte(m []int, i int )(v []int){
+
+	var Soportes []int
+
+	for _, Soporte := range m {
+		if (Soporte != i){
+			Soportes = append(Soportes,Soporte)
+			fmt.Print(Soporte)
+		}
+	} 
+	
+	return Soportes
+}
+
