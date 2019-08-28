@@ -18,15 +18,15 @@ func GetTransaccionActaRecibido(id int) (v []interface{}, err error) {
 
 	if _, err := o.QueryTable(new(ActaRecibido)).RelatedSel().Filter("Id",id).Filter("Activo",true).All(&Acta); err == nil{
 
-		fmt.Println(Acta)
+		fmt.Println("Acta :",Acta)
 		var UltimoEstado HistoricoActa
 
 		if _, err := o.QueryTable(new(HistoricoActa)).RelatedSel().Filter("ActaRecibidoId__Id",id).Filter("Activo",true).All(&UltimoEstado); err == nil{
-
+			fmt.Println("Historico :" ,UltimoEstado)
 			var Soportes []SoporteActa
 
 			if _, err := o.QueryTable(new(SoporteActa)).RelatedSel().Filter("ActaRecibidoId__Id",id).Filter("Activo",true).All(&Soportes); err == nil{
-				fmt.Println(Soportes)
+				fmt.Println("Soporte :" ,Soportes)
 				var w []interface{}
 
 				for _, Soporte_ := range Soportes{
@@ -89,6 +89,7 @@ func AddTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 	if idActa, errTr := o.Insert(m.ActaRecibido); errTr == nil {
 
 		m.UltimoEstado.ActaRecibidoId.Id = int(idActa)
+		m.UltimoEstado.Activo = true
 
 		if _, errTr := o.Insert(m.UltimoEstado); errTr == nil {
 
@@ -142,17 +143,21 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 	// ascertain id exists in the database
 	fmt.Println(v)
 	if errTr := o.Read(&v); errTr == nil {
-		var num int64
 
-		if num, errTr = o.Update(m.ActaRecibido,"UbicacionId","FechaVistoBueno","RevisorId","Observaciones","FechaModificacion"); errTr == nil {
-			fmt.Println("Number of records updated in database:", num)
+		if _, errTr = o.Update(m.ActaRecibido,"UbicacionId","FechaVistoBueno","RevisorId","Observaciones","FechaModificacion"); errTr == nil {
+			fmt.Println("Acta: ",m.ActaRecibido)
 
-			var Historico_ *HistoricoActa
+			var Historico_ HistoricoActa
 
 			if errTr := o.QueryTable(new(HistoricoActa)).RelatedSel().Filter("Activo", true).Filter("ActaRecibidoId__Id", m.ActaRecibido.Id).One(&Historico_); errTr == nil {
 
+				fmt.Println("Historico :", Historico_)
+
 				Historico_.Activo = false
 				if _, errTr = o.Update(&Historico_,"Activo"); errTr == nil{
+
+					m.UltimoEstado.Activo = true
+
 					if _, errTr = o.Insert(m.UltimoEstado); err != nil{
 						err = errTr
 						fmt.Println(err)
@@ -328,22 +333,22 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 					}		
 				}
 			
-			if (q != nil){
-				fmt.Println(q)
-				var _Soporte SoporteActa
-				for _, Soporte := range q {
-					_Soporte.Id = Soporte
-					_Soporte.Activo = false
-					if _, errTr = o.Update(&_Soporte,"Activo"); err != nil{
-						err = errTr
-						fmt.Println(err)
-						_ = o.Rollback()
-						return
+				if (q != nil){
+					fmt.Println(q)
+					var _Soporte SoporteActa
+					for _, Soporte := range q {
+						_Soporte.Id = Soporte
+						_Soporte.Activo = false
+						if _, errTr = o.Update(&_Soporte,"Activo"); err != nil{
+							err = errTr
+							fmt.Println(err)
+							_ = o.Rollback()
+							return
+						}
+
 					}
 
 				}
-
-			}
 			
 			_ = o.Commit()
 		}	else {
