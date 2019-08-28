@@ -11,7 +11,9 @@ insert into acta_recibido.estado_acta (id, nombre, descripcion, codigo_abreviaci
 insert into acta_recibido.estado_acta (id, nombre, descripcion, codigo_abreviacion, activo, numero_orden, fecha_creacion, fecha_modificacion) 
 	values (5, 'Aceptada', 'Estado del cata ya verificada y lista para una nueva entrada', 'Aceptada', true, 1, now(), now());
 insert into acta_recibido.estado_acta (id, nombre, descripcion, codigo_abreviacion, activo, numero_orden, fecha_creacion, fecha_modificacion) 
-	values (6, 'Anulada', 'Estado del acta para el cual el registro no sirve', 'Anulada', true, 1, now(), now());
+	values (6, 'Asociada a Entrada', 'Estado para identificar el acta como elemento asociado a una entrada', 'AsociadoEntrada', true, 1, now(), now());
+insert into acta_recibido.estado_acta (id, nombre, descripcion, codigo_abreviacion, activo, numero_orden, fecha_creacion, fecha_modificacion) 
+	values (7, 'Anulada', 'Estado del acta para el cual el registro no sirve', 'Anulada', true, 1, now(), now());
 
 -- Datos para tabla parametrica de estado_elemento
 
