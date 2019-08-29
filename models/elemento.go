@@ -17,13 +17,13 @@ type Elemento struct {
 	Marca              string          `orm:"column(marca);null"`
 	Serie              string          `orm:"column(serie);null"`
 	UnidadMedida       int             `orm:"column(unidad_medida)"`
-	ValorUnitario      int             `orm:"column(valor_unitario)"`
-	Subtotal           int             `orm:"column(subtotal);null"`
-	Descuento          int             `orm:"column(descuento);null"`
-	ValorTotal         int             `orm:"column(valor_total);null"`
+	ValorUnitario      float64         `orm:"column(valor_unitario)"`
+	Subtotal           float64         `orm:"column(subtotal);null"`
+	Descuento          float64         `orm:"column(descuento);null"`
+	ValorTotal         float64         `orm:"column(valor_total);null"`
 	PorcentajeIvaId    int             `orm:"column(porcentaje_iva_id)"`
-	ValorIva           int             `orm:"column(valor_iva);null"`
-	ValorFinal         int             `orm:"column(valor_final);null"`
+	ValorIva           float64         `orm:"column(valor_iva);null"`
+	ValorFinal         float64         `orm:"column(valor_final);null"`
 	SubgrupoCatalogoId int             `orm:"column(subgrupo_catalogo_id)"`
 	Verificado 		   bool            `orm:"column(verificado)"`
 	TipoBienId         *TipoBien       `orm:"column(tipo_bien_id);rel(fk)"`

@@ -87,13 +87,16 @@ func AddTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 	err = o.Begin()
 	
 	if idActa, errTr := o.Insert(m.ActaRecibido); errTr == nil {
-
+		fmt.Println("idActa: ", idActa)
+		fmt.Println("m: ", m.UltimoEstado)
 		m.UltimoEstado.ActaRecibidoId.Id = int(idActa)
 		m.UltimoEstado.Activo = true
-
+		fmt.Println("m: ", m.UltimoEstado)
 		if _, errTr := o.Insert(m.UltimoEstado); errTr == nil {
 
 			for _, v := range *m.SoportesActa {
+
+				fmt.Println("Soportes : ",v)
 
 				v.SoporteActa.ActaRecibidoId.Id = int(idActa)
 
@@ -128,7 +131,7 @@ func AddTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 
 	} else {
 		err = errTr
-		fmt.Println(err)
+		fmt.Println(errTr)
 		_ = o.Rollback()
 	}
 	return

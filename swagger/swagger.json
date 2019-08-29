@@ -1373,8 +1373,8 @@
                     "format": "int64"
                 },
                 "Descuento": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "number",
+                    "format": "double"
                 },
                 "EstadoElementoId": {
                     "$ref": "#/definitions/models.EstadoElemento"
@@ -1415,8 +1415,8 @@
                     "format": "int64"
                 },
                 "Subtotal": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "number",
+                    "format": "double"
                 },
                 "TipoBienId": {
                     "$ref": "#/definitions/models.TipoBien"
@@ -1426,20 +1426,20 @@
                     "format": "int64"
                 },
                 "ValorFinal": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "number",
+                    "format": "double"
                 },
                 "ValorIva": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "number",
+                    "format": "double"
                 },
                 "ValorTotal": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "number",
+                    "format": "double"
                 },
                 "ValorUnitario": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "number",
+                    "format": "double"
                 },
                 "Verificado": {
                     "type": "boolean"
