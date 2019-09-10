@@ -1,3 +1,8 @@
 lastupdate.tmp
 refactor_controller
-acta_de_recibido_arka_crud
+acta_recibido_crud
+./refactor_controller/
+refactor_controller/
+ejec.sh
+acta_recibido_env.sh
+custom.env
