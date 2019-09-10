@@ -7,14 +7,12 @@ import (
 	"github.com/astaxie/beego/orm"
 	_ "github.com/lib/pq"
 
-	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/plugins/cors"
 	apistatus "github.com/udistrital/utils_oas/apiStatusLib"
 	"github.com/udistrital/utils_oas/customerror"
 )
 
 func main() {
-	orm.Debug = true
 	orm.RegisterDataBase("default", "postgres", "postgres://"+
 		beego.AppConfig.String("PGuser")+":"+
 		beego.AppConfig.String("PGpass")+"@"+
@@ -23,6 +21,7 @@ func main() {
 		beego.AppConfig.String("PGdb")+"?sslmode=disable&search_path="+
 		beego.AppConfig.String("PGschemas")+"")
 	if beego.BConfig.RunMode == "dev" {
+		orm.Debug = true
 		beego.BConfig.WebConfig.DirectoryIndex = true
 		beego.BConfig.WebConfig.StaticDir["/swagger"] = "swagger"
 	}
@@ -38,11 +37,6 @@ func main() {
 		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
 	}))
-
-	logPath := "{\"filename\":\""
-	logPath += beego.AppConfig.String("logPath")
-	logPath += "\"}"
-	logs.SetLogger(logs.AdapterFile, logPath)
 
 	beego.ErrorController(&customerror.CustomErrorController{})
 	apistatus.Init()
