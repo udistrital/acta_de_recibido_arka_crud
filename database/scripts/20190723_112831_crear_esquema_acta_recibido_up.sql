@@ -1,18 +1,3 @@
--- Database generated with pgModeler (PostgreSQL Database Modeler).
--- pgModeler  version: 0.9.2-beta
--- PostgreSQL version: 9.5
--- Project Site: pgmodeler.io
--- Model Author: ---
-
-
--- Database creation must be done outside a multicommand file.
--- These commands were put in this file only as a convenience.
--- -- object: new_database | type: DATABASE --
--- -- DROP DATABASE IF EXISTS new_database;
--- CREATE DATABASE new_database;
--- -- ddl-end --
--- 
-
 -- object: acta_recibido | type: SCHEMA --
 -- DROP SCHEMA IF EXISTS acta_recibido CASCADE;
 CREATE SCHEMA acta_recibido;
@@ -257,7 +242,7 @@ ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- Permisos de usuario
 
-GRANT USAGE ON SCHEMA acta_recibido TO test;
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA acta_recibido TO test;
-GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA acta_recibido TO test;
+GRANT USAGE ON SCHEMA acta_recibido TO desarrollooas;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA acta_recibido TO desarrollooas;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA acta_recibido TO desarrollooas;
 
