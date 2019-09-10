@@ -1321,7 +1321,7 @@
         }
     },
     "definitions": {
-        "4627.\u003cnil\u003e.TransaccionSoporteActa": {
+        "4658.\u003cnil\u003e.TransaccionSoporteActa": {
             "title": "TransaccionSoporteActa",
             "type": "object"
         },
@@ -1373,8 +1373,8 @@
                     "format": "int64"
                 },
                 "Descuento": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "number",
+                    "format": "double"
                 },
                 "EstadoElementoId": {
                     "$ref": "#/definitions/models.EstadoElemento"
@@ -1397,6 +1397,9 @@
                 "Nombre": {
                     "type": "string"
                 },
+                "Placa": {
+                    "type": "string"
+                },
                 "PorcentajeIvaId": {
                     "type": "integer",
                     "format": "int64"
@@ -1412,8 +1415,8 @@
                     "format": "int64"
                 },
                 "Subtotal": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "number",
+                    "format": "double"
                 },
                 "TipoBienId": {
                     "$ref": "#/definitions/models.TipoBien"
@@ -1423,20 +1426,20 @@
                     "format": "int64"
                 },
                 "ValorFinal": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "number",
+                    "format": "double"
                 },
                 "ValorIva": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "number",
+                    "format": "double"
                 },
                 "ValorTotal": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "number",
+                    "format": "double"
                 },
                 "ValorUnitario": {
-                    "type": "integer",
-                    "format": "int64"
+                    "type": "number",
+                    "format": "double"
                 },
                 "Verificado": {
                     "type": "boolean"
@@ -1615,7 +1618,10 @@
                     "$ref": "#/definitions/models.ActaRecibido"
                 },
                 "SoportesActa": {
-                    "$ref": "#/definitions/4627.\u003cnil\u003e.TransaccionSoporteActa"
+                    "$ref": "#/definitions/4658.\u003cnil\u003e.TransaccionSoporteActa"
+                },
+                "UltimoEstado": {
+                    "$ref": "#/definitions/models.HistoricoActa"
                 }
             }
         },

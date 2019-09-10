@@ -7,6 +7,7 @@ import (
 
 type TransaccionActaRecibido struct {
 	ActaRecibido            *ActaRecibido
+	UltimoEstado			*HistoricoActa
 	SoportesActa			*[]TransaccionSoporteActa
 }
 
@@ -17,57 +18,63 @@ func GetTransaccionActaRecibido(id int) (v []interface{}, err error) {
 
 	if _, err := o.QueryTable(new(ActaRecibido)).RelatedSel().Filter("Id",id).Filter("Activo",true).All(&Acta); err == nil{
 
-		fmt.Println(Acta)
-		var Soportes []SoporteActa
+		fmt.Println("Acta :",Acta)
+		var UltimoEstado HistoricoActa
 
-		if _, err := o.QueryTable(new(SoporteActa)).RelatedSel().Filter("ActaRecibidoId__Id",id).Filter("Activo",true).All(&Soportes); err == nil{
-			fmt.Println(Soportes)
-			var w []interface{}
+		if _, err := o.QueryTable(new(HistoricoActa)).RelatedSel().Filter("ActaRecibidoId__Id",id).Filter("Activo",true).All(&UltimoEstado); err == nil{
+			fmt.Println("Historico :" ,UltimoEstado)
+			var Soportes []SoporteActa
 
-			for _, Soporte_ := range Soportes{
+			if _, err := o.QueryTable(new(SoporteActa)).RelatedSel().Filter("ActaRecibidoId__Id",id).Filter("Activo",true).All(&Soportes); err == nil{
+				fmt.Println("Soporte :" ,Soportes)
+				var w []interface{}
 
-				var Elementos []Elemento
+				for _, Soporte_ := range Soportes{
 
-				if _, err := o.QueryTable(new(Elemento)).RelatedSel().Filter("SoporteActaId__Id",Soporte_.Id).Filter("Activo",true).All(&Elementos); err == nil{
-					fmt.Println(Elementos)
-					var q []interface{}
+					var Elementos []Elemento
 
-					for _, Elemento_ := range Elementos{
-						
-						q = append(q,map[string]interface{}{
-							"Id": Elemento_.Id,
-							"Nombre": Elemento_.Nombre,
-							"Cantidad": Elemento_.Cantidad,
-							"Marca": Elemento_.Marca,
-							"Serie": Elemento_.Serie,
-							"UnidadMedida": Elemento_.UnidadMedida,
-							"ValorUnitario": Elemento_.ValorUnitario,
-							"Subtotal": Elemento_.Subtotal,
-							"Descuento": Elemento_.Descuento,
-							"ValorTotal": Elemento_.ValorTotal,
-							"PorcentajeIvaId": Elemento_.PorcentajeIvaId,
-							"ValorIva": Elemento_.ValorIva,
-							"ValorFinal": Elemento_.ValorFinal,
-							"SubgrupoCatalogoId": Elemento_.SubgrupoCatalogoId,
-							"Verificado": Elemento_.Verificado,
-							"TipoBienId": Elemento_.TipoBienId,
-							"EstadoElementoId": Elemento_.EstadoElementoId,
-							"SoporteActaId": Elemento_.SoporteActaId,
-							"Activo": Elemento_.Activo,
-							"FechaCreacion": Elemento_.FechaCreacion,
-							"FechaModificacion": Elemento_.FechaModificacion,
+					if _, err := o.QueryTable(new(Elemento)).RelatedSel().Filter("SoporteActaId__Id",Soporte_.Id).Filter("Activo",true).All(&Elementos); err == nil{
+						fmt.Println(Elementos)
+						var q []interface{}
+
+						for _, Elemento_ := range Elementos{
+
+							q = append(q,map[string]interface{}{
+								"Id": Elemento_.Id,
+								"Nombre": Elemento_.Nombre,
+								"Cantidad": Elemento_.Cantidad,
+								"Marca": Elemento_.Marca,
+								"Serie": Elemento_.Serie,
+								"UnidadMedida": Elemento_.UnidadMedida,
+								"ValorUnitario": Elemento_.ValorUnitario,
+								"Subtotal": Elemento_.Subtotal,
+								"Descuento": Elemento_.Descuento,
+								"ValorTotal": Elemento_.ValorTotal,
+								"PorcentajeIvaId": Elemento_.PorcentajeIvaId,
+								"ValorIva": Elemento_.ValorIva,
+								"ValorFinal": Elemento_.ValorFinal,
+								"SubgrupoCatalogoId": Elemento_.SubgrupoCatalogoId,
+								"Verificado": Elemento_.Verificado,
+								"TipoBienId": Elemento_.TipoBienId,
+								"EstadoElementoId": Elemento_.EstadoElementoId,
+								"SoporteActaId": Elemento_.SoporteActaId,
+								"Activo": Elemento_.Activo,
+								"FechaCreacion": Elemento_.FechaCreacion,
+								"FechaModificacion": Elemento_.FechaModificacion,
+							})
+						}
+						w = append(w,map[string]interface{}{
+							"SoporteActa": Soporte_,
+							"Elementos": &q,
 						})
 					}
-					w = append(w,map[string]interface{}{
-						"SoporteActa": Soporte_,
-						"Elementos": &q,
-					})
 				}
+				v = append(v,map[string]interface{}{
+					"ActaRecibido": Acta,
+					"UltimoEstado": UltimoEstado,
+					"SoportesActa": &w,
+				})
 			}
-			v = append(v,map[string]interface{}{
-				"ActaRecibido": Acta,
-				"SoportesActa": &w,
-			})
 		}
 		return v, nil
 	}
@@ -80,38 +87,51 @@ func AddTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 	err = o.Begin()
 	
 	if idActa, errTr := o.Insert(m.ActaRecibido); errTr == nil {
-		fmt.Println(idActa)
+		fmt.Println("idActa: ", idActa)
+		fmt.Println("m: ", m.UltimoEstado)
+		m.UltimoEstado.ActaRecibidoId.Id = int(idActa)
+		m.UltimoEstado.Activo = true
+		fmt.Println("m: ", m.UltimoEstado)
+		if _, errTr := o.Insert(m.UltimoEstado); errTr == nil {
 
-		for _, v := range *m.SoportesActa {
+			for _, v := range *m.SoportesActa {
 
-			v.SoporteActa.ActaRecibidoId.Id = int(idActa)
+				fmt.Println("Soportes : ",v)
 
-			if IdSoporte, errTr := o.Insert(v.SoporteActa); errTr == nil {
-				fmt.Println(IdSoporte)
+				v.SoporteActa.ActaRecibidoId.Id = int(idActa)
 
-				for _, w := range *v.Elementos {
+				if IdSoporte, errTr := o.Insert(v.SoporteActa); errTr == nil {
 
-					w.SoporteActaId.Id = int(IdSoporte)
+					for _, w := range *v.Elementos {
 
-					if _, errTr = o.Insert(&w); errTr != nil {
-						err = errTr
-						fmt.Println(err)
-						_ = o.Rollback()
-						return
+						w.SoporteActaId.Id = int(IdSoporte)
+
+						if _, errTr = o.Insert(&w); errTr != nil {
+							err = errTr
+							fmt.Println(err)
+							_ = o.Rollback()
+							return
+						}
+
 					}
 
+				} else {
+					err = errTr
+					fmt.Println(err)
+					_ = o.Rollback()
 				}
-
-			} else {
-				err = errTr
-				fmt.Println(err)
-				_ = o.Rollback()
 			}
+
+		}else {
+			err = errTr
+			fmt.Println(err)
+			_ = o.Rollback()
 		}
 		_ = o.Commit()
+
 	} else {
 		err = errTr
-		fmt.Println(err)
+		fmt.Println(errTr)
 		_ = o.Rollback()
 	}
 	return
@@ -126,10 +146,39 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 	// ascertain id exists in the database
 	fmt.Println(v)
 	if errTr := o.Read(&v); errTr == nil {
-		var num int64
 
-		if num, errTr = o.Update(m.ActaRecibido,"UbicacionId","FechaVistoBueno","RevisorId","Observaciones","FechaModificacion"); errTr == nil {
-			fmt.Println("Number of records updated in database:", num)
+		if _, errTr = o.Update(m.ActaRecibido,"UbicacionId","FechaVistoBueno","RevisorId","Observaciones","FechaModificacion"); errTr == nil {
+			fmt.Println("Acta: ",m.ActaRecibido)
+
+			var Historico_ HistoricoActa
+
+			if errTr := o.QueryTable(new(HistoricoActa)).RelatedSel().Filter("Activo", true).Filter("ActaRecibidoId__Id", m.ActaRecibido.Id).One(&Historico_); errTr == nil {
+
+				fmt.Println("Historico :", Historico_)
+
+				Historico_.Activo = false
+				if _, errTr = o.Update(&Historico_,"Activo"); errTr == nil{
+
+					m.UltimoEstado.Activo = true
+
+					if _, errTr = o.Insert(m.UltimoEstado); err != nil{
+						err = errTr
+						fmt.Println(err)
+						_ = o.Rollback()
+						return
+					}
+				} else {
+					err = errTr
+					fmt.Println(err)
+					_ = o.Rollback()
+					return
+				}
+			} else {
+				err = errTr
+				fmt.Println(err)
+				_ = o.Rollback()
+				return
+			}
 
 			var Soportes []SoporteActa
 			var q []int
@@ -287,23 +336,22 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 					}		
 				}
 			
-			if (q != nil){
-				fmt.Println(q)
-				var _Soporte SoporteActa
-				for _, Soporte := range q {
-					_Soporte.Id = Soporte
-					_Soporte.Activo = false
-					if _, errTr = o.Update(&_Soporte,"Activo"); err != nil{
-						err = errTr
-						fmt.Println(err)
-						_ = o.Rollback()
-						return
+				if (q != nil){
+					fmt.Println(q)
+					var _Soporte SoporteActa
+					for _, Soporte := range q {
+						_Soporte.Id = Soporte
+						_Soporte.Activo = false
+						if _, errTr = o.Update(&_Soporte,"Activo"); err != nil{
+							err = errTr
+							fmt.Println(err)
+							_ = o.Rollback()
+							return
+						}
+
 					}
 
 				}
-
-			}
-			
 			
 			_ = o.Commit()
 		}	else {

@@ -35,9 +35,6 @@ func (c *TransaccionActaRecibidoController) GetAllById() {
 		c.Data["system"] = err
 		c.Abort("404")
 	} else {
-		if l == nil {
-			l = append(l, map[string]interface{}{})
-		}
 		c.Data["json"] = l
 	}
 	c.ServeJSON()
