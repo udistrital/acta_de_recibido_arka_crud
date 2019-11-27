@@ -1321,7 +1321,7 @@
         }
     },
     "definitions": {
-        "4658.\u003cnil\u003e.TransaccionSoporteActa": {
+        "4680.\u003cnil\u003e.TransaccionSoporteActa": {
             "title": "TransaccionSoporteActa",
             "type": "object"
         },
@@ -1554,6 +1554,10 @@
                 "Consecutivo": {
                     "type": "string"
                 },
+                "DocumentoId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
                 "FechaCreacion": {
                     "type": "string",
                     "format": "datetime"
@@ -1618,7 +1622,7 @@
                     "$ref": "#/definitions/models.ActaRecibido"
                 },
                 "SoportesActa": {
-                    "$ref": "#/definitions/4658.\u003cnil\u003e.TransaccionSoporteActa"
+                    "$ref": "#/definitions/4680.\u003cnil\u003e.TransaccionSoporteActa"
                 },
                 "UltimoEstado": {
                     "$ref": "#/definitions/models.HistoricoActa"

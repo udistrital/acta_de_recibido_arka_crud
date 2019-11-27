@@ -241,8 +241,6 @@ ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
 -- Permisos de usuario
-
 GRANT USAGE ON SCHEMA acta_recibido TO desarrollooas;
 GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA acta_recibido TO desarrollooas;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA acta_recibido TO desarrollooas;
-
