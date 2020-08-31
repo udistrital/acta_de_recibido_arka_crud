@@ -1,18 +1,3 @@
--- Database generated with pgModeler (PostgreSQL Database Modeler).
--- pgModeler  version: 0.9.2-beta
--- PostgreSQL version: 9.5
--- Project Site: pgmodeler.io
--- Model Author: ---
-
-
--- Database creation must be done outside a multicommand file.
--- These commands were put in this file only as a convenience.
--- -- object: new_database | type: DATABASE --
--- -- DROP DATABASE IF EXISTS new_database;
--- CREATE DATABASE new_database;
--- -- ddl-end --
--- 
-
 -- object: acta_recibido | type: SCHEMA --
 -- DROP SCHEMA IF EXISTS acta_recibido CASCADE;
 CREATE SCHEMA acta_recibido;
@@ -68,6 +53,7 @@ CREATE TABLE acta_recibido.elemento (
 	tipo_bien_id integer NOT NULL,
 	estado_elemento_id integer NOT NULL,
 	soporte_acta_id integer NOT NULL,
+	placa character varying(100),
 	activo boolean NOT NULL,
 	fecha_creacion timestamp NOT NULL,
 	fecha_modificacion timestamp NOT NULL,
@@ -106,6 +92,8 @@ COMMENT ON COLUMN acta_recibido.elemento.valor_iva IS 'Hace referencia al valor 
 COMMENT ON COLUMN acta_recibido.elemento.valor_final IS 'Hace referencia al valor final despues de descuentos e impuestos del elemento ';
 -- ddl-end --
 COMMENT ON COLUMN acta_recibido.elemento.subgrupo_catalogo_id IS 'foranea para relacionar subgrupo de inventarios con tabla de rompimiento contrato elemento y acta recibido';
+-- ddl-end --
+COMMENT ON COLUMN acta_recibido.elemento.placa IS 'Hace referencia a la placa del elemento para uso futuro en el modulo de salidas';
 -- ddl-end --
 
 -- object: acta_recibido.estado_acta | type: TABLE --
@@ -251,11 +239,6 @@ ALTER TABLE acta_recibido.historico_acta ADD CONSTRAINT fk_estado_acta FOREIGN K
 REFERENCES acta_recibido.estado_acta (id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
-
--- Permisos de usuario
-GRANT USAGE ON SCHEMA acta_recibido TO test;
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA acta_recibido TO test;
-GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA acta_recibido TO test;
 
 -- Permisos de usuario
 GRANT USAGE ON SCHEMA acta_recibido TO desarrollooas;

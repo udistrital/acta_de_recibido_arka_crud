@@ -816,7 +816,71 @@ paths:
           description: '{string} delete success!'
         "404":
           description: not found resource
+  /transaccion_acta_recibido/:
+    post:
+      tags:
+      - transaccion_acta_recibido
+      description: create the TransaccionActaRecibido
+      operationId: TransaccionActaRecibidoController.PostTransaccionActaRecibido
+      parameters:
+      - in: body
+        name: body
+        description: body for TransaccionActaRecibido content
+        required: true
+        schema:
+          $ref: '#/definitions/models.TransaccionActaRecibido'
+      responses:
+        "201":
+          description: '{int} models.TransaccionActaRecibido'
+        "400":
+          description: the request contains incorrect syntax
+  /transaccion_acta_recibido/{id}:
+    get:
+      tags:
+      - transaccion_acta_recibido
+      description: get TransaccionActaRecibidoController
+      operationId: TransaccionActaRecibidoController.Get All By id
+      parameters:
+      - in: path
+        name: id
+        description: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.TransaccionActaRecibidoController'
+        "404":
+          description: not found resource
+    put:
+      tags:
+      - transaccion_acta_recibido
+      description: update the TransaccionActaRecibido
+      operationId: TransaccionActaRecibidoController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for TransaccionActaRecibido content
+        required: true
+        schema:
+          $ref: '#/definitions/models.TransaccionActaRecibido'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.TransaccionActaRecibido'
+        "400":
+          description: the request contains incorrect syntax
 definitions:
+  4680.<nil>.TransaccionSoporteActa:
+    title: TransaccionSoporteActa
+    type: object
   models.ActaRecibido:
     title: ActaRecibido
     type: object
@@ -853,8 +917,8 @@ definitions:
         type: integer
         format: int64
       Descuento:
-        type: integer
-        format: int64
+        type: number
+        format: double
       EstadoElementoId:
         $ref: '#/definitions/models.EstadoElemento'
       FechaCreacion:
@@ -870,6 +934,8 @@ definitions:
         type: string
       Nombre:
         type: string
+      Placa:
+        type: string
       PorcentajeIvaId:
         type: integer
         format: int64
@@ -881,25 +947,25 @@ definitions:
         type: integer
         format: int64
       Subtotal:
-        type: integer
-        format: int64
+        type: number
+        format: double
       TipoBienId:
         $ref: '#/definitions/models.TipoBien'
       UnidadMedida:
         type: integer
         format: int64
       ValorFinal:
-        type: integer
-        format: int64
+        type: number
+        format: double
       ValorIva:
-        type: integer
-        format: int64
+        type: number
+        format: double
       ValorTotal:
-        type: integer
-        format: int64
+        type: number
+        format: double
       ValorUnitario:
-        type: integer
-        format: int64
+        type: number
+        format: double
       Verificado:
         type: boolean
   models.EstadoActa:
@@ -979,6 +1045,9 @@ definitions:
         type: boolean
       Consecutivo:
         type: string
+      DocumentoId:
+        type: integer
+        format: int64
       FechaCreacion:
         type: string
         format: datetime
@@ -1018,6 +1087,19 @@ definitions:
       NumeroOrden:
         type: number
         format: double
+  models.TransaccionActaRecibido:
+    title: TransaccionActaRecibido
+    type: object
+    properties:
+      ActaRecibido:
+        $ref: '#/definitions/models.ActaRecibido'
+      SoportesActa:
+        $ref: '#/definitions/4680.<nil>.TransaccionSoporteActa'
+      UltimoEstado:
+        $ref: '#/definitions/models.HistoricoActa'
+  models.TransaccionActaRecibidoController:
+    title: TransaccionActaRecibidoController
+    type: object
 tags:
 - name: estado_elemento
   description: |
@@ -1040,3 +1122,6 @@ tags:
 - name: historico_acta
   description: |
     HistoricoActaController operations for HistoricoActa
+- name: transaccion_acta_recibido
+  description: |
+    operations for TransaccionActaRecibido

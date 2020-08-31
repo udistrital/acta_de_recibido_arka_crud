@@ -1,147 +1,111 @@
-# Acta de Recibido ARKA II CRUD
+# acta_recibido_crud
 
-acta_recibido_crud : API CRUD para el consumo de datos para el modulo de acta de recibido de la plataforma ARKA II, 
-referente al modelo de negocio de inventarios de la Universidad Distrital. 
-El proyecto está escrito en el lenguaje Go, generado mediante el **[framework beego](https://beego.me/)**.
+API CRUD para el consumo de datos del módulo de acta de recibido de la plataforma ARKA II,
+referente al modelo de negocio de inventarios de la Universidad Distrital.
+
+## Especificaciones Técnicas
+
+### Tecnologías Implementadas y Versiones
+* [Golang](https://github.com/udistrital/introduccion_oas/blob/master/instalacion_de_herramientas/golang.md)
+* [BeeGo](https://github.com/udistrital/introduccion_oas/blob/master/instalacion_de_herramientas/beego.md)
+* [Docker](https://docs.docker.com/engine/install/ubuntu/)
+* [Docker Compose](https://docs.docker.com/compose/)
+
+### Variables de Entorno
+```shell
+API_ACTA_RECIBIDO_HTTP_PORT=[Puerto asignado para la ejecución del API]
+ACTA_RECIBIDO_CRUD__PGUSER=[Usuario de la base de datos]
+ACTA_RECIBIDO_CRUD__PGPASS=[Clave del usuario para la conexión a la base de datos]
+ACTA_RECIBIDO_CRUD__PGURLS=[Host de conexión]
+ACTA_RECIBIDO_CRUD__PGDB=[Nombre de la base de datos]
+ACTA_RECIBIDO_CRUD__SCHEMA=[Esquema a utilizar en la base de datos]
+ACTA_RECIBIDO_CRUD__LOG=[Archivo para logs]
+RUN_MODE=[Modo de ejecución del api]
+
+# Ejemplo
+API_ACTA_RECIBIDO_HTTP_PORT=8080
+ACTA_RECIBIDO_CRUD__PGUSER=postgres
+ACTA_RECIBIDO_CRUD__PGPASS=****
+ACTA_RECIBIDO_CRUD__PGURLS=127.0.0.1
+ACTA_RECIBIDO_CRUD__PGDB=arka
+ACTA_RECIBIDO_CRUD__SCHEMA=public
+ACTA_RECIBIDO_CRUD__LOG=
+RUN_MODE=dev
+```
+**NOTA:** Las variables se pueden ver en el fichero conf/app.conf y están identificadas con ACTA_RECIBIDO_CRUD__  
+Para definir puertos, dns y configuraciones internas dentro del archivo **.env**  
+Para definir conexiones externas a otros apis se debe crear el archivo **custom.env** en la raiz del proyecto  
+
+
+### Ejecución del Proyecto
+```shell
+#1. Obtener el repositorio con Go
+go get github.com/udistrital/acta_recibido_crud
+
+#2. Moverse a la carpeta del repositorio
+cd $GOPATH/src/github.com/udistrital/acta_recibido_crud
+
+# 3. Moverse a la rama **develop**
+git pull origin develop && git checkout develop
+
+# 4. alimentar todas las variables de entorno que utiliza el proyecto.
+ACTA_RECIBIDO_CRUD__PORT=8080 ACTA_RECIBIDO_CRUD__PGURLS=127.0.0.1:27017 ACTA_RECIBIDO_CRUD__SOME_VARIABLE=some_value bee run
+```
+
+### Ejecución Dockerfile
+```shell
+# docker build --tag=acta_recibido_crud . --no-cache
+# docker run -p 80:80 acta_recibido_crud
+```
+
+### Ejecución docker-compose
+```shell
+#1. Clonar el repositorio
+git clone -b develop https://github.com/udistrital/acta_recibido_crud
+
+#2. Moverse a la carpeta del repositorio
+cd acta_recibido_crud
+
+#3. Crear un fichero con el nombre **custom.env**
+# En windows ejecutar:* ` ni custom.env`
+touch custom.env
+
+#4. Crear la network **back_end** para los contenedores
+docker network create back_end
+
+#5. Ejecutar el compose del contenedor
+docker-compose up --build
+
+#6. Comprobar que los contenedores estén en ejecución
+docker ps
+```
+
+### Ejecución Pruebas
+
+Pruebas unitarias
+```shell
+# Not Data
+```
+## Estado CI
+
+| Develop | Relese 0.0.1 | Master |
+| -- | -- | -- |
+| [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/acta_recibido_crud/status.svg?ref=refs/heads/develop)](https://hubci.portaloas.udistrital.edu.co/udistrital/acta_recibido_crud) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/acta_recibido_crud/status.svg?ref=refs/heads/release/0.0.1)](https://hubci.portaloas.udistrital.edu.co/udistrital/acta_recibido_crud) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/acta_recibido_crud/status.svg)](https://hubci.portaloas.udistrital.edu.co/udistrital/acta_recibido_crud) |
+
 
 ## Modelo de Datos
+[Modelo de Datos Acta de Recibido Crud](https://drive.google.com/open?id=12zD-XDVDQ_iG9nFZM-vMbjOP_f47GVml)
 
-### SQL del Modelo de datos: 
+[Modelo de Datos Relacional](acta_recibidov3_revision.png).
 
-https://drive.google.com/open?id=1axnn6JPRVDLtPF9qunibtwKkFzn4M6oh
+[SQL Acta de Recibido Crud](https://drive.google.com/open?id=1axnn6JPRVDLtPF9qunibtwKkFzn4M6oh)
 
-### Imagen del Modelo de Datos
+## Licencia
 
-https://drive.google.com/open?id=12zD-XDVDQ_iG9nFZM-vMbjOP_f47GVml
+This file is part of acta_recibido_crud.
 
-![image](acta_recibidov3_revision.png).
+acta_recibido_crud is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
+acta_recibido_crud is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-# Instalación
-Para instalar el proyecto de debe relizar lo siguientes pasos:
-
-## Opción 1
-
-Ejecutar desde la terminal 'go get repositorio':
-```shell 
-go get github.com/udistrital/acta_recibido_crud.git
-```
-
-## Opción 2
-
-1. Clonar en el proyecto en la carpeta local: go/src/github.com/udistrital:
-```shell
-cd ~go/src/github.com/udistrital 
-```
-
-2. Ejecutar:
-
-```shell 
-git clone https://github.com/udistrital/acta_recibido_crud.git
-```
-
-3. Ir a la carpeta del proyecto
-```shell 
-cd acta_de_recibido_crud
-```
-
-4. Instalar dependencias del proyecto:
-```shell 
-go get
-```
-# Variables de Entorno
-
-Definir los valores de las siguientes variables de entorno:
-
- - `API_ACTA_RECIBIDO_HTTP_PORT`: Puerto asignado para la ejecución del API
- - `ACTA_RECIBIDO_CRUD__PGUSER`: Usuario de la base de datos
- - `ACTA_RECIBIDO_CRUD__PGPASS`: Clave del usuario para la conexión a la base de datos  
- - `ACTA_RECIBIDO_CRUD__PGURLS`: Host de conexión
- - `ACTA_RECIBIDO_CRUD__PGDB`: Nombre de la base de datos
- - `ACTA_RECIBIDO_CRUD__SCHEMA`: Esquema a utilizar en la base de datos
- - `ACTA_RECIBIDO_CRUD__LOG`: Archivo para logs
- - `RUN_MODE`: Modo de ejecución del api.
-
-## Ejemplo: 
-
- - `API_ACTA_RECIBIDO_HTTP_PORT`: 8080
- - `ACTA_RECIBIDO_CRUD__PGUSER`: postgres
- - `ACTA_RECIBIDO_CRUD__PGPASS`: 
- - `ACTA_RECIBIDO_CRUD__PGURLS`: 127.0.0.1
- - `ACTA_RECIBIDO_CRUD__PGDB`: arka
- - `ACTA_RECIBIDO_CRUD__SCHEMA`: acta_recibido
- - `ACTA_RECIBIDO_CRUD__LOG`:
- - `RUN_MODE`: dev
-
-# Ejecución del proyecto
-Ubicado en la raíz del proyecto,
-```shell 
-cd ~/go/src/github.com/udistrital/acta_recibido_crud
-```
-A travez de un archivo con extension .sh se deben escribir las variables de entorno separadas con un espacio y seguidas del comando para la ejecucuin del proyecto
-
-- Ejecutar: 
-```shell 
-API_ACTA_RECIBIDO_HTTP_PORT=8080 ACTA_RECIBIDO_CRUD__PGUSER=postgres ACTA_RECIBIDO_CRUD__PGPASS= ACTA_RECIBIDO_CRUD__PGURLS=127.0.0.1 ACTA_RECIBIDO_CRUD__PGDB=arka ACTA_RECIBIDO_CRUD__SCHEMA=acta_recibido RUN_MODE=dev bee run
-```
-- O si se quiere ejecutar el swager:
-
-```shell 
-API_ACTA_RECIBIDO_HTTP_PORT=8080 ACTA_RECIBIDO_CRUD__PGUSER=postgres ACTA_RECIBIDO_CRUD__PGPASS= ACTA_RECIBIDO_CRUD__PGURLS=127.0.0.1 ACTA_RECIBIDO_CRUD__PGDB=arka ACTA_RECIBIDO_CRUD__SCHEMA=acta_recibido RUN_MODE=dev bee run -downdoc=true -gendoc=true
-```
-
-# Endpoint
-
-## Ejemplo
-
-* para este caso, el servidor se expone en el puerto: 127.0.0.1:8080 
-
-* Para ver la documentación de swagger: [127.0.0.1:8080/swagger/](http://127.0.0.1:8080/swagger/)
-
-
-- Correr el proyecto por docker compose 
-1. Crear red de contenedores denominada back_end con el comando (si ya esta creada no es necesario crearla):
-
-```sh
-docker network create back_end
-```
-
-2. Para construir y correr los contenedores:
-```sh
-docker-compose up --build
-```
-o
-```sh
-docker-compose build --no-cache
-```
-- Bajar los servicios de los contenedores
-```sh
-docker-compose down
-```
-- Subir los servicios de los contenedores ya construidos previamente
-```sh
-docker-compose up
-```
-# Archivos para variables de entorno: 
-
-- para definir puertos, dns y configuraciones internas dentro del archivo **.env**
-- para definir conexiones externas a otros apis se debe crear el archivo **custom.env** en la raiz del proyecto
-
-## Derechos de Autor
-
-This program is free software: you can redistribute it 
-and/or modify it under the terms of the GNU General Public 
-License as published by the Free Software Foundation, either
-version 3 of the License, or (at your option) any later
-version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-### UNIVERSIDAD DISTRITAL FRANCISCO JOSÉ DE CALDAS
-
-### OFICINA ASESORA DE SISTEMAS
-
-### 2019
+You should have received a copy of the GNU General Public License along with acta_recibido_crud. If not, see https://www.gnu.org/licenses/.
