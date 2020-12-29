@@ -85,7 +85,6 @@ func GetTransaccionActaRecibido(id int) (v []interface{}, err error) {
 func AddTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 	o := orm.NewOrm()
 	err = o.Begin()
-	
 	if idActa, errTr := o.Insert(m.ActaRecibido); errTr == nil {
 		fmt.Println("idActa: ", idActa)
 		fmt.Println("m: ", m.UltimoEstado)
@@ -95,9 +94,6 @@ func AddTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 		if _, errTr := o.Insert(m.UltimoEstado); errTr == nil {
 
 			for _, v := range *m.SoportesActa {
-
-				fmt.Println("Soportes : ",v)
-
 				v.SoporteActa.ActaRecibidoId.Id = int(idActa)
 
 				if IdSoporte, errTr := o.Insert(v.SoporteActa); errTr == nil {
@@ -147,7 +143,7 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 	fmt.Println(v)
 	if errTr := o.Read(&v); errTr == nil {
 
-		if _, errTr = o.Update(m.ActaRecibido,"UbicacionId","FechaVistoBueno","RevisorId","Observaciones","FechaModificacion"); errTr == nil {
+		if _, errTr = o.Update(m.ActaRecibido,"UbicacionId","FechaVistoBueno","RevisorId","Observaciones","FechaModificacion","PersonaAsignada"); errTr == nil {
 			fmt.Println("Acta: ",m.ActaRecibido)
 
 			var Historico_ HistoricoActa
@@ -184,7 +180,6 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 			var q []int
 
 			if _, errTr = o.QueryTable(new(SoporteActa)).RelatedSel().Filter("ActaRecibidoId__Id",m.ActaRecibido.Id).All(&Soportes); err == nil{
-			
 				for _, Soporte := range Soportes{
 					q = append(q,Soporte.Id)
 					fmt.Println(q)
@@ -215,13 +210,11 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 								var g []int
 
 								if _, errTr = o.QueryTable(new(Elemento)).RelatedSel().Filter("SoporteActaId__Id",metadato.Id).All(&Elementos); err == nil{
-								
 									for _, Elemento := range Elementos{
 										g = append(g,Elemento.Id)
 										fmt.Println(g)
 									}
 									fmt.Println(g)
-								
 								} else {
 									err = errTr
 									fmt.Println(err)
@@ -237,7 +230,6 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 									if errTr = o.QueryTable(new(Elemento)).RelatedSel().Filter("Id",u.Id).Filter("SoporteActaId__Id",metadato.Id).One(&metadato_elemento); err == nil{
 
 										if (metadato_elemento.Id != 0){
-												
 											metadato_elemento.Nombre = u.Nombre
 											metadato_elemento.Cantidad = u.Cantidad
 											metadato_elemento.Marca = u.Marca
@@ -294,10 +286,8 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 											_ = o.Rollback()
 											return
 										}
-					
 									}
 									fmt.Println(g)
-					
 								}
 
 							} else {
@@ -309,11 +299,9 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 						} else {
 							w.SoporteActa.ActaRecibidoId.Id = m.ActaRecibido.Id
 							if _, errTr = o.Insert(w.SoporteActa); errTr == nil {
-								
 								for _, u := range *w.Elementos {
 
 									u.SoporteActaId.Id = w.SoporteActa.Id
-				
 									if _, errTr = o.Insert(&u); errTr != nil {
 										err = errTr
 										fmt.Println(err)
