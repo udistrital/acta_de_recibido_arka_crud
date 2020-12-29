@@ -15,6 +15,7 @@ type ActaRecibido struct {
 	UbicacionId       int       `orm:"column(ubicacion_id)"`
 	FechaVistoBueno   time.Time `orm:"column(fecha_visto_bueno);type(date);null"`
 	RevisorId         int       `orm:"column(revisor_id)"`
+	PersonaAsignada   int       `orm:"column(persona_asignada)"`
 	Observaciones     string    `orm:"column(observaciones);null"`
 	Activo            bool      `orm:"column(activo)"`
 	FechaCreacion     time.Time `orm:"auto_now_add;column(fecha_creacion);type(timestamp without time zone)"`
@@ -129,6 +130,7 @@ func GetAllActaRecibido(query map[string]string, fields []string, sortby []strin
 // UpdateActaRecibido updates ActaRecibido by Id and returns error if
 // the record to be updated doesn't exist
 func UpdateActaRecibidoById(m *ActaRecibido) (err error) {
+
 	o := orm.NewOrm()
 	v := ActaRecibido{Id: m.Id}
 	// ascertain id exists in the database
