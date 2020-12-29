@@ -1,0 +1,1 @@
+alter table acta_recibido.acta_recibido drop column persona_asignada
