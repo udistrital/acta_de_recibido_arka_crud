@@ -1321,7 +1321,7 @@
         }
     },
     "definitions": {
-        "32406.\u003cnil\u003e.TransaccionSoporteActa": {
+        "32419.\u003cnil\u003e.TransaccionSoporteActa": {
             "title": "TransaccionSoporteActa",
             "type": "object"
         },
@@ -1626,7 +1626,7 @@
                     "$ref": "#/definitions/models.ActaRecibido"
                 },
                 "SoportesActa": {
-                    "$ref": "#/definitions/32406.\u003cnil\u003e.TransaccionSoporteActa"
+                    "$ref": "#/definitions/32419.\u003cnil\u003e.TransaccionSoporteActa"
                 },
                 "UltimoEstado": {
                     "$ref": "#/definitions/models.HistoricoActa"

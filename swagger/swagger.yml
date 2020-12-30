@@ -32,8 +32,7 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply
-          to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -147,8 +146,7 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply
-          to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -262,8 +260,7 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply
-          to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -377,8 +374,7 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply
-          to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -492,8 +488,7 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply
-          to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -607,8 +602,7 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply
-          to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -722,8 +716,7 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply
-          to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -878,7 +871,7 @@ paths:
         "400":
           description: the request contains incorrect syntax
 definitions:
-  4680.<nil>.TransaccionSoporteActa:
+  32419.<nil>.TransaccionSoporteActa:
     title: TransaccionSoporteActa
     type: object
   models.ActaRecibido:
@@ -901,6 +894,9 @@ definitions:
         format: int64
       Observaciones:
         type: string
+      PersonaAsignada:
+        type: integer
+        format: int64
       RevisorId:
         type: integer
         format: int64
@@ -1094,7 +1090,7 @@ definitions:
       ActaRecibido:
         $ref: '#/definitions/models.ActaRecibido'
       SoportesActa:
-        $ref: '#/definitions/4680.<nil>.TransaccionSoporteActa'
+        $ref: '#/definitions/32419.<nil>.TransaccionSoporteActa'
       UltimoEstado:
         $ref: '#/definitions/models.HistoricoActa'
   models.TransaccionActaRecibidoController:
