@@ -1,1 +1,2 @@
-DROP TABLE IF EXISTS acta_recibido.elemento CASCADE;
+ALTER TABLE acta_recibido.elemento
+    ALTER COLUMN subgrupo_catalogo_id NOT NULL;
