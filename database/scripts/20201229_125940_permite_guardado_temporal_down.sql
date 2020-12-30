@@ -1,1 +1,2 @@
-DROP TABLE IF EXISTS acta_recibido.elemento CASCADE;
+ALTER TABLE acta_recibido.elemento
+    ALTER COLUMN tipo_bien_id NOT NULL;
