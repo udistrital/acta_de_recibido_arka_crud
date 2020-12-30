@@ -151,7 +151,6 @@ CREATE TABLE acta_recibido.soporte_acta (
 	proveedor_id integer NOT NULL,
 	fecha_soporte date NOT NULL,
 	acta_recibido_id integer NOT NULL,
-	documento_id integer,
 	activo boolean NOT NULL,
 	fecha_creacion timestamp NOT NULL,
 	fecha_modificacion timestamp NOT NULL,
