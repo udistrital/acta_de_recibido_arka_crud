@@ -156,7 +156,6 @@ CREATE TABLE acta_recibido.soporte_acta (
 	fecha_modificacion timestamp NOT NULL,
 	CONSTRAINT pk_soporte_acta PRIMARY KEY (id),
 	CONSTRAINT uq_consecutivo UNIQUE (consecutivo)
-
 );
 -- ddl-end --
 COMMENT ON COLUMN acta_recibido.soporte_acta.consecutivo IS 'Hace referencia al numero de factura o soporte que debe ser de caracter unico';
