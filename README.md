@@ -94,11 +94,9 @@ Pruebas unitarias
 
 
 ## Modelo de Datos
-[Modelo de Datos Acta de Recibido Crud](https://drive.google.com/open?id=12zD-XDVDQ_iG9nFZM-vMbjOP_f47GVml)
 
-[Modelo de Datos Relacional](acta_recibidov3_revision.png).
-
-[SQL Acta de Recibido Crud](https://drive.google.com/open?id=1axnn6JPRVDLtPF9qunibtwKkFzn4M6oh)
+![Modelo de Datos](models/model.svg)
+[modelo](models/model.dbm) - [Drive](https://drive.google.com/open?id=1axnn6JPRVDLtPF9qunibtwKkFzn4M6oh)
 
 ## Licencia
 
