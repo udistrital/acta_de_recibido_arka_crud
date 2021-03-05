@@ -95,8 +95,8 @@ Pruebas unitarias
 
 ## Modelo de Datos
 
-![Modelo de Datos](models/model.svg)
-[modelo](models/model.dbm) - [Drive](https://drive.google.com/open?id=1axnn6JPRVDLtPF9qunibtwKkFzn4M6oh)
+[Modelo de Datos ACTA RECIBIDO CRUD](https://drive.google.com/drive/u/2/folders/1LkLHwuF-FKOyuMEMs0DjMdIUH-YXDJnY)\
+[PGModeler](models/modelo.dbm) - [SVG](models/modelo.svg)
 
 ## Licencia
 
