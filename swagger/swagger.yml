@@ -871,7 +871,7 @@ paths:
         "400":
           description: the request contains incorrect syntax
 definitions:
-  32419.<nil>.TransaccionSoporteActa:
+  32489.<nil>.TransaccionSoporteActa:
     title: TransaccionSoporteActa
     type: object
   models.ActaRecibido:
@@ -915,6 +915,9 @@ definitions:
       Descuento:
         type: number
         format: double
+      EspacioFisicoId:
+        type: integer
+        format: int64
       EstadoElementoId:
         $ref: '#/definitions/models.EstadoElemento'
       FechaCreacion:
@@ -1090,7 +1093,7 @@ definitions:
       ActaRecibido:
         $ref: '#/definitions/models.ActaRecibido'
       SoportesActa:
-        $ref: '#/definitions/32419.<nil>.TransaccionSoporteActa'
+        $ref: '#/definitions/32489.<nil>.TransaccionSoporteActa'
       UltimoEstado:
         $ref: '#/definitions/models.HistoricoActa'
   models.TransaccionActaRecibidoController:

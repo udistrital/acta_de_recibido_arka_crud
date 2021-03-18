@@ -1321,7 +1321,7 @@
         }
     },
     "definitions": {
-        "32419.\u003cnil\u003e.TransaccionSoporteActa": {
+        "32489.\u003cnil\u003e.TransaccionSoporteActa": {
             "title": "TransaccionSoporteActa",
             "type": "object"
         },
@@ -1379,6 +1379,10 @@
                 "Descuento": {
                     "type": "number",
                     "format": "double"
+                },
+                "EspacioFisicoId": {
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "EstadoElementoId": {
                     "$ref": "#/definitions/models.EstadoElemento"
@@ -1626,7 +1630,7 @@
                     "$ref": "#/definitions/models.ActaRecibido"
                 },
                 "SoportesActa": {
-                    "$ref": "#/definitions/32419.\u003cnil\u003e.TransaccionSoporteActa"
+                    "$ref": "#/definitions/32489.\u003cnil\u003e.TransaccionSoporteActa"
                 },
                 "UltimoEstado": {
                     "$ref": "#/definitions/models.HistoricoActa"
