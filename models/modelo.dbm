@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.1" last-position="0,227" last-zoom="0.95"
+<dbmodel pgmodeler-ver="0.9.1" last-position="0,0" last-zoom="0.9"
 	 default-schema="public" default-owner="postgres">
 <role name="desarrollooas"
       superuser="true"
@@ -41,7 +41,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla para guardar informacion del acta recibido]]></comment>
-	<position x="20" y="300"/>
+	<position x="100" y="420"/>
 	<column name="id" not-null="true" sequence="acta_recibido.acta_recibido_id_seq">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[campo para guardar identificador del acta recibido]]></comment>
@@ -89,7 +89,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla para guardar los elementos de acta recibido por contrato]]></comment>
-	<position x="800" y="560"/>
+	<position x="820" y="400"/>
 	<column name="id" not-null="true" sequence="acta_recibido.elemento_id_seq">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[identificador para acta recibido elemento por contratos]]></comment>
@@ -173,6 +173,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="fecha_modificacion" not-null="true">
 		<type name="timestamp" length="0"/>
 	</column>
+	<column name="espacio_fisico_id">
+		<type name="integer" length="0"/>
+		<comment><![CDATA[Hace referencia al id en la tabla espacio_físico en el api oikos_crud]]></comment>
+	</column>
 	<constraint name="pk_elemento" type="pk-constr" table="acta_recibido.elemento">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
@@ -190,7 +194,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla para almacenar los estados de acta recibido]]></comment>
-	<position x="700" y="300"/>
+	<position x="860" y="160"/>
 	<column name="id" not-null="true" sequence="acta_recibido.estado_acta_id_seq">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[campo serial para estado acta recibido]]></comment>
@@ -237,7 +241,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="estado_elemento">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
-	<position x="1240" y="340"/>
+	<position x="1240" y="900"/>
 	<column name="id" not-null="true" sequence="acta_recibido.estado_elemento_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -278,7 +282,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="soporte_acta">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
-	<position x="360" y="860"/>
+	<position x="440" y="900"/>
 	<column name="id" not-null="true" sequence="acta_recibido.soporte_acta_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -325,7 +329,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="tipo_bien">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
-	<position x="1200" y="40"/>
+	<position x="1240" y="180"/>
 	<column name="id" not-null="true" sequence="acta_recibido.tipo_bien_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -367,7 +371,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla de rompimiento para la relacion de los estados del acta y el acta de recibido ]]></comment>
-	<position x="360" y="60"/>
+	<position x="440" y="120"/>
 	<column name="id" not-null="true" sequence="acta_recibido.historico_acta_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -428,56 +432,54 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </constraint>
 
 <relationship name="rel_elemento_estado_elemento" type="relfk"
+	 custom-color="#8db7ce"
 	 src-table="acta_recibido.elemento"
 	 dst-table="acta_recibido.estado_elemento" reference-fk="fk_elemento_estado_elemento"
 	 src-required="false" dst-required="false">
 	<label ref-type="name-label">
-		<position x="101.573" y="-4.10156"/>
+		<position x="11.4936" y="35.7393"/>
 	</label>
 </relationship>
 
 <relationship name="rel_elemento_soporte_acta" type="relfk"
+	 custom-color="#9e2fc5"
 	 src-table="acta_recibido.elemento"
 	 dst-table="acta_recibido.soporte_acta" reference-fk="fk_elemento_soporte_acta"
 	 src-required="false" dst-required="false">
 	<label ref-type="name-label">
-		<position x="-36.0517" y="-81.6016"/>
+		<position x="13.8688" y="38.2393"/>
 	</label>
 </relationship>
 
 <relationship name="rel_elemento_tipo_bien" type="relfk"
+	 custom-color="#89d700"
 	 src-table="acta_recibido.elemento"
 	 dst-table="acta_recibido.tipo_bien" reference-fk="fk_elemento_tipo_bien"
 	 src-required="false" dst-required="false">
 	<label ref-type="name-label">
-		<position x="-60.4269" y="-56.6016"/>
+		<position x="19.4936" y="-76.7607"/>
 	</label>
 </relationship>
 
 <relationship name="rel_soporte_acta_acta_recibido" type="relfk"
+	 custom-color="#60a5b4"
 	 src-table="acta_recibido.soporte_acta"
 	 dst-table="acta_recibido.acta_recibido" reference-fk="fk_soporte_acta_acta_recibido"
-	 src-required="false" dst-required="false">
-	<label ref-type="src-label">
-		<position x="0.1425" y="18.725"/>
-	</label>
-</relationship>
+	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_historico_acta_acta_recibido" type="relfk"
+	 custom-color="#b6d4fe"
 	 src-table="acta_recibido.historico_acta"
 	 dst-table="acta_recibido.acta_recibido" reference-fk="fk_acta_recibido"
-	 src-required="false" dst-required="false">
-	<label ref-type="name-label">
-		<position x="28.6395" y="28.3984"/>
-	</label>
-</relationship>
+	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_historico_acta_estado_acta" type="relfk"
+	 custom-color="#b57da0"
 	 src-table="acta_recibido.historico_acta"
 	 dst-table="acta_recibido.estado_acta" reference-fk="fk_estado_acta"
 	 src-required="false" dst-required="false">
 	<label ref-type="name-label">
-		<position x="50.6473" y="20.8984"/>
+		<position x="30.5678" y="-69.2607"/>
 	</label>
 </relationship>
 
