@@ -35,17 +35,20 @@ steps:
     event:
     - push
 
-- name: check_commits
-  image: jjvargass/qa_develoment:latest
-  commands:
-  - python /app/check_commits.py
-  when:
-    branch:
-    - develop
-    - feature/*
-    - release/*
-    event:
-    - push
+# SCRIPT NO OBJETIVO
+# Se comenta hasta que sea objetivo. Para más información:
+# https://github.com/udistrital/arka_cliente/commit/37e3ece10d52cae1303d837ad0e8a6ca1fb7a549
+# - name: check_commits
+#   image: jjvargass/qa_develoment:latest
+#   commands:
+#   - python /app/check_commits.py
+#   when:
+#     branch:
+#     - develop
+#     - feature/*
+#     - release/*
+#     event:
+#     - push
 
 - name: go_build
   image: golang:1.14
@@ -55,6 +58,8 @@ steps:
   when:
     branch:
     - develop
+    - feature/*
+    - hotfix/*
     - release/*
     - master
     event:
@@ -140,6 +145,8 @@ steps:
   when:
     branch:
     - release/*
+    event:
+    - push
     status:
     - failure
 
