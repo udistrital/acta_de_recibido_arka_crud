@@ -32,7 +32,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -146,7 +147,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -260,7 +262,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -374,7 +377,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -488,7 +492,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -602,7 +607,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -716,7 +722,8 @@ paths:
         type: string
       - in: query
         name: order
-        description: Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
         type: string
       - in: query
         name: limit
@@ -871,8 +878,11 @@ paths:
         "400":
           description: the request contains incorrect syntax
 definitions:
-  32489.<nil>.TransaccionSoporteActa:
-    title: TransaccionSoporteActa
+  36834.<nil>.SoporteActa:
+    title: SoporteActa
+    type: object
+  36863.<nil>.Elemento:
+    title: Elemento
     type: object
   models.ActaRecibido:
     title: ActaRecibido
@@ -886,27 +896,17 @@ definitions:
       FechaModificacion:
         type: string
         format: datetime
-      FechaVistoBueno:
-        type: string
-        format: datetime
       Id:
         type: integer
         format: int64
-      Observaciones:
-        type: string
-      PersonaAsignada:
-        type: integer
-        format: int64
-      RevisorId:
-        type: integer
-        format: int64
-      UbicacionId:
-        type: integer
-        format: int64
+      TipoActaId:
+        $ref: '#/definitions/models.TipoActa'
   models.Elemento:
     title: Elemento
     type: object
     properties:
+      ActaRecibidoId:
+        $ref: '#/definitions/models.ActaRecibido'
       Activo:
         type: boolean
       Cantidad:
@@ -940,8 +940,6 @@ definitions:
         format: int64
       Serie:
         type: string
-      SoporteActaId:
-        $ref: '#/definitions/models.SoporteActa'
       SubgrupoCatalogoId:
         type: integer
         format: int64
@@ -965,8 +963,6 @@ definitions:
       ValorUnitario:
         type: number
         format: double
-      Verificado:
-        type: boolean
   models.EstadoActa:
     title: EstadoActa
     type: object
@@ -1031,7 +1027,24 @@ definitions:
       FechaModificacion:
         type: string
         format: datetime
+      FechaVistoBueno:
+        type: string
+        format: datetime
       Id:
+        type: integer
+        format: int64
+      Observaciones:
+        type: string
+      PersonaAsignada:
+        type: integer
+        format: int64
+      ProveedorId:
+        type: integer
+        format: int64
+      RevisorId:
+        type: integer
+        format: int64
+      UbicacionId:
         type: integer
         format: int64
   models.SoporteActa:
@@ -1059,9 +1072,27 @@ definitions:
       Id:
         type: integer
         format: int64
-      ProveedorId:
+  models.TipoActa:
+    title: TipoActa
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      CodigoAbreviacion:
+        type: string
+      Descripcion:
+        type: string
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
         type: integer
         format: int64
+      Nombre:
+        type: string
   models.TipoBien:
     title: TipoBien
     type: object
@@ -1092,8 +1123,10 @@ definitions:
     properties:
       ActaRecibido:
         $ref: '#/definitions/models.ActaRecibido'
+      Elementos:
+        $ref: '#/definitions/36863.<nil>.Elemento'
       SoportesActa:
-        $ref: '#/definitions/32489.<nil>.TransaccionSoporteActa'
+        $ref: '#/definitions/36834.<nil>.SoporteActa'
       UltimoEstado:
         $ref: '#/definitions/models.HistoricoActa'
   models.TransaccionActaRecibidoController:
