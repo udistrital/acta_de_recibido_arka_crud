@@ -29,3 +29,7 @@ ALTER TABLE acta_recibido.historico_acta
 ALTER TABLE acta_recibido.soporte_acta
     ADD COLUMN IF NOT EXISTS proveedor_id INTEGER;
 
+-- Tipo Acta
+
+DROP TABLE IF EXISTS acta_recibido.tipo_acta;
+

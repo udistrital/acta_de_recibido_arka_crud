@@ -67,3 +67,23 @@ ALTER TABLE acta_recibido.historico_acta
 ALTER TABLE acta_recibido.soporte_acta
     DROP COLUMN IF EXISTS proveedor_id;
 
+-- Tipo Acta
+
+CREATE TABLE acta_recibido.tipo_acta (
+	id SERIAL NOT NULL,
+	nombre CHARACTER varying(20) NOT NULL,
+	descripcion CHARACTER varying(250),
+	codigo_abreviacion CHARACTER varying(20),
+	activo BOOLEAN NOT NULL,
+	fecha_creacion TIMESTAMP NOT NULL,
+	fecha_modificacion TIMESTAMP NOT NULL,
+	CONSTRAINT pk_tipo_acta PRIMARY KEY (id)
+);
+
+INSERT INTO acta_recibido.tipo_acta (id, nombre, descripcion, codigo_abreviacion, activo, fecha_creacion, fecha_modificacion) 
+	VALUES (1, 'Regular', 'Acta para registrar elementos con factura de compra', 'REG', true, now(), now());
+INSERT INTO acta_recibido.tipo_acta (id, nombre, descripcion, codigo_abreviacion, activo, fecha_creacion, fecha_modificacion) 
+	VALUES (2, 'Especial', 'Acta para registrar elementos sin factura de compra', 'VER', true, now(), now());
+INSERT INTO acta_recibido.tipo_acta (id, nombre, descripcion, codigo_abreviacion, activo, fecha_creacion, fecha_modificacion) 
+	VALUES (3, 'Inmueble', 'Acta para registrar bienes inmuebles', 'INM', true, now(), now());
+
