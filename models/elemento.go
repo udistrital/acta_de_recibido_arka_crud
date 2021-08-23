@@ -25,11 +25,10 @@ type Elemento struct {
 	ValorIva           float64         `orm:"column(valor_iva);null"`
 	ValorFinal         float64         `orm:"column(valor_final);null"`
 	SubgrupoCatalogoId int             `orm:"column(subgrupo_catalogo_id);null"`
-	Verificado         bool            `orm:"column(verificado)"`
 	TipoBienId         *TipoBien       `orm:"column(tipo_bien_id);rel(fk);null"`
 	EstadoElementoId   *EstadoElemento `orm:"column(estado_elemento_id);rel(fk)"`
 	EspacioFisicoId    int             `orm:"column(espacio_fisico_id)"`
-	SoporteActaId      *SoporteActa    `orm:"column(soporte_acta_id);rel(fk)"`
+	ActaRecibidoId     *ActaRecibido   `orm:"column(acta_recibido_id);rel(fk)"`
 	Placa              string          `orm:"column(placa);null"`
 	Activo             bool            `orm:"column(activo)"`
 	FechaCreacion      time.Time       `orm:"auto_now_add;column(fecha_creacion);type(timestamp without time zone)"`
