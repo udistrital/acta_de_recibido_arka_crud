@@ -33,3 +33,12 @@ ALTER TABLE acta_recibido.soporte_acta
 
 DROP TABLE IF EXISTS acta_recibido.tipo_acta;
 
+-- Acta Recibido
+
+ALTER TABLE acta_recibido.acta_recibido
+    DROP COLUMN IF EXISTS tipo_acta_id,
+    ADD COLUMN IF NOT EXISTS ubicacion_id INTEGER,
+    ADD COLUMN IF NOT EXISTS revisor_id INTEGER,
+    ADD COLUMN IF NOT EXISTS persona_asignada INTEGER,
+    ADD COLUMN IF NOT EXISTS observaciones CHARACTER varying(300),
+    ADD COLUMN IF NOT EXISTS fecha_visto_bueno DATE;

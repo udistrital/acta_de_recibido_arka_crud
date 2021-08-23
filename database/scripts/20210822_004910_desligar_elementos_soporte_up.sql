@@ -87,3 +87,20 @@ INSERT INTO acta_recibido.tipo_acta (id, nombre, descripcion, codigo_abreviacion
 INSERT INTO acta_recibido.tipo_acta (id, nombre, descripcion, codigo_abreviacion, activo, fecha_creacion, fecha_modificacion) 
 	VALUES (3, 'Inmueble', 'Acta para registrar bienes inmuebles', 'INM', true, now(), now());
 
+-- Acta Recibido
+
+ALTER TABLE acta_recibido.acta_recibido
+    ADD COLUMN IF NOT EXISTS tipo_acta_id INTEGER NOT NULL DEFAULT 1,
+    DROP COLUMN IF EXISTS ubicacion_id,
+    DROP COLUMN IF EXISTS revisor_id,
+    DROP COLUMN IF EXISTS persona_asignada,
+    DROP COLUMN IF EXISTS observaciones,
+    DROP COLUMN IF EXISTS fecha_visto_bueno;
+
+ALTER TABLE acta_recibido.acta_recibido
+    ADD CONSTRAINT fk_acta_recibido_tipo_acta FOREIGN KEY (tipo_acta_id)
+    REFERENCES acta_recibido.tipo_Acta (id) MATCH FULL
+    ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE acta_recibido.acta_recibido
+    ALTER COLUMN tipo_acta_id DROP DEFAULT;
