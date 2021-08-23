@@ -24,3 +24,8 @@ ALTER TABLE acta_recibido.historico_acta
     DROP COLUMN IF EXISTS observaciones,
     DROP COLUMN IF EXISTS fecha_visto_bueno;
 
+-- Soporte
+
+ALTER TABLE acta_recibido.soporte_acta
+    ADD COLUMN IF NOT EXISTS proveedor_id INTEGER;
+

@@ -13,7 +13,6 @@ import (
 type SoporteActa struct {
 	Id                int           `orm:"column(id);pk;auto"`
 	Consecutivo       string        `orm:"column(consecutivo);null"`
-	ProveedorId       int           `orm:"column(proveedor_id);null"`
 	DocumentoId       int           `orm:"column(documento_id);null"`
 	FechaSoporte      time.Time     `orm:"column(fecha_soporte);type(date);null"`
 	ActaRecibidoId    *ActaRecibido `orm:"column(acta_recibido_id);rel(fk)"`

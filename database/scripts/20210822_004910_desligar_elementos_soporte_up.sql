@@ -62,3 +62,8 @@ ALTER TABLE acta_recibido.historico_acta
     ALTER COLUMN revisor_id SET NOT NULL,
     ALTER COLUMN persona_asignada_id SET NOT NULL;
 
+-- Soporte
+
+ALTER TABLE acta_recibido.soporte_acta
+    DROP COLUMN IF EXISTS proveedor_id;
+
