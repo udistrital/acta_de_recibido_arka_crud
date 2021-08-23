@@ -14,3 +14,13 @@ ALTER TABLE acta_recibido.elemento
     REFERENCES acta_recibido.soporte_acta (id) MATCH FULL
     ON DELETE RESTRICT ON UPDATE CASCADE;
 
+-- Historico
+
+ALTER TABLE acta_recibido.historico_acta
+    DROP COLUMN IF EXISTS proveedor_id,
+    DROP COLUMN IF EXISTS ubicacion_id,
+    DROP COLUMN IF EXISTS revisor_id,
+    DROP COLUMN IF EXISTS persona_asignada_id,
+    DROP COLUMN IF EXISTS observaciones,
+    DROP COLUMN IF EXISTS fecha_visto_bueno;
+
