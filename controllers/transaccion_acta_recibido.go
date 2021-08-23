@@ -2,10 +2,11 @@ package controllers
 
 import (
 	"encoding/json"
-	"github.com/udistrital/acta_recibido_crud/models"
-	"github.com/astaxie/beego/logs"
-	"github.com/astaxie/beego"
 	"strconv"
+
+	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/logs"
+	"github.com/udistrital/acta_recibido_crud/models"
 )
 
 // operations for TransaccionActaRecibido
@@ -16,7 +17,6 @@ type TransaccionActaRecibidoController struct {
 func (c *TransaccionActaRecibidoController) URLMapping() {
 	c.Mapping("Post", c.Post)
 }
-
 
 // GetAllByPersona ...
 // @Title Get All By id
@@ -39,7 +39,6 @@ func (c *TransaccionActaRecibidoController) GetAllById() {
 	}
 	c.ServeJSON()
 }
-
 
 // @Title PostTransaccionActaRecibido
 // @Description create the TransaccionActaRecibido
