@@ -1035,7 +1035,7 @@ definitions:
         format: int64
       Observaciones:
         type: string
-      PersonaAsignada:
+      PersonaAsignadaId:
         type: integer
         format: int64
       ProveedorId:

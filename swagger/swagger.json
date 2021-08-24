@@ -1539,7 +1539,7 @@
                 "Observaciones": {
                     "type": "string"
                 },
-                "PersonaAsignada": {
+                "PersonaAsignadaId": {
                     "type": "integer",
                     "format": "int64"
                 },
