@@ -12,11 +12,7 @@ import (
 
 type ActaRecibido struct {
 	Id                int       `orm:"column(id);pk;auto"`
-	UbicacionId       int       `orm:"column(ubicacion_id)"`
-	FechaVistoBueno   time.Time `orm:"column(fecha_visto_bueno);type(date);null"`
-	RevisorId         int       `orm:"column(revisor_id)"`
-	PersonaAsignada   int       `orm:"column(persona_asignada)"`
-	Observaciones     string    `orm:"column(observaciones);null"`
+	TipoActaId        *TipoActa `orm:"column(tipo_acta_id);rel(fk)"`
 	Activo            bool      `orm:"column(activo)"`
 	FechaCreacion     time.Time `orm:"auto_now_add;column(fecha_creacion);type(timestamp without time zone)"`
 	FechaModificacion time.Time `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone)"`

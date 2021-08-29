@@ -10,50 +10,49 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
-type SoporteActa struct {
-	Id                int           `orm:"column(id);pk;auto"`
-	Consecutivo       string        `orm:"column(consecutivo);null"`
-	DocumentoId       int           `orm:"column(documento_id);null"`
-	FechaSoporte      time.Time     `orm:"column(fecha_soporte);type(date);null"`
-	ActaRecibidoId    *ActaRecibido `orm:"column(acta_recibido_id);rel(fk)"`
-	Activo            bool          `orm:"column(activo)"`
-	FechaCreacion     time.Time     `orm:"auto_now_add;column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time     `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone)"`
+type TipoActa struct {
+	Id                int       `orm:"column(id);pk;auto"`
+	Nombre            string    `orm:"column(nombre)"`
+	Descripcion       string    `orm:"column(descripcion);null"`
+	CodigoAbreviacion string    `orm:"column(codigo_abreviacion);null"`
+	Activo            bool      `orm:"column(activo)"`
+	FechaCreacion     time.Time `orm:"auto_now_add;column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion time.Time `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone)"`
 }
 
-func (t *SoporteActa) TableName() string {
-	return "soporte_acta"
+func (t *TipoActa) TableName() string {
+	return "tipo_acta"
 }
 
 func init() {
-	orm.RegisterModel(new(SoporteActa))
+	orm.RegisterModel(new(TipoActa))
 }
 
-// AddSoporteActa insert a new SoporteActa into database and returns
+// AddTipoActa insert a new TipoActa into database and returns
 // last inserted Id on success.
-func AddSoporteActa(m *SoporteActa) (id int64, err error) {
+func AddTipoActa(m *TipoActa) (id int64, err error) {
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
 }
 
-// GetSoporteActaById retrieves SoporteActa by Id. Returns error if
+// GetTipoActaById retrieves TipoActa by Id. Returns error if
 // Id doesn't exist
-func GetSoporteActaById(id int) (v *SoporteActa, err error) {
+func GetTipoActaById(id int) (v *TipoActa, err error) {
 	o := orm.NewOrm()
-	v = &SoporteActa{Id: id}
+	v = &TipoActa{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllSoporteActa retrieves all SoporteActa matches certain condition. Returns empty list if
+// GetAllTipoActa retrieves all TipoActa matches certain condition. Returns empty list if
 // no records exist
-func GetAllSoporteActa(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllTipoActa(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(SoporteActa)).RelatedSel()
+	qs := o.QueryTable(new(TipoActa)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
@@ -103,7 +102,7 @@ func GetAllSoporteActa(query map[string]string, fields []string, sortby []string
 		}
 	}
 
-	var l []SoporteActa
+	var l []TipoActa
 	qs = qs.OrderBy(sortFields...)
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -126,11 +125,11 @@ func GetAllSoporteActa(query map[string]string, fields []string, sortby []string
 	return nil, err
 }
 
-// UpdateSoporteActa updates SoporteActa by Id and returns error if
+// UpdateTipoActa updates TipooActa by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateSoporteActaById(m *SoporteActa) (err error) {
+func UpdateTipoActaById(m *TipoActa) (err error) {
 	o := orm.NewOrm()
-	v := SoporteActa{Id: m.Id}
+	v := TipoActa{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -141,15 +140,15 @@ func UpdateSoporteActaById(m *SoporteActa) (err error) {
 	return
 }
 
-// DeleteSoporteActa deletes SoporteActa by Id and returns error if
+// DeleteTipoActa deletes TipoActa by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteSoporteActa(id int) (err error) {
+func DeleteTipoActa(id int) (err error) {
 	o := orm.NewOrm()
-	v := SoporteActa{Id: id}
+	v := TipoActa{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&SoporteActa{Id: id}); err == nil {
+		if num, err = o.Delete(&TipoActa{Id: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

@@ -1321,8 +1321,12 @@
         }
     },
     "definitions": {
-        "32489.\u003cnil\u003e.TransaccionSoporteActa": {
-            "title": "TransaccionSoporteActa",
+        "36834.\u003cnil\u003e.SoporteActa": {
+            "title": "SoporteActa",
+            "type": "object"
+        },
+        "36863.\u003cnil\u003e.Elemento": {
+            "title": "Elemento",
             "type": "object"
         },
         "models.ActaRecibido": {
@@ -1340,28 +1344,12 @@
                     "type": "string",
                     "format": "datetime"
                 },
-                "FechaVistoBueno": {
-                    "type": "string",
-                    "format": "datetime"
-                },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "Observaciones": {
-                    "type": "string"
-                },
-                "PersonaAsignada": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "RevisorId": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "UbicacionId": {
-                    "type": "integer",
-                    "format": "int64"
+                "TipoActaId": {
+                    "$ref": "#/definitions/models.TipoActa"
                 }
             }
         },
@@ -1369,6 +1357,9 @@
             "title": "Elemento",
             "type": "object",
             "properties": {
+                "ActaRecibidoId": {
+                    "$ref": "#/definitions/models.ActaRecibido"
+                },
                 "Activo": {
                     "type": "boolean"
                 },
@@ -1415,9 +1406,6 @@
                 "Serie": {
                     "type": "string"
                 },
-                "SoporteActaId": {
-                    "$ref": "#/definitions/models.SoporteActa"
-                },
                 "SubgrupoCatalogoId": {
                     "type": "integer",
                     "format": "int64"
@@ -1448,9 +1436,6 @@
                 "ValorUnitario": {
                     "type": "number",
                     "format": "double"
-                },
-                "Verificado": {
-                    "type": "boolean"
                 }
             }
         },
@@ -1543,7 +1528,30 @@
                     "type": "string",
                     "format": "datetime"
                 },
+                "FechaVistoBueno": {
+                    "type": "string",
+                    "format": "datetime"
+                },
                 "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Observaciones": {
+                    "type": "string"
+                },
+                "PersonaAsignadaId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "ProveedorId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "RevisorId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "UbicacionId": {
                     "type": "integer",
                     "format": "int64"
                 }
@@ -1581,10 +1589,36 @@
                 "Id": {
                     "type": "integer",
                     "format": "int64"
+                }
+            }
+        },
+        "models.TipoActa": {
+            "title": "TipoActa",
+            "type": "object",
+            "properties": {
+                "Activo": {
+                    "type": "boolean"
                 },
-                "ProveedorId": {
+                "CodigoAbreviacion": {
+                    "type": "string"
+                },
+                "Descripcion": {
+                    "type": "string"
+                },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "Id": {
                     "type": "integer",
                     "format": "int64"
+                },
+                "Nombre": {
+                    "type": "string"
                 }
             }
         },
@@ -1629,8 +1663,11 @@
                 "ActaRecibido": {
                     "$ref": "#/definitions/models.ActaRecibido"
                 },
+                "Elementos": {
+                    "$ref": "#/definitions/36863.\u003cnil\u003e.Elemento"
+                },
                 "SoportesActa": {
-                    "$ref": "#/definitions/32489.\u003cnil\u003e.TransaccionSoporteActa"
+                    "$ref": "#/definitions/36834.\u003cnil\u003e.SoporteActa"
                 },
                 "UltimoEstado": {
                     "$ref": "#/definitions/models.HistoricoActa"
