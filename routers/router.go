@@ -28,12 +28,6 @@ func init() {
 			),
 		),
 
-		beego.NSNamespace("/tipo_bien",
-			beego.NSInclude(
-				&controllers.TipoBienController{},
-			),
-		),
-
 		beego.NSNamespace("/elemento",
 			beego.NSInclude(
 				&controllers.ElementoController{},

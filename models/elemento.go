@@ -25,7 +25,6 @@ type Elemento struct {
 	ValorIva           float64         `orm:"column(valor_iva);null"`
 	ValorFinal         float64         `orm:"column(valor_final);null"`
 	SubgrupoCatalogoId int             `orm:"column(subgrupo_catalogo_id);null"`
-	TipoBienId         *TipoBien       `orm:"column(tipo_bien_id);rel(fk);null"`
 	EstadoElementoId   *EstadoElemento `orm:"column(estado_elemento_id);rel(fk)"`
 	EspacioFisicoId    int             `orm:"column(espacio_fisico_id)"`
 	ActaRecibidoId     *ActaRecibido   `orm:"column(acta_recibido_id);rel(fk)"`

@@ -106,7 +106,6 @@ CREATE TABLE acta_recibido.elemento(
 	valor_iva numeric(20,7),
 	valor_final numeric(20,7),
 	subgrupo_catalogo_id integer,
-	tipo_bien_id integer,
 	estado_elemento_id integer NOT NULL,
 	placa character varying(100),
 	activo boolean NOT NULL,
@@ -255,7 +254,7 @@ ALTER SEQUENCE acta_recibido.soporte_acta_id_seq OWNER TO postgres;
 CREATE TABLE acta_recibido.soporte_acta(
 	id integer NOT NULL DEFAULT nextval('acta_recibido.soporte_acta_id_seq'::regclass),
 	consecutivo character varying(100),
-	fecha_soporte date,
+	fecha_soporte date DEFAULT '2020-10-10',
 	acta_recibido_id integer NOT NULL,
 	activo boolean NOT NULL,
 	fecha_creacion timestamp NOT NULL,
@@ -270,38 +269,6 @@ COMMENT ON COLUMN acta_recibido.soporte_acta.consecutivo IS 'Hace referencia al 
 COMMENT ON COLUMN acta_recibido.soporte_acta.fecha_soporte IS 'hace referencia a la fecha de creacion o expedicion de la factura o soporte del acta de recibido';
 -- ddl-end --
 ALTER TABLE acta_recibido.soporte_acta OWNER TO postgres;
--- ddl-end --
-
--- object: acta_recibido.tipo_bien_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS acta_recibido.tipo_bien_id_seq CASCADE;
-CREATE SEQUENCE acta_recibido.tipo_bien_id_seq
-	INCREMENT BY 1
-	MINVALUE 1
-	MAXVALUE 2147483647
-	START WITH 1
-	CACHE 1
-	NO CYCLE
-	OWNED BY NONE;
--- ddl-end --
-ALTER SEQUENCE acta_recibido.tipo_bien_id_seq OWNER TO postgres;
--- ddl-end --
-
--- object: acta_recibido.tipo_bien | type: TABLE --
--- DROP TABLE IF EXISTS acta_recibido.tipo_bien CASCADE;
-CREATE TABLE acta_recibido.tipo_bien(
-	id integer NOT NULL DEFAULT nextval('acta_recibido.tipo_bien_id_seq'::regclass),
-	nombre character varying(20) NOT NULL,
-	descripcion character varying(250),
-	codigo_abreviacion character varying(20),
-	activo boolean NOT NULL,
-	numero_orden numeric(5,2),
-	fecha_creacion timestamp NOT NULL,
-	fecha_modificacion timestamp NOT NULL,
-	CONSTRAINT pk_tipo_bien PRIMARY KEY (id)
-
-);
--- ddl-end --
-ALTER TABLE acta_recibido.tipo_bien OWNER TO postgres;
 -- ddl-end --
 
 -- object: acta_recibido.historico_acta_id_seq | type: SEQUENCE --
@@ -387,13 +354,6 @@ REFERENCES acta_recibido.estado_elemento (id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: fk_elemento_tipo_bien | type: CONSTRAINT --
--- ALTER TABLE acta_recibido.elemento DROP CONSTRAINT IF EXISTS fk_elemento_tipo_bien CASCADE;
-ALTER TABLE acta_recibido.elemento ADD CONSTRAINT fk_elemento_tipo_bien FOREIGN KEY (tipo_bien_id)
-REFERENCES acta_recibido.tipo_bien (id) MATCH FULL
-ON DELETE RESTRICT ON UPDATE CASCADE;
--- ddl-end --
-
 -- object: fk_elemento_acta_recibido | type: CONSTRAINT --
 -- ALTER TABLE acta_recibido.elemento DROP CONSTRAINT IF EXISTS fk_elemento_acta_recibido CASCADE;
 ALTER TABLE acta_recibido.elemento ADD CONSTRAINT fk_elemento_acta_recibido FOREIGN KEY (acta_recibido_id)
@@ -422,97 +382,85 @@ REFERENCES acta_recibido.estado_acta (id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: grant_ebca9ae58e | type: PERMISSION --
+-- object: grant_11c83eb633 | type: PERMISSION --
 GRANT CREATE,USAGE
    ON SCHEMA acta_recibido
    TO postgres;
 -- ddl-end --
 
--- object: grant_72bf0f6adb | type: PERMISSION --
+-- object: grant_e615cfdf87 | type: PERMISSION --
 GRANT USAGE
    ON SCHEMA acta_recibido
    TO desarrollooas;
 -- ddl-end --
 
--- object: grant_4c4f23602c | type: PERMISSION --
+-- object: grant_5c642a79a7 | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER
    ON TABLE acta_recibido.acta_recibido
    TO postgres;
 -- ddl-end --
 
--- object: grant_8769f0f41b | type: PERMISSION --
+-- object: grant_fdb5726e4c | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE
    ON TABLE acta_recibido.acta_recibido
    TO desarrollooas;
 -- ddl-end --
 
--- object: grant_dbf86e94ea | type: PERMISSION --
+-- object: grant_de33abc2fa | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER
    ON TABLE acta_recibido.elemento
    TO postgres;
 -- ddl-end --
 
--- object: grant_7577dbfdad | type: PERMISSION --
+-- object: grant_5daddb4481 | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE
    ON TABLE acta_recibido.elemento
    TO desarrollooas;
 -- ddl-end --
 
--- object: grant_95b23702eb | type: PERMISSION --
+-- object: grant_2cf6b5fed4 | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER
    ON TABLE acta_recibido.estado_acta
    TO postgres;
 -- ddl-end --
 
--- object: grant_a632f79d97 | type: PERMISSION --
+-- object: grant_7771e8fab3 | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE
    ON TABLE acta_recibido.estado_acta
    TO desarrollooas;
 -- ddl-end --
 
--- object: grant_1100e5fae7 | type: PERMISSION --
+-- object: grant_fa5da33e94 | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER
    ON TABLE acta_recibido.estado_elemento
    TO postgres;
 -- ddl-end --
 
--- object: grant_ca4488bc23 | type: PERMISSION --
+-- object: grant_d84e73b47d | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE
    ON TABLE acta_recibido.estado_elemento
    TO desarrollooas;
 -- ddl-end --
 
--- object: grant_2b972e911b | type: PERMISSION --
+-- object: grant_29c5383857 | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER
    ON TABLE acta_recibido.soporte_acta
    TO postgres;
 -- ddl-end --
 
--- object: grant_1a6e6169ff | type: PERMISSION --
+-- object: grant_577685c175 | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE
    ON TABLE acta_recibido.soporte_acta
    TO desarrollooas;
 -- ddl-end --
 
--- object: grant_241e7139b2 | type: PERMISSION --
-GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER
-   ON TABLE acta_recibido.tipo_bien
-   TO postgres;
--- ddl-end --
-
--- object: grant_083db1ee54 | type: PERMISSION --
-GRANT SELECT,INSERT,UPDATE,DELETE
-   ON TABLE acta_recibido.tipo_bien
-   TO desarrollooas;
--- ddl-end --
-
--- object: grant_b09537e34b | type: PERMISSION --
+-- object: grant_78aa23f394 | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER
    ON TABLE acta_recibido.historico_acta
    TO postgres;
 -- ddl-end --
 
--- object: grant_b9acab178e | type: PERMISSION --
+-- object: grant_46ea86c02c | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE
    ON TABLE acta_recibido.historico_acta
    TO desarrollooas;
