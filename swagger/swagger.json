@@ -1053,179 +1053,6 @@
                 }
             }
         },
-        "/tipo_bien/": {
-            "get": {
-                "tags": [
-                    "tipo_bien"
-                ],
-                "description": "get TipoBien",
-                "operationId": "TipoBienController.Get All",
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "query",
-                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "fields",
-                        "description": "Fields returned. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "sortby",
-                        "description": "Sorted-by fields. e.g. col1,col2 ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "order",
-                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "limit",
-                        "description": "Limit the size of result set. Must be an integer",
-                        "type": "string"
-                    },
-                    {
-                        "in": "query",
-                        "name": "offset",
-                        "description": "Start position of result set. Must be an integer",
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.TipoBien"
-                        }
-                    },
-                    "404": {
-                        "description": "not found resource"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "tipo_bien"
-                ],
-                "description": "create TipoBien",
-                "operationId": "TipoBienController.Post",
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for TipoBien content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.TipoBien"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "{int} models.TipoBien"
-                    },
-                    "400": {
-                        "description": "the request contains incorrect syntax"
-                    }
-                }
-            }
-        },
-        "/tipo_bien/{id}": {
-            "get": {
-                "tags": [
-                    "tipo_bien"
-                ],
-                "description": "get TipoBien by id",
-                "operationId": "TipoBienController.Get One",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The key for staticblock",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.TipoBien"
-                        }
-                    },
-                    "404": {
-                        "description": "not found resource"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "tipo_bien"
-                ],
-                "description": "update the TipoBien",
-                "operationId": "TipoBienController.Put",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to update",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "body for TipoBien content",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/models.TipoBien"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/models.TipoBien"
-                        }
-                    },
-                    "400": {
-                        "description": "the request contains incorrect syntax"
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "tipo_bien"
-                ],
-                "description": "delete the TipoBien",
-                "operationId": "TipoBienController.Delete",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "description": "The id you want to delete",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "{string} delete success!"
-                    },
-                    "404": {
-                        "description": "not found resource"
-                    }
-                }
-            }
-        },
         "/transaccion_acta_recibido/": {
             "post": {
                 "tags": [
@@ -1268,6 +1095,12 @@
                         "description": "id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "elementos",
+                        "description": "Traer elementos asociados al acta",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -1321,11 +1154,11 @@
         }
     },
     "definitions": {
-        "36834.\u003cnil\u003e.SoporteActa": {
+        "32392.\u003cnil\u003e.SoporteActa": {
             "title": "SoporteActa",
             "type": "object"
         },
-        "36863.\u003cnil\u003e.Elemento": {
+        "32421.\u003cnil\u003e.Elemento": {
             "title": "Elemento",
             "type": "object"
         },
@@ -1413,9 +1246,6 @@
                 "Subtotal": {
                     "type": "number",
                     "format": "double"
-                },
-                "TipoBienId": {
-                    "$ref": "#/definitions/models.TipoBien"
                 },
                 "UnidadMedida": {
                     "type": "integer",
@@ -1622,40 +1452,6 @@
                 }
             }
         },
-        "models.TipoBien": {
-            "title": "TipoBien",
-            "type": "object",
-            "properties": {
-                "Activo": {
-                    "type": "boolean"
-                },
-                "CodigoAbreviacion": {
-                    "type": "string"
-                },
-                "Descripcion": {
-                    "type": "string"
-                },
-                "FechaCreacion": {
-                    "type": "string",
-                    "format": "datetime"
-                },
-                "FechaModificacion": {
-                    "type": "string",
-                    "format": "datetime"
-                },
-                "Id": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "Nombre": {
-                    "type": "string"
-                },
-                "NumeroOrden": {
-                    "type": "number",
-                    "format": "double"
-                }
-            }
-        },
         "models.TransaccionActaRecibido": {
             "title": "TransaccionActaRecibido",
             "type": "object",
@@ -1664,10 +1460,10 @@
                     "$ref": "#/definitions/models.ActaRecibido"
                 },
                 "Elementos": {
-                    "$ref": "#/definitions/36863.\u003cnil\u003e.Elemento"
+                    "$ref": "#/definitions/32421.\u003cnil\u003e.Elemento"
                 },
                 "SoportesActa": {
-                    "$ref": "#/definitions/36834.\u003cnil\u003e.SoporteActa"
+                    "$ref": "#/definitions/32392.\u003cnil\u003e.SoporteActa"
                 },
                 "UltimoEstado": {
                     "$ref": "#/definitions/models.HistoricoActa"
@@ -1687,10 +1483,6 @@
         {
             "name": "soporte_acta",
             "description": "SoporteActaController operations for SoporteActa\n"
-        },
-        {
-            "name": "tipo_bien",
-            "description": "TipoBienController operations for TipoBien\n"
         },
         {
             "name": "elemento",

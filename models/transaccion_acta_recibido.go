@@ -13,30 +13,33 @@ type TransaccionActaRecibido struct {
 }
 
 // GetTransaccionActaRecibido Obtener transacción con la información de un Acta de Recibido
-func GetTransaccionActaRecibido(id int) (v TransaccionActaRecibido, err error) {
+func GetTransaccionActaRecibido(id int, getElementos bool) (v TransaccionActaRecibido, err error) {
 	o := orm.NewOrm()
 	var acta ActaRecibido
 
 	if _, err := o.QueryTable(new(ActaRecibido)).RelatedSel().Filter("Id", id).All(&acta); err == nil {
+		v.ActaRecibido = &acta
 
 		var ultimoEstado HistoricoActa
 
 		if _, err := o.QueryTable(new(HistoricoActa)).RelatedSel().Filter("ActaRecibidoId__Id", id).Filter("Activo", true).All(&ultimoEstado); err == nil {
+			v.UltimoEstado = &ultimoEstado
 
 			var soportes []SoporteActa
 
 			if _, err := o.QueryTable(new(SoporteActa)).RelatedSel().Filter("ActaRecibidoId__Id", id).Filter("Activo", true).All(&soportes); err == nil {
+				v.SoportesActa = &soportes
 
-				var elementos []Elemento
+				if getElementos {
 
-				if _, err := o.QueryTable(new(Elemento)).RelatedSel().Filter("ActaRecibidoId__Id", id).Filter("Activo", true).All(&elementos); err == nil {
+					var elementos []Elemento
 
-					v.ActaRecibido = &acta
-					v.UltimoEstado = &ultimoEstado
-					v.SoportesActa = &soportes
-					v.Elementos = &elementos
+					if _, err := o.QueryTable(new(Elemento)).RelatedSel().Filter("ActaRecibidoId__Id", id).Filter("Activo", true).All(&elementos); err == nil {
 
-					return v, nil
+						v.Elementos = &elementos
+
+						return v, nil
+					}
 				}
 			}
 		}
