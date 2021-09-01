@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.1" last-position="0,0" last-zoom="0.9"
+<dbmodel pgmodeler-ver="0.9.1" last-position="0,344" last-zoom="1"
 	 default-schema="public" default-owner="postgres">
 <role name="desarrollooas"
       superuser="true"
@@ -24,7 +24,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <schema name="public" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
 </schema>
 
-<schema name="acta_recibido" rect-visible="true" fill-color="#888a85">
+<schema name="acta_recibido" rect-visible="true" fill-color="#729fcf">
 	<role name="postgres"/>
 	<comment><![CDATA[Esquema para la gestión de actas de recibido]]></comment>
 </schema>
@@ -41,24 +41,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla para guardar informacion del acta recibido]]></comment>
-	<position x="100" y="420"/>
+	<position x="760" y="820"/>
 	<column name="id" not-null="true" sequence="acta_recibido.acta_recibido_id_seq">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[campo para guardar identificador del acta recibido]]></comment>
-	</column>
-	<column name="ubicacion_id" not-null="true">
-		<type name="integer" length="0"/>
-	</column>
-	<column name="fecha_visto_bueno">
-		<type name="date" length="0"/>
-	</column>
-	<column name="revisor_id" not-null="true">
-		<type name="integer" length="0"/>
-		<comment><![CDATA[campo para guardar el usuario del revisor que genera el acta recibido]]></comment>
-	</column>
-	<column name="observaciones">
-		<type name="character varying" length="300"/>
-		<comment><![CDATA[campo para guardar las observaciones del acta recibidio]]></comment>
 	</column>
 	<column name="activo" not-null="true">
 		<type name="boolean" length="0"/>
@@ -69,7 +55,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="fecha_modificacion" not-null="true">
 		<type name="timestamp" length="0"/>
 	</column>
-	<column name="persona_asignada">
+	<column name="tipo_acta_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
 	<constraint name="pk_acta_recibido" type="pk-constr" table="acta_recibido.acta_recibido">
@@ -89,7 +75,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla para guardar los elementos de acta recibido por contrato]]></comment>
-	<position x="820" y="400"/>
+	<position x="1200" y="380"/>
 	<column name="id" not-null="true" sequence="acta_recibido.elemento_id_seq">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[identificador para acta recibido elemento por contratos]]></comment>
@@ -148,16 +134,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="integer" length="0"/>
 		<comment><![CDATA[foranea para relacionar subgrupo de inventarios con tabla de rompimiento contrato elemento y acta recibido]]></comment>
 	</column>
-	<column name="verificado" not-null="true">
-		<type name="boolean" length="0"/>
-	</column>
-	<column name="tipo_bien_id">
-		<type name="integer" length="0"/>
-	</column>
 	<column name="estado_elemento_id" not-null="true">
-		<type name="integer" length="0"/>
-	</column>
-	<column name="soporte_acta_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
 	<column name="placa">
@@ -175,7 +152,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<column name="espacio_fisico_id">
 		<type name="integer" length="0"/>
-		<comment><![CDATA[Hace referencia al id en la tabla espacio_físico en el api oikos_crud]]></comment>
+		<comment><![CDATA[Hace referencia al id en la tabla espacio_físico en el api oikos_crud, en caso de que el elemento sea de tipo bien inmueble]]></comment>
+	</column>
+	<column name="acta_recibido_id" not-null="true">
+		<type name="integer" length="0"/>
 	</column>
 	<constraint name="pk_elemento" type="pk-constr" table="acta_recibido.elemento">
 		<columns names="id" ref-type="src-columns"/>
@@ -194,7 +174,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla para almacenar los estados de acta recibido]]></comment>
-	<position x="860" y="160"/>
+	<position x="1760" y="940"/>
 	<column name="id" not-null="true" sequence="acta_recibido.estado_acta_id_seq">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[campo serial para estado acta recibido]]></comment>
@@ -241,7 +221,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="estado_elemento">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
-	<position x="1240" y="900"/>
+	<position x="1760" y="740"/>
 	<column name="id" not-null="true" sequence="acta_recibido.estado_elemento_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -282,7 +262,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="soporte_acta">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
-	<position x="440" y="900"/>
+	<position x="300" y="600"/>
 	<column name="id" not-null="true" sequence="acta_recibido.soporte_acta_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -290,11 +270,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="character varying" length="100"/>
 		<comment><![CDATA[Hace referencia al numero de factura o soporte que debe ser de caracter unico]]></comment>
 	</column>
-	<column name="proveedor_id">
-		<type name="integer" length="0"/>
-		<comment><![CDATA[hace referencia al proveedro del documento de soporte o factura]]></comment>
-	</column>
-	<column name="fecha_soporte">
+	<column name="fecha_soporte" default-value="'2020-10-10'">
 		<type name="date" length="0"/>
 		<comment><![CDATA[hace referencia a la fecha de creacion o expedicion de la factura o soporte del acta de recibido]]></comment>
 	</column>
@@ -318,47 +294,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<sequence name="tipo_bien_id_seq"
-	 start="1" increment="1"
-	 min-value="1" max-value="2147483647"
-	 cache="1" cycle="false">
-	<schema name="acta_recibido"/>
-	<role name="postgres"/>
-</sequence>
-
-<table name="tipo_bien">
-	<schema name="acta_recibido"/>
-	<role name="postgres"/>
-	<position x="1240" y="180"/>
-	<column name="id" not-null="true" sequence="acta_recibido.tipo_bien_id_seq">
-		<type name="integer" length="0"/>
-	</column>
-	<column name="nombre" not-null="true">
-		<type name="character varying" length="20"/>
-	</column>
-	<column name="descripcion">
-		<type name="character varying" length="250"/>
-	</column>
-	<column name="codigo_abreviacion">
-		<type name="character varying" length="20"/>
-	</column>
-	<column name="activo" not-null="true">
-		<type name="boolean" length="0"/>
-	</column>
-	<column name="numero_orden">
-		<type name="numeric" length="5" precision="2"/>
-	</column>
-	<column name="fecha_creacion" not-null="true">
-		<type name="timestamp" length="0"/>
-	</column>
-	<column name="fecha_modificacion" not-null="true">
-		<type name="timestamp" length="0"/>
-	</column>
-	<constraint name="pk_tipo_bien" type="pk-constr" table="acta_recibido.tipo_bien">
-		<columns names="id" ref-type="src-columns"/>
-	</constraint>
-</table>
-
 <sequence name="historico_acta_id_seq"
 	 start="1" increment="1"
 	 min-value="1" max-value="2147483647"
@@ -371,7 +306,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla de rompimiento para la relacion de los estados del acta y el acta de recibido ]]></comment>
-	<position x="440" y="120"/>
+	<position x="1220" y="1000"/>
 	<column name="id" not-null="true" sequence="acta_recibido.historico_acta_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -390,10 +325,72 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="fecha_modificacion" not-null="true">
 		<type name="timestamp" length="0"/>
 	</column>
+	<column name="proveedor_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="ubicacion_id">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="revisor_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="persona_asignada_id" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="observaciones">
+		<type name="character varying" length="300"/>
+	</column>
+	<column name="fecha_visto_bueno">
+		<type name="date" length="0"/>
+	</column>
 	<constraint name="pk_historico_acta" type="pk-constr" table="acta_recibido.historico_acta">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
 </table>
+
+<sequence name="tipo_acta_id_seq"
+	 start="1" increment="1"
+	 min-value="1" max-value="2147483647"
+	 cache="1" cycle="false">
+	<schema name="acta_recibido"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="tipo_acta">
+	<schema name="acta_recibido"/>
+	<role name="postgres"/>
+	<position x="300" y="1000"/>
+	<column name="id" not-null="true" sequence="acta_recibido.tipo_acta_id_seq">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nombre" not-null="true">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="descripcion">
+		<type name="character varying" length="250"/>
+	</column>
+	<column name="codigo_abreviacion">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="activo" not-null="true">
+		<type name="boolean" length="0"/>
+	</column>
+	<column name="fecha_creacion" not-null="true">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="fecha_modificacion" not-null="true">
+		<type name="timestamp" length="0"/>
+	</column>
+	<constraint name="pk_tipo_acta" type="pk-constr" table="acta_recibido.tipo_acta">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="fk_acta_recibido_tipo_acta" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="RESTRICT" ref-table="acta_recibido.tipo_acta" table="acta_recibido.acta_recibido">
+	<columns names="tipo_acta_id" ref-type="src-columns"/>
+	<columns names="id" ref-type="dst-columns"/>
+</constraint>
 
 <constraint name="fk_elemento_estado_elemento" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="CASCADE" del-action="RESTRICT" ref-table="acta_recibido.estado_elemento" table="acta_recibido.elemento">
@@ -401,15 +398,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
-<constraint name="fk_elemento_soporte_acta" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="CASCADE" del-action="RESTRICT" ref-table="acta_recibido.soporte_acta" table="acta_recibido.elemento">
-	<columns names="soporte_acta_id" ref-type="src-columns"/>
-	<columns names="id" ref-type="dst-columns"/>
-</constraint>
-
-<constraint name="fk_elemento_tipo_bien" type="fk-constr" comparison-type="MATCH FULL"
-	 upd-action="CASCADE" del-action="RESTRICT" ref-table="acta_recibido.tipo_bien" table="acta_recibido.elemento">
-	<columns names="tipo_bien_id" ref-type="src-columns"/>
+<constraint name="fk_elemento_acta_recibido" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="RESTRICT" ref-table="acta_recibido.acta_recibido" table="acta_recibido.elemento">
+	<columns names="acta_recibido_id" ref-type="src-columns"/>
 	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
@@ -431,57 +422,49 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
+<relationship name="rel_acta_recibido_tipo_acta" type="relfk"
+	 custom-color="#a2017b"
+	 src-table="acta_recibido.acta_recibido"
+	 dst-table="acta_recibido.tipo_acta" reference-fk="fk_acta_recibido_tipo_acta"
+	 src-required="false" dst-required="false"/>
+
 <relationship name="rel_elemento_estado_elemento" type="relfk"
-	 custom-color="#8db7ce"
+	 custom-color="#ae78dc"
 	 src-table="acta_recibido.elemento"
 	 dst-table="acta_recibido.estado_elemento" reference-fk="fk_elemento_estado_elemento"
-	 src-required="false" dst-required="false">
-	<label ref-type="name-label">
-		<position x="11.4936" y="35.7393"/>
-	</label>
-</relationship>
+	 src-required="false" dst-required="false"/>
 
-<relationship name="rel_elemento_soporte_acta" type="relfk"
-	 custom-color="#9e2fc5"
+<relationship name="rel_elemento_acta_recibido" type="relfk"
+	 custom-color="#e8bbca"
 	 src-table="acta_recibido.elemento"
-	 dst-table="acta_recibido.soporte_acta" reference-fk="fk_elemento_soporte_acta"
-	 src-required="false" dst-required="false">
-	<label ref-type="name-label">
-		<position x="13.8688" y="38.2393"/>
-	</label>
-</relationship>
-
-<relationship name="rel_elemento_tipo_bien" type="relfk"
-	 custom-color="#89d700"
-	 src-table="acta_recibido.elemento"
-	 dst-table="acta_recibido.tipo_bien" reference-fk="fk_elemento_tipo_bien"
-	 src-required="false" dst-required="false">
-	<label ref-type="name-label">
-		<position x="19.4936" y="-76.7607"/>
-	</label>
-</relationship>
+	 dst-table="acta_recibido.acta_recibido" reference-fk="fk_elemento_acta_recibido"
+	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_soporte_acta_acta_recibido" type="relfk"
-	 custom-color="#60a5b4"
+	 custom-color="#4047e0"
 	 src-table="acta_recibido.soporte_acta"
 	 dst-table="acta_recibido.acta_recibido" reference-fk="fk_soporte_acta_acta_recibido"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_historico_acta_acta_recibido" type="relfk"
-	 custom-color="#b6d4fe"
-	 src-table="acta_recibido.historico_acta"
-	 dst-table="acta_recibido.acta_recibido" reference-fk="fk_acta_recibido"
-	 src-required="false" dst-required="false"/>
-
-<relationship name="rel_historico_acta_estado_acta" type="relfk"
-	 custom-color="#b57da0"
-	 src-table="acta_recibido.historico_acta"
-	 dst-table="acta_recibido.estado_acta" reference-fk="fk_estado_acta"
 	 src-required="false" dst-required="false">
 	<label ref-type="name-label">
-		<position x="30.5678" y="-69.2607"/>
+		<position x="24.8688" y="13.2393"/>
 	</label>
 </relationship>
+
+<relationship name="rel_historico_acta_acta_recibido" type="relfk"
+	 custom-color="#c98212"
+	 src-table="acta_recibido.historico_acta"
+	 dst-table="acta_recibido.acta_recibido" reference-fk="fk_acta_recibido"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="-1.3578" y="18.2393"/>
+	</label>
+</relationship>
+
+<relationship name="rel_historico_acta_estado_acta" type="relfk"
+	 custom-color="#f96afb"
+	 src-table="acta_recibido.historico_acta"
+	 dst-table="acta_recibido.estado_acta" reference-fk="fk_estado_acta"
+	 src-required="false" dst-required="false"/>
 
 <permission>
 	<object name="acta_recibido" type="schema"/>
@@ -540,16 +523,6 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </permission>
 <permission>
 	<object name="acta_recibido.soporte_acta" type="table"/>
-	<roles names="desarrollooas"/>
-	<privileges select="true" delete="true" insert="true" update="true"/>
-</permission>
-<permission>
-	<object name="acta_recibido.tipo_bien" type="table"/>
-	<roles names="postgres"/>
-	<privileges select="true" delete="true" insert="true" update="true" truncate="true" references="true" trigger="true"/>
-</permission>
-<permission>
-	<object name="acta_recibido.tipo_bien" type="table"/>
 	<roles names="desarrollooas"/>
 	<privileges select="true" delete="true" insert="true" update="true"/>
 </permission>

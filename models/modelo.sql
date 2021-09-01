@@ -60,14 +60,10 @@ ALTER SEQUENCE acta_recibido.acta_recibido_id_seq OWNER TO postgres;
 -- DROP TABLE IF EXISTS acta_recibido.acta_recibido CASCADE;
 CREATE TABLE acta_recibido.acta_recibido(
 	id integer NOT NULL DEFAULT nextval('acta_recibido.acta_recibido_id_seq'::regclass),
-	ubicacion_id integer NOT NULL,
-	fecha_visto_bueno date,
-	revisor_id integer NOT NULL,
-	observaciones character varying(300),
 	activo boolean NOT NULL,
 	fecha_creacion timestamp NOT NULL,
 	fecha_modificacion timestamp NOT NULL,
-	persona_asignada integer,
+	tipo_acta_id integer NOT NULL,
 	CONSTRAINT pk_acta_recibido PRIMARY KEY (id)
 
 );
@@ -75,10 +71,6 @@ CREATE TABLE acta_recibido.acta_recibido(
 COMMENT ON TABLE acta_recibido.acta_recibido IS 'tabla para guardar informacion del acta recibido';
 -- ddl-end --
 COMMENT ON COLUMN acta_recibido.acta_recibido.id IS 'campo para guardar identificador del acta recibido';
--- ddl-end --
-COMMENT ON COLUMN acta_recibido.acta_recibido.revisor_id IS 'campo para guardar el usuario del revisor que genera el acta recibido';
--- ddl-end --
-COMMENT ON COLUMN acta_recibido.acta_recibido.observaciones IS 'campo para guardar las observaciones del acta recibidio';
 -- ddl-end --
 ALTER TABLE acta_recibido.acta_recibido OWNER TO postgres;
 -- ddl-end --
@@ -114,15 +106,13 @@ CREATE TABLE acta_recibido.elemento(
 	valor_iva numeric(20,7),
 	valor_final numeric(20,7),
 	subgrupo_catalogo_id integer,
-	verificado boolean NOT NULL,
-	tipo_bien_id integer,
 	estado_elemento_id integer NOT NULL,
-	soporte_acta_id integer NOT NULL,
 	placa character varying(100),
 	activo boolean NOT NULL,
 	fecha_creacion timestamp NOT NULL,
 	fecha_modificacion timestamp NOT NULL,
 	espacio_fisico_id integer,
+	acta_recibido_id integer NOT NULL,
 	CONSTRAINT pk_elemento PRIMARY KEY (id)
 
 );
@@ -161,7 +151,7 @@ COMMENT ON COLUMN acta_recibido.elemento.subgrupo_catalogo_id IS 'foranea para r
 -- ddl-end --
 COMMENT ON COLUMN acta_recibido.elemento.placa IS 'Hace referencia a la placa del elemento para uso futuro en el modulo de salidas';
 -- ddl-end --
-COMMENT ON COLUMN acta_recibido.elemento.espacio_fisico_id IS 'Hace referencia al id en la tabla espacio_físico en el api oikos_crud';
+COMMENT ON COLUMN acta_recibido.elemento.espacio_fisico_id IS 'Hace referencia al id en la tabla espacio_físico en el api oikos_crud, en caso de que el elemento sea de tipo bien inmueble';
 -- ddl-end --
 ALTER TABLE acta_recibido.elemento OWNER TO postgres;
 -- ddl-end --
@@ -264,8 +254,7 @@ ALTER SEQUENCE acta_recibido.soporte_acta_id_seq OWNER TO postgres;
 CREATE TABLE acta_recibido.soporte_acta(
 	id integer NOT NULL DEFAULT nextval('acta_recibido.soporte_acta_id_seq'::regclass),
 	consecutivo character varying(100),
-	proveedor_id integer,
-	fecha_soporte date,
+	fecha_soporte date DEFAULT '2020-10-10',
 	acta_recibido_id integer NOT NULL,
 	activo boolean NOT NULL,
 	fecha_creacion timestamp NOT NULL,
@@ -277,43 +266,9 @@ CREATE TABLE acta_recibido.soporte_acta(
 -- ddl-end --
 COMMENT ON COLUMN acta_recibido.soporte_acta.consecutivo IS 'Hace referencia al numero de factura o soporte que debe ser de caracter unico';
 -- ddl-end --
-COMMENT ON COLUMN acta_recibido.soporte_acta.proveedor_id IS 'hace referencia al proveedro del documento de soporte o factura';
--- ddl-end --
 COMMENT ON COLUMN acta_recibido.soporte_acta.fecha_soporte IS 'hace referencia a la fecha de creacion o expedicion de la factura o soporte del acta de recibido';
 -- ddl-end --
 ALTER TABLE acta_recibido.soporte_acta OWNER TO postgres;
--- ddl-end --
-
--- object: acta_recibido.tipo_bien_id_seq | type: SEQUENCE --
--- DROP SEQUENCE IF EXISTS acta_recibido.tipo_bien_id_seq CASCADE;
-CREATE SEQUENCE acta_recibido.tipo_bien_id_seq
-	INCREMENT BY 1
-	MINVALUE 1
-	MAXVALUE 2147483647
-	START WITH 1
-	CACHE 1
-	NO CYCLE
-	OWNED BY NONE;
--- ddl-end --
-ALTER SEQUENCE acta_recibido.tipo_bien_id_seq OWNER TO postgres;
--- ddl-end --
-
--- object: acta_recibido.tipo_bien | type: TABLE --
--- DROP TABLE IF EXISTS acta_recibido.tipo_bien CASCADE;
-CREATE TABLE acta_recibido.tipo_bien(
-	id integer NOT NULL DEFAULT nextval('acta_recibido.tipo_bien_id_seq'::regclass),
-	nombre character varying(20) NOT NULL,
-	descripcion character varying(250),
-	codigo_abreviacion character varying(20),
-	activo boolean NOT NULL,
-	numero_orden numeric(5,2),
-	fecha_creacion timestamp NOT NULL,
-	fecha_modificacion timestamp NOT NULL,
-	CONSTRAINT pk_tipo_bien PRIMARY KEY (id)
-
-);
--- ddl-end --
-ALTER TABLE acta_recibido.tipo_bien OWNER TO postgres;
 -- ddl-end --
 
 -- object: acta_recibido.historico_acta_id_seq | type: SEQUENCE --
@@ -339,6 +294,12 @@ CREATE TABLE acta_recibido.historico_acta(
 	activo boolean NOT NULL,
 	fecha_creacion timestamp NOT NULL,
 	fecha_modificacion timestamp NOT NULL,
+	proveedor_id integer,
+	ubicacion_id integer,
+	revisor_id integer NOT NULL,
+	persona_asignada_id integer NOT NULL,
+	observaciones character varying(300),
+	fecha_visto_bueno date,
 	CONSTRAINT pk_historico_acta PRIMARY KEY (id)
 
 );
@@ -348,6 +309,44 @@ COMMENT ON TABLE acta_recibido.historico_acta IS 'tabla de rompimiento para la r
 ALTER TABLE acta_recibido.historico_acta OWNER TO postgres;
 -- ddl-end --
 
+-- object: acta_recibido.tipo_acta_id_seq | type: SEQUENCE --
+-- DROP SEQUENCE IF EXISTS acta_recibido.tipo_acta_id_seq CASCADE;
+CREATE SEQUENCE acta_recibido.tipo_acta_id_seq
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 2147483647
+	START WITH 1
+	CACHE 1
+	NO CYCLE
+	OWNED BY NONE;
+-- ddl-end --
+ALTER SEQUENCE acta_recibido.tipo_acta_id_seq OWNER TO postgres;
+-- ddl-end --
+
+-- object: acta_recibido.tipo_acta | type: TABLE --
+-- DROP TABLE IF EXISTS acta_recibido.tipo_acta CASCADE;
+CREATE TABLE acta_recibido.tipo_acta(
+	id integer NOT NULL DEFAULT nextval('acta_recibido.tipo_acta_id_seq'::regclass),
+	nombre character varying(20) NOT NULL,
+	descripcion character varying(250),
+	codigo_abreviacion character varying(20),
+	activo boolean NOT NULL,
+	fecha_creacion timestamp NOT NULL,
+	fecha_modificacion timestamp NOT NULL,
+	CONSTRAINT pk_tipo_acta PRIMARY KEY (id)
+
+);
+-- ddl-end --
+ALTER TABLE acta_recibido.tipo_acta OWNER TO postgres;
+-- ddl-end --
+
+-- object: fk_acta_recibido_tipo_acta | type: CONSTRAINT --
+-- ALTER TABLE acta_recibido.acta_recibido DROP CONSTRAINT IF EXISTS fk_acta_recibido_tipo_acta CASCADE;
+ALTER TABLE acta_recibido.acta_recibido ADD CONSTRAINT fk_acta_recibido_tipo_acta FOREIGN KEY (tipo_acta_id)
+REFERENCES acta_recibido.tipo_acta (id) MATCH FULL
+ON DELETE RESTRICT ON UPDATE CASCADE;
+-- ddl-end --
+
 -- object: fk_elemento_estado_elemento | type: CONSTRAINT --
 -- ALTER TABLE acta_recibido.elemento DROP CONSTRAINT IF EXISTS fk_elemento_estado_elemento CASCADE;
 ALTER TABLE acta_recibido.elemento ADD CONSTRAINT fk_elemento_estado_elemento FOREIGN KEY (estado_elemento_id)
@@ -355,17 +354,10 @@ REFERENCES acta_recibido.estado_elemento (id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: fk_elemento_soporte_acta | type: CONSTRAINT --
--- ALTER TABLE acta_recibido.elemento DROP CONSTRAINT IF EXISTS fk_elemento_soporte_acta CASCADE;
-ALTER TABLE acta_recibido.elemento ADD CONSTRAINT fk_elemento_soporte_acta FOREIGN KEY (soporte_acta_id)
-REFERENCES acta_recibido.soporte_acta (id) MATCH FULL
-ON DELETE RESTRICT ON UPDATE CASCADE;
--- ddl-end --
-
--- object: fk_elemento_tipo_bien | type: CONSTRAINT --
--- ALTER TABLE acta_recibido.elemento DROP CONSTRAINT IF EXISTS fk_elemento_tipo_bien CASCADE;
-ALTER TABLE acta_recibido.elemento ADD CONSTRAINT fk_elemento_tipo_bien FOREIGN KEY (tipo_bien_id)
-REFERENCES acta_recibido.tipo_bien (id) MATCH FULL
+-- object: fk_elemento_acta_recibido | type: CONSTRAINT --
+-- ALTER TABLE acta_recibido.elemento DROP CONSTRAINT IF EXISTS fk_elemento_acta_recibido CASCADE;
+ALTER TABLE acta_recibido.elemento ADD CONSTRAINT fk_elemento_acta_recibido FOREIGN KEY (acta_recibido_id)
+REFERENCES acta_recibido.acta_recibido (id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
@@ -390,97 +382,85 @@ REFERENCES acta_recibido.estado_acta (id) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: grant_6429a31e6c | type: PERMISSION --
+-- object: grant_11c83eb633 | type: PERMISSION --
 GRANT CREATE,USAGE
    ON SCHEMA acta_recibido
    TO postgres;
 -- ddl-end --
 
--- object: grant_308b1948e4 | type: PERMISSION --
+-- object: grant_e615cfdf87 | type: PERMISSION --
 GRANT USAGE
    ON SCHEMA acta_recibido
    TO desarrollooas;
 -- ddl-end --
 
--- object: grant_a601c97836 | type: PERMISSION --
+-- object: grant_5c642a79a7 | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER
    ON TABLE acta_recibido.acta_recibido
    TO postgres;
 -- ddl-end --
 
--- object: grant_6597a89380 | type: PERMISSION --
+-- object: grant_fdb5726e4c | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE
    ON TABLE acta_recibido.acta_recibido
    TO desarrollooas;
 -- ddl-end --
 
--- object: grant_2961234faf | type: PERMISSION --
+-- object: grant_de33abc2fa | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER
    ON TABLE acta_recibido.elemento
    TO postgres;
 -- ddl-end --
 
--- object: grant_f4bc31d116 | type: PERMISSION --
+-- object: grant_5daddb4481 | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE
    ON TABLE acta_recibido.elemento
    TO desarrollooas;
 -- ddl-end --
 
--- object: grant_99c9dd20ac | type: PERMISSION --
+-- object: grant_2cf6b5fed4 | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER
    ON TABLE acta_recibido.estado_acta
    TO postgres;
 -- ddl-end --
 
--- object: grant_e544e28c9d | type: PERMISSION --
+-- object: grant_7771e8fab3 | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE
    ON TABLE acta_recibido.estado_acta
    TO desarrollooas;
 -- ddl-end --
 
--- object: grant_aed62a6e9d | type: PERMISSION --
+-- object: grant_fa5da33e94 | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER
    ON TABLE acta_recibido.estado_elemento
    TO postgres;
 -- ddl-end --
 
--- object: grant_9d630fa67d | type: PERMISSION --
+-- object: grant_d84e73b47d | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE
    ON TABLE acta_recibido.estado_elemento
    TO desarrollooas;
 -- ddl-end --
 
--- object: grant_2c74db5bd6 | type: PERMISSION --
+-- object: grant_29c5383857 | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER
    ON TABLE acta_recibido.soporte_acta
    TO postgres;
 -- ddl-end --
 
--- object: grant_31f9ac2d25 | type: PERMISSION --
+-- object: grant_577685c175 | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE
    ON TABLE acta_recibido.soporte_acta
    TO desarrollooas;
 -- ddl-end --
 
--- object: grant_bde90e0fb5 | type: PERMISSION --
-GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER
-   ON TABLE acta_recibido.tipo_bien
-   TO postgres;
--- ddl-end --
-
--- object: grant_d9085fdd11 | type: PERMISSION --
-GRANT SELECT,INSERT,UPDATE,DELETE
-   ON TABLE acta_recibido.tipo_bien
-   TO desarrollooas;
--- ddl-end --
-
--- object: grant_a6b0a81bcd | type: PERMISSION --
+-- object: grant_78aa23f394 | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER
    ON TABLE acta_recibido.historico_acta
    TO postgres;
 -- ddl-end --
 
--- object: grant_460157417b | type: PERMISSION --
+-- object: grant_46ea86c02c | type: PERMISSION --
 GRANT SELECT,INSERT,UPDATE,DELETE
    ON TABLE acta_recibido.historico_acta
    TO desarrollooas;
