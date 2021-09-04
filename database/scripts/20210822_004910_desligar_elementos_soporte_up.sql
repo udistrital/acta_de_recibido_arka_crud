@@ -3,8 +3,8 @@
 ALTER TABLE acta_recibido.elemento
     ADD COLUMN IF NOT EXISTS acta_recibido_id INTEGER;
 
-UPDATE acta_recibido.elemento
-    SET acta_recibido_id = COALESCE(soporte_acta_id);
+-- UPDATE acta_recibido.elemento
+--     SET acta_recibido_id = COALESCE(soporte_acta_id);
 --
 ALTER TABLE acta_recibido.elemento
     DROP COLUMN IF EXISTS verificado;
