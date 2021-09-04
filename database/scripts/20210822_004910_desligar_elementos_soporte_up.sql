@@ -12,8 +12,8 @@ ALTER TABLE acta_recibido.elemento
 ALTER TABLE acta_recibido.elemento
     DROP COLUMN IF EXISTS soporte_acta_id;
 --
-ALTER TABLE acta_recibido.elemento
-    ALTER COLUMN acta_recibido_id SET NOT NULL;
+-- ALTER TABLE acta_recibido.elemento
+--     ALTER COLUMN acta_recibido_id SET NOT NULL;
 --
 ALTER TABLE acta_recibido.elemento
     ADD CONSTRAINT fk_elemento_acta_recibido FOREIGN KEY (acta_recibido_id)
