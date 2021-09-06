@@ -14,7 +14,7 @@ ALTER TABLE acta_recibido.elemento
 --
 ALTER TABLE acta_recibido.elemento
     ALTER COLUMN acta_recibido_id SET NOT NULL;
---
+
 ALTER TABLE acta_recibido.elemento
     ADD CONSTRAINT fk_elemento_acta_recibido FOREIGN KEY (acta_recibido_id)
     REFERENCES acta_recibido.acta_recibido (id) MATCH FULL
