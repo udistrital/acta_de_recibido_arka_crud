@@ -88,6 +88,8 @@ steps:
   when:
     branch:
     - develop
+    - feature/*
+    - hotfix/*
     - release/*
     - master
     event:
