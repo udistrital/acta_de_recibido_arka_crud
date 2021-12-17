@@ -1053,6 +1053,179 @@
                 }
             }
         },
+        "/tipo_acta/": {
+            "get": {
+                "tags": [
+                    "tipo_acta"
+                ],
+                "description": "get TipoActa",
+                "operationId": "TipoActaController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoActa"
+                        }
+                    },
+                    "404": {
+                        "description": "not found resource"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "tipo_acta"
+                ],
+                "description": "create TipoActa",
+                "operationId": "TipoActaController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for TipoActa content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoActa"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.TipoActa"
+                    },
+                    "400": {
+                        "description": "the request contains incorrect syntax"
+                    }
+                }
+            }
+        },
+        "/tipo_acta/{id}": {
+            "get": {
+                "tags": [
+                    "tipo_acta"
+                ],
+                "description": "get TipoActa by id",
+                "operationId": "TipoActaController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoActa"
+                        }
+                    },
+                    "404": {
+                        "description": "not found resource"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "tipo_acta"
+                ],
+                "description": "update the TipoActa",
+                "operationId": "TipoActaController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for TipoActa content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoActa"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.TipoActa"
+                        }
+                    },
+                    "400": {
+                        "description": "the request contains incorrect syntax"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "tipo_acta"
+                ],
+                "description": "delete the TipoActa",
+                "operationId": "TipoActaController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "404": {
+                        "description": "not found resource"
+                    }
+                }
+            }
+        },
         "/transaccion_acta_recibido/": {
             "post": {
                 "tags": [
@@ -1154,11 +1327,11 @@
         }
     },
     "definitions": {
-        "32392.\u003cnil\u003e.SoporteActa": {
+        "32592.\u003cnil\u003e.SoporteActa": {
             "title": "SoporteActa",
             "type": "object"
         },
-        "32421.\u003cnil\u003e.Elemento": {
+        "32621.\u003cnil\u003e.Elemento": {
             "title": "Elemento",
             "type": "object"
         },
@@ -1460,10 +1633,10 @@
                     "$ref": "#/definitions/models.ActaRecibido"
                 },
                 "Elementos": {
-                    "$ref": "#/definitions/32421.\u003cnil\u003e.Elemento"
+                    "$ref": "#/definitions/32621.\u003cnil\u003e.Elemento"
                 },
                 "SoportesActa": {
-                    "$ref": "#/definitions/32392.\u003cnil\u003e.SoporteActa"
+                    "$ref": "#/definitions/32592.\u003cnil\u003e.SoporteActa"
                 },
                 "UltimoEstado": {
                     "$ref": "#/definitions/models.HistoricoActa"
@@ -1503,6 +1676,10 @@
         {
             "name": "transaccion_acta_recibido",
             "description": "operations for TransaccionActaRecibido\n"
+        },
+        {
+            "name": "tipo_acta",
+            "description": "TipoActaController operations for TipoActa\n"
         }
     ]
 }
