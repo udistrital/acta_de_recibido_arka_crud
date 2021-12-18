@@ -57,6 +57,12 @@ func init() {
 				&controllers.TransaccionActaRecibidoController{},
 			),
 		),
+
+		beego.NSNamespace("/tipo_acta",
+			beego.NSInclude(
+				&controllers.TipoActaController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }
