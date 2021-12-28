@@ -3,28 +3,18 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.1" last-position="0,344" last-zoom="1"
+<dbmodel pgmodeler-ver="0.9.1" last-position="50,17" last-zoom="0.9"
 	 default-schema="public" default-owner="postgres">
-<role name="desarrollooas"
-      superuser="true"
-      createdb="true"
-      replication="true"
-      createrole="true"
-      inherit="true"
-      login="true"
-      encrypted="true"
-      password="********">
-</role>
-
-<database name="bd_oas" encoding="UTF8" lc-collate="en_US.UTF-8" lc-ctype="en_US.UTF-8" is-template="false" allow-conns="true">
+<database name="postgres" encoding="UTF8" lc-collate="en_US.utf8" lc-ctype="en_US.utf8" is-template="false" allow-conns="true">
 	<role name="postgres"/>
 	<tablespace name="pg_default"/>
+	<comment><![CDATA[default administrative connection database]]></comment>
 </database>
 
 <schema name="public" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
 </schema>
 
-<schema name="acta_recibido" rect-visible="true" fill-color="#729fcf">
+<schema name="acta_recibido" rect-visible="true" fill-color="#f31753">
 	<role name="postgres"/>
 	<comment><![CDATA[Esquema para la gestión de actas de recibido]]></comment>
 </schema>
@@ -41,7 +31,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla para guardar informacion del acta recibido]]></comment>
-	<position x="760" y="820"/>
+	<position x="700" y="360"/>
 	<column name="id" not-null="true" sequence="acta_recibido.acta_recibido_id_seq">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[campo para guardar identificador del acta recibido]]></comment>
@@ -75,7 +65,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla para guardar los elementos de acta recibido por contrato]]></comment>
-	<position x="1200" y="380"/>
+	<position x="1460" y="20"/>
 	<column name="id" not-null="true" sequence="acta_recibido.elemento_id_seq">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[identificador para acta recibido elemento por contratos]]></comment>
@@ -174,7 +164,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla para almacenar los estados de acta recibido]]></comment>
-	<position x="1760" y="940"/>
+	<position x="680" y="620"/>
 	<column name="id" not-null="true" sequence="acta_recibido.estado_acta_id_seq">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[campo serial para estado acta recibido]]></comment>
@@ -221,7 +211,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="estado_elemento">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
-	<position x="1760" y="740"/>
+	<position x="680" y="100"/>
 	<column name="id" not-null="true" sequence="acta_recibido.estado_elemento_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -262,7 +252,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="soporte_acta">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
-	<position x="300" y="600"/>
+	<position x="1460" y="440"/>
 	<column name="id" not-null="true" sequence="acta_recibido.soporte_acta_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -270,7 +260,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="character varying" length="100"/>
 		<comment><![CDATA[Hace referencia al numero de factura o soporte que debe ser de caracter unico]]></comment>
 	</column>
-	<column name="fecha_soporte" default-value="'2020-10-10'">
+	<column name="fecha_soporte">
 		<type name="date" length="0"/>
 		<comment><![CDATA[hace referencia a la fecha de creacion o expedicion de la factura o soporte del acta de recibido]]></comment>
 	</column>
@@ -306,7 +296,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla de rompimiento para la relacion de los estados del acta y el acta de recibido ]]></comment>
-	<position x="1220" y="1000"/>
+	<position x="1500" y="680"/>
 	<column name="id" not-null="true" sequence="acta_recibido.historico_acta_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -359,7 +349,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="tipo_acta">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
-	<position x="300" y="1000"/>
+	<position x="200" y="340"/>
 	<column name="id" not-null="true" sequence="acta_recibido.tipo_acta_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -423,45 +413,37 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </constraint>
 
 <relationship name="rel_acta_recibido_tipo_acta" type="relfk"
-	 custom-color="#a2017b"
+	 custom-color="#66819a"
 	 src-table="acta_recibido.acta_recibido"
 	 dst-table="acta_recibido.tipo_acta" reference-fk="fk_acta_recibido_tipo_acta"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_elemento_estado_elemento" type="relfk"
-	 custom-color="#ae78dc"
+	 custom-color="#e00f23"
 	 src-table="acta_recibido.elemento"
 	 dst-table="acta_recibido.estado_elemento" reference-fk="fk_elemento_estado_elemento"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_elemento_acta_recibido" type="relfk"
-	 custom-color="#e8bbca"
+	 custom-color="#a2f889"
 	 src-table="acta_recibido.elemento"
 	 dst-table="acta_recibido.acta_recibido" reference-fk="fk_elemento_acta_recibido"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_soporte_acta_acta_recibido" type="relfk"
-	 custom-color="#4047e0"
+	 custom-color="#04f746"
 	 src-table="acta_recibido.soporte_acta"
 	 dst-table="acta_recibido.acta_recibido" reference-fk="fk_soporte_acta_acta_recibido"
-	 src-required="false" dst-required="false">
-	<label ref-type="name-label">
-		<position x="24.8688" y="13.2393"/>
-	</label>
-</relationship>
+	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_historico_acta_acta_recibido" type="relfk"
-	 custom-color="#c98212"
+	 custom-color="#5e500b"
 	 src-table="acta_recibido.historico_acta"
 	 dst-table="acta_recibido.acta_recibido" reference-fk="fk_acta_recibido"
-	 src-required="false" dst-required="false">
-	<label ref-type="name-label">
-		<position x="-1.3578" y="18.2393"/>
-	</label>
-</relationship>
+	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_historico_acta_estado_acta" type="relfk"
-	 custom-color="#f96afb"
+	 custom-color="#5e1546"
 	 src-table="acta_recibido.historico_acta"
 	 dst-table="acta_recibido.estado_acta" reference-fk="fk_estado_acta"
 	 src-required="false" dst-required="false"/>
@@ -472,19 +454,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<privileges create="true" usage="true"/>
 </permission>
 <permission>
-	<object name="acta_recibido" type="schema"/>
-	<roles names="desarrollooas"/>
-	<privileges usage="true"/>
-</permission>
-<permission>
 	<object name="acta_recibido.acta_recibido" type="table"/>
 	<roles names="postgres"/>
 	<privileges select="true" delete="true" insert="true" update="true" truncate="true" references="true" trigger="true"/>
-</permission>
-<permission>
-	<object name="acta_recibido.acta_recibido" type="table"/>
-	<roles names="desarrollooas"/>
-	<privileges select="true" delete="true" insert="true" update="true"/>
 </permission>
 <permission>
 	<object name="acta_recibido.elemento" type="table"/>
@@ -492,19 +464,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<privileges select="true" delete="true" insert="true" update="true" truncate="true" references="true" trigger="true"/>
 </permission>
 <permission>
-	<object name="acta_recibido.elemento" type="table"/>
-	<roles names="desarrollooas"/>
-	<privileges select="true" delete="true" insert="true" update="true"/>
-</permission>
-<permission>
 	<object name="acta_recibido.estado_acta" type="table"/>
 	<roles names="postgres"/>
 	<privileges select="true" delete="true" insert="true" update="true" truncate="true" references="true" trigger="true"/>
-</permission>
-<permission>
-	<object name="acta_recibido.estado_acta" type="table"/>
-	<roles names="desarrollooas"/>
-	<privileges select="true" delete="true" insert="true" update="true"/>
 </permission>
 <permission>
 	<object name="acta_recibido.estado_elemento" type="table"/>
@@ -512,28 +474,13 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<privileges select="true" delete="true" insert="true" update="true" truncate="true" references="true" trigger="true"/>
 </permission>
 <permission>
-	<object name="acta_recibido.estado_elemento" type="table"/>
-	<roles names="desarrollooas"/>
-	<privileges select="true" delete="true" insert="true" update="true"/>
-</permission>
-<permission>
 	<object name="acta_recibido.soporte_acta" type="table"/>
 	<roles names="postgres"/>
 	<privileges select="true" delete="true" insert="true" update="true" truncate="true" references="true" trigger="true"/>
 </permission>
 <permission>
-	<object name="acta_recibido.soporte_acta" type="table"/>
-	<roles names="desarrollooas"/>
-	<privileges select="true" delete="true" insert="true" update="true"/>
-</permission>
-<permission>
 	<object name="acta_recibido.historico_acta" type="table"/>
 	<roles names="postgres"/>
 	<privileges select="true" delete="true" insert="true" update="true" truncate="true" references="true" trigger="true"/>
-</permission>
-<permission>
-	<object name="acta_recibido.historico_acta" type="table"/>
-	<roles names="desarrollooas"/>
-	<privileges select="true" delete="true" insert="true" update="true"/>
 </permission>
 </dbmodel>
