@@ -7,7 +7,6 @@ CREATE TABLE acta_recibido.elemento_campo(
 	fecha_creacion timestamp with time zone NOT NULL,
 	fecha_modificacion timestamp with time zone NOT NULL,
 	CONSTRAINT pk_elemento_campo PRIMARY KEY (id)
-
 );
 
 CREATE TABLE acta_recibido.campo(
@@ -19,7 +18,6 @@ CREATE TABLE acta_recibido.campo(
 	fecha_creacion timestamp with time zone NOT NULL,
 	fecha_modificacion timestamp with time zone NOT NULL,
 	CONSTRAINT pk_campo PRIMARY KEY (id)
-
 );
 
 ALTER TABLE acta_recibido.elemento_campo ADD CONSTRAINT fk_elemento_campo_elemento FOREIGN KEY (elemento_id)
