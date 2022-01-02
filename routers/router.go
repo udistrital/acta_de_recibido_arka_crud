@@ -69,6 +69,12 @@ func init() {
 				&controllers.CampoController{},
 			),
 		),
+
+		beego.NSNamespace("/elemento_campo",
+			beego.NSInclude(
+				&controllers.Elemento_campoController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }
