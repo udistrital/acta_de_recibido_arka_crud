@@ -30,7 +30,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="acta_recibido">
 	<schema name="acta_recibido"/>
 	<comment><![CDATA[tabla para guardar informacion del acta recibido]]></comment>
-	<position x="480" y="400"/>
+	<position x="580" y="480"/>
 	<column name="id" not-null="true" sequence="acta_recibido.acta_recibido_id_seq">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[campo para guardar identificador del acta recibido]]></comment>
@@ -63,7 +63,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="elemento">
 	<schema name="acta_recibido"/>
 	<comment><![CDATA[tabla para guardar los elementos de acta recibido por contrato]]></comment>
-	<position x="920" y="40"/>
+	<position x="1040" y="40"/>
 	<column name="id" not-null="true" sequence="acta_recibido.elemento_id_seq">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[identificador para acta recibido elemento por contratos]]></comment>
@@ -161,7 +161,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="estado_acta">
 	<schema name="acta_recibido"/>
 	<comment><![CDATA[tabla para almacenar los estados de acta recibido]]></comment>
-	<position x="420" y="720"/>
+	<position x="540" y="840"/>
 	<column name="id" not-null="true" sequence="acta_recibido.estado_acta_id_seq">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[campo serial para estado acta recibido]]></comment>
@@ -207,7 +207,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="estado_elemento">
 	<schema name="acta_recibido"/>
-	<position x="440" y="100"/>
+	<position x="560" y="100"/>
 	<column name="id" not-null="true" sequence="acta_recibido.estado_elemento_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -247,7 +247,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="soporte_acta">
 	<schema name="acta_recibido"/>
-	<position x="920" y="480"/>
+	<position x="1080" y="660"/>
 	<column name="id" not-null="true" sequence="acta_recibido.soporte_acta_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -290,7 +290,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="historico_acta">
 	<schema name="acta_recibido"/>
 	<comment><![CDATA[tabla de rompimiento para la relacion de los estados del acta y el acta de recibido ]]></comment>
-	<position x="960" y="720"/>
+	<position x="1080" y="880"/>
 	<column name="id" not-null="true" sequence="acta_recibido.historico_acta_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -342,7 +342,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="tipo_acta">
 	<schema name="acta_recibido"/>
-	<position x="0" y="380"/>
+	<position x="120" y="440"/>
 	<column name="id" not-null="true" sequence="acta_recibido.tipo_acta_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -379,7 +379,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="elemento_campo">
 	<schema name="acta_recibido"/>
-	<position x="1400" y="140"/>
+	<position x="1580" y="240"/>
 	<column name="id" not-null="true" sequence="acta_recibido.elemento_campo_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -416,7 +416,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="campo">
 	<schema name="acta_recibido"/>
-	<position x="1880" y="220"/>
+	<position x="1060" y="480"/>
 	<column name="id" not-null="true" sequence="acta_recibido.campo_id_seq">
 		<type name="integer" length="0"/>
 	</column>
