@@ -126,6 +126,121 @@ paths:
           description: '{string} delete success!'
         "404":
           description: not found resource
+  /campo/:
+    get:
+      tags:
+      - campo
+      description: get Campo
+      operationId: CampoController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Campo'
+        "403":
+          description: ""
+    post:
+      tags:
+      - campo
+      description: create Campo
+      operationId: CampoController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Campo content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Campo'
+      responses:
+        "201":
+          description: '{int} models.Campo'
+        "403":
+          description: body is empty
+  /campo/{id}:
+    get:
+      tags:
+      - campo
+      description: get Campo by id
+      operationId: CampoController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Campo'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - campo
+      description: update the Campo
+      operationId: CampoController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Campo content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Campo'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Campo'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - campo
+      description: delete the Campo
+      operationId: CampoController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
   /elemento/:
     get:
       tags:
@@ -241,6 +356,121 @@ paths:
           description: '{string} delete success!'
         "404":
           description: not found resource
+  /elemento_campo/:
+    get:
+      tags:
+      - elemento_campo
+      description: get Elemento_campo
+      operationId: Elemento_campoController.Get All
+      parameters:
+      - in: query
+        name: query
+        description: Filter. e.g. col1:v1,col2:v2 ...
+        type: string
+      - in: query
+        name: fields
+        description: Fields returned. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: sortby
+        description: Sorted-by fields. e.g. col1,col2 ...
+        type: string
+      - in: query
+        name: order
+        description: Order corresponding to each sortby field, if single value, apply
+          to all sortby fields. e.g. desc,asc ...
+        type: string
+      - in: query
+        name: limit
+        description: Limit the size of result set. Must be an integer
+        type: string
+      - in: query
+        name: offset
+        description: Start position of result set. Must be an integer
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Elemento_campo'
+        "403":
+          description: ""
+    post:
+      tags:
+      - elemento_campo
+      description: create Elemento_campo
+      operationId: Elemento_campoController.Post
+      parameters:
+      - in: body
+        name: body
+        description: body for Elemento_campo content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Elemento_campo'
+      responses:
+        "201":
+          description: '{int} models.Elemento_campo'
+        "403":
+          description: body is empty
+  /elemento_campo/{id}:
+    get:
+      tags:
+      - elemento_campo
+      description: get Elemento_campo by id
+      operationId: Elemento_campoController.Get One
+      parameters:
+      - in: path
+        name: id
+        description: The key for staticblock
+        required: true
+        type: string
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Elemento_campo'
+        "403":
+          description: :id is empty
+    put:
+      tags:
+      - elemento_campo
+      description: update the Elemento_campo
+      operationId: Elemento_campoController.Put
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to update
+        required: true
+        type: string
+      - in: body
+        name: body
+        description: body for Elemento_campo content
+        required: true
+        schema:
+          $ref: '#/definitions/models.Elemento_campo'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/models.Elemento_campo'
+        "403":
+          description: :id is not int
+    delete:
+      tags:
+      - elemento_campo
+      description: delete the Elemento_campo
+      operationId: Elemento_campoController.Delete
+      parameters:
+      - in: path
+        name: id
+        description: The id you want to delete
+        required: true
+        type: string
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: id is empty
   /estado_acta/:
     get:
       tags:
@@ -882,10 +1112,10 @@ paths:
         "400":
           description: the request contains incorrect syntax
 definitions:
-  32592.<nil>.SoporteActa:
+  41460.<nil>.SoporteActa:
     title: SoporteActa
     type: object
-  32621.<nil>.Elemento:
+  41489.<nil>.Elemento:
     title: Elemento
     type: object
   models.ActaRecibido:
@@ -905,6 +1135,27 @@ definitions:
         format: int64
       TipoActaId:
         $ref: '#/definitions/models.TipoActa'
+  models.Campo:
+    title: Campo
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      Descripcion:
+        type: string
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      Nombre:
+        type: string
+      Sigla:
+        type: string
   models.Elemento:
     title: Elemento
     type: object
@@ -965,6 +1216,27 @@ definitions:
       ValorUnitario:
         type: number
         format: double
+  models.Elemento_campo:
+    title: Elemento_campo
+    type: object
+    properties:
+      Activo:
+        type: boolean
+      CampoId:
+        $ref: '#/definitions/models.Campo'
+      ElementoId:
+        $ref: '#/definitions/models.Elemento'
+      FechaCreacion:
+        type: string
+        format: datetime
+      FechaModificacion:
+        type: string
+        format: datetime
+      Id:
+        type: integer
+        format: int64
+      Valor:
+        type: string
   models.EstadoActa:
     title: EstadoActa
     type: object
@@ -1102,9 +1374,9 @@ definitions:
       ActaRecibido:
         $ref: '#/definitions/models.ActaRecibido'
       Elementos:
-        $ref: '#/definitions/32621.<nil>.Elemento'
+        $ref: '#/definitions/41489.<nil>.Elemento'
       SoportesActa:
-        $ref: '#/definitions/32592.<nil>.SoporteActa'
+        $ref: '#/definitions/41460.<nil>.SoporteActa'
       UltimoEstado:
         $ref: '#/definitions/models.HistoricoActa'
   models.TransaccionActaRecibidoController:
@@ -1135,3 +1407,9 @@ tags:
 - name: tipo_acta
   description: |
     TipoActaController operations for TipoActa
+- name: campo
+  description: |2
+     CampoController operations for Campo
+- name: elemento_campo
+  description: |2
+     Elemento_campoController operations for Elemento_campo

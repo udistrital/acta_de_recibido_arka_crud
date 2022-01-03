@@ -63,6 +63,18 @@ func init() {
 				&controllers.TipoActaController{},
 			),
 		),
+
+		beego.NSNamespace("/campo",
+			beego.NSInclude(
+				&controllers.CampoController{},
+			),
+		),
+
+		beego.NSNamespace("/elemento_campo",
+			beego.NSInclude(
+				&controllers.Elemento_campoController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }
