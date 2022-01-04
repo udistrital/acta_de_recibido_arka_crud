@@ -88,9 +88,9 @@ Pruebas unitarias
 ```
 ## Estado CI
 
-| Develop | Relese 0.1.3 | Master |
+| Develop | Relese 0.2.0 | Master |
 | -- | -- | -- |
-| [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/acta_recibido_crud/status.svg?ref=refs/heads/develop)](https://hubci.portaloas.udistrital.edu.co/udistrital/acta_recibido_crud) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/acta_recibido_crud/status.svg?ref=refs/heads/release/0.1.3)](https://hubci.portaloas.udistrital.edu.co/udistrital/acta_recibido_crud) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/acta_recibido_crud/status.svg)](https://hubci.portaloas.udistrital.edu.co/udistrital/acta_recibido_crud) |
+| [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/acta_recibido_crud/status.svg?ref=refs/heads/develop)](https://hubci.portaloas.udistrital.edu.co/udistrital/acta_recibido_crud) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/acta_recibido_crud/status.svg?ref=refs/heads/release/0.2.0)](https://hubci.portaloas.udistrital.edu.co/udistrital/acta_recibido_crud) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/acta_recibido_crud/status.svg)](https://hubci.portaloas.udistrital.edu.co/udistrital/acta_recibido_crud) |
 
 
 ## Modelo de Datos
