@@ -27,3 +27,6 @@ ON DELETE NO ACTION ON UPDATE NO ACTION;
 ALTER TABLE acta_recibido.elemento_campo ADD CONSTRAINT fk_elemento_campo_campo FOREIGN KEY (campo_id)
 REFERENCES acta_recibido.campo (id) MATCH FULL
 ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+insert into acta_recibido.campo (nombre, sigla, descripcion, activo, fecha_creacion, fecha_modificacion)
+	values ('Póliza', 'P', 'Aseguramiento de bienes, póliza', true, now(), now());
