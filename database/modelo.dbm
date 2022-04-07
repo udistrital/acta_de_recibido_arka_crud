@@ -3,9 +3,9 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.1" last-position="284,154" last-zoom="1"
-	 default-schema="public" default-owner="postgres">
-<database name="postgres" encoding="UTF8" lc-collate="en_US.utf8" lc-ctype="en_US.utf8" is-template="false" allow-conns="true">
+<dbmodel pgmodeler-ver="0.9.1-beta" last-position="0,0" last-zoom="1"
+	 default-owner="postgres">
+<database name="postgres" encoding="UTF8" lc-collate="en_US.utf8" lc-ctype="en_US.utf8">
 	<role name="postgres"/>
 	<tablespace name="pg_default"/>
 	<comment><![CDATA[default administrative connection database]]></comment>
@@ -495,51 +495,43 @@ CAUTION: Do not modify this file unless you know what you are doing.
 </constraint>
 
 <relationship name="rel_acta_recibido_tipo_acta" type="relfk"
-	 custom-color="#5e09fb"
 	 src-table="acta_recibido.acta_recibido"
-	 dst-table="acta_recibido.tipo_acta" reference-fk="fk_acta_recibido_tipo_acta"
+	 dst-table="acta_recibido.tipo_acta"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_elemento_estado_elemento" type="relfk"
-	 custom-color="#41d1c5"
 	 src-table="acta_recibido.elemento"
-	 dst-table="acta_recibido.estado_elemento" reference-fk="fk_elemento_estado_elemento"
+	 dst-table="acta_recibido.estado_elemento"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_elemento_acta_recibido" type="relfk"
-	 custom-color="#67026e"
 	 src-table="acta_recibido.elemento"
-	 dst-table="acta_recibido.acta_recibido" reference-fk="fk_elemento_acta_recibido"
+	 dst-table="acta_recibido.acta_recibido"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_soporte_acta_acta_recibido" type="relfk"
-	 custom-color="#271d46"
 	 src-table="acta_recibido.soporte_acta"
-	 dst-table="acta_recibido.acta_recibido" reference-fk="fk_soporte_acta_acta_recibido"
+	 dst-table="acta_recibido.acta_recibido"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_historico_acta_acta_recibido" type="relfk"
-	 custom-color="#8bcecc"
 	 src-table="acta_recibido.historico_acta"
-	 dst-table="acta_recibido.acta_recibido" reference-fk="fk_acta_recibido"
+	 dst-table="acta_recibido.acta_recibido"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_historico_acta_estado_acta" type="relfk"
-	 custom-color="#7796d5"
 	 src-table="acta_recibido.historico_acta"
-	 dst-table="acta_recibido.estado_acta" reference-fk="fk_estado_acta"
+	 dst-table="acta_recibido.estado_acta"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_elemento_campo_elemento" type="relfk"
-	 custom-color="#f5615c"
 	 src-table="acta_recibido.elemento_campo"
-	 dst-table="acta_recibido.elemento" reference-fk="fk_elemento_campo_elemento"
+	 dst-table="acta_recibido.elemento"
 	 src-required="false" dst-required="false"/>
 
 <relationship name="rel_elemento_campo_campo" type="relfk"
-	 custom-color="#249ff9"
 	 src-table="acta_recibido.elemento_campo"
-	 dst-table="acta_recibido.campo" reference-fk="fk_elemento_campo_campo"
+	 dst-table="acta_recibido.campo"
 	 src-required="false" dst-required="false"/>
 
 <permission>
