@@ -6,12 +6,14 @@ referente al modelo de negocio de inventarios de la Universidad Distrital.
 ## Especificaciones Técnicas
 
 ### Tecnologías Implementadas y Versiones
-* [Golang](https://github.com/udistrital/introduccion_oas/blob/master/instalacion_de_herramientas/golang.md)
-* [BeeGo](https://github.com/udistrital/introduccion_oas/blob/master/instalacion_de_herramientas/beego.md)
-* [Docker](https://docs.docker.com/engine/install/ubuntu/)
-* [Docker Compose](https://docs.docker.com/compose/)
+
+- [Golang](https://github.com/udistrital/introduccion_oas/blob/master/instalacion_de_herramientas/golang.md)
+- [BeeGo](https://github.com/udistrital/introduccion_oas/blob/master/instalacion_de_herramientas/beego.md)
+- [Docker](https://docs.docker.com/engine/install/ubuntu/)
+- [Docker Compose](https://docs.docker.com/compose/)
 
 ### Variables de Entorno
+
 ```shell
 API_ACTA_RECIBIDO_HTTP_PORT=[Puerto asignado para la ejecución del API]
 ACTA_RECIBIDO_CRUD__PGUSER=[Usuario de la base de datos]
@@ -32,12 +34,13 @@ ACTA_RECIBIDO_CRUD__SCHEMA=public
 ACTA_RECIBIDO_CRUD__LOG=
 RUN_MODE=dev
 ```
-**NOTA:** Las variables se pueden ver en el fichero conf/app.conf y están identificadas con ACTA_RECIBIDO_CRUD__  
-Para definir puertos, dns y configuraciones internas dentro del archivo **.env**  
-Para definir conexiones externas a otros apis se debe crear el archivo **custom.env** en la raiz del proyecto  
 
+**NOTA:** Las variables se pueden ver en el fichero conf/app.conf y están identificadas con `ACTA_RECIBIDO_CRUD__`
+Para definir puertos, dns y configuraciones internas dentro del archivo **.env**
+Para definir conexiones externas a otros apis se debe crear el archivo **custom.env** en la raiz del proyecto
 
 ### Ejecución del Proyecto
+
 ```shell
 #1. Obtener el repositorio con Go
 go get github.com/udistrital/acta_recibido_crud
@@ -53,12 +56,14 @@ ACTA_RECIBIDO_CRUD__PORT=8080 ACTA_RECIBIDO_CRUD__PGURLS=127.0.0.1:27017 ACTA_RE
 ```
 
 ### Ejecución Dockerfile
+
 ```shell
 # docker build --tag=acta_recibido_crud . --no-cache
 # docker run -p 80:80 acta_recibido_crud
 ```
 
 ### Ejecución docker-compose
+
 ```shell
 #1. Clonar el repositorio
 git clone -b develop https://github.com/udistrital/acta_recibido_crud
@@ -83,20 +88,20 @@ docker ps
 ### Ejecución Pruebas
 
 Pruebas unitarias
+
 ```shell
 # Not Data
 ```
+
 ## Estado CI
 
-| Develop | Release 0.2.1 | Master |
+| Develop | Release 1.0.0 | Master |
 | -- | -- | -- |
-| [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/acta_recibido_crud/status.svg?ref=refs/heads/develop)](https://hubci.portaloas.udistrital.edu.co/udistrital/acta_recibido_crud) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/acta_recibido_crud/status.svg?ref=refs/heads/release/0.2.1)](https://hubci.portaloas.udistrital.edu.co/udistrital/acta_recibido_crud) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/acta_recibido_crud/status.svg)](https://hubci.portaloas.udistrital.edu.co/udistrital/acta_recibido_crud) |
-
+| [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/acta_recibido_crud/status.svg?ref=refs/heads/develop)](https://hubci.portaloas.udistrital.edu.co/udistrital/acta_recibido_crud) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/acta_recibido_crud/status.svg?ref=refs/heads/release/1.0.0)](https://hubci.portaloas.udistrital.edu.co/udistrital/acta_recibido_crud) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/acta_recibido_crud/status.svg)](https://hubci.portaloas.udistrital.edu.co/udistrital/acta_recibido_crud) |
 
 ## Modelo de Datos
 
-[Modelo de Datos ACTA RECIBIDO CRUD](https://drive.google.com/drive/u/2/folders/1LkLHwuF-FKOyuMEMs0DjMdIUH-YXDJnY)\
-[PGModeler](models/modelo.dbm) - [SVG](models/modelo.svg)
+[PGModeler](database/modelo.dbm) - [SVG](database/modelo.svg)
 
 ## Licencia
 
