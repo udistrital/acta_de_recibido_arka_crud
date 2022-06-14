@@ -1,20 +1,21 @@
-lastupdate.tmp
-refactor_controller
+# Binarios y temporales
+*.tmp
+*.exe
+*.zip
+*.log
+*~
 acta_recibido_crud
-./refactor_controller/
-refactor_controller/
-ejec.sh
-acta_recibido_env.sh
-custom.env
+main
+
+# Variables de Entorno
+*.env
+!.env
+
+# IDEs y otros
+.vscode
 .scannerwork/
-swagger/*.png
-swagger/*.html
-swagger/*.js
-swagger/*.map
-swagger/*.css
-swagger/*.yml
-swagger/css/
-swagger/fonts/
-swagger/images/
-swagger/lang/
-swagger/lib/
+
+# Swagger
+swagger/**
+!swagger/swagger.json
+!swagger/swagger.yml

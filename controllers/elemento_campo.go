@@ -6,18 +6,19 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/udistrital/acta_recibido_crud/models"
+
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
-	"github.com/udistrital/acta_recibido_crud/models"
 )
 
-// EstadoActaController operations for EstadoActa
-type EstadoActaController struct {
+//  Elemento_campoController operations for Elemento_campo
+type Elemento_campoController struct {
 	beego.Controller
 }
 
 // URLMapping ...
-func (c *EstadoActaController) URLMapping() {
+func (c *Elemento_campoController) URLMapping() {
 	c.Mapping("Post", c.Post)
 	c.Mapping("GetOne", c.GetOne)
 	c.Mapping("GetAll", c.GetAll)
@@ -27,20 +28,20 @@ func (c *EstadoActaController) URLMapping() {
 
 // Post ...
 // @Title Post
-// @Description create EstadoActa
-// @Param	body		body 	models.EstadoActa	true		"body for EstadoActa content"
-// @Success 201 {int} models.EstadoActa
-// @Failure 400 the request contains incorrect syntax
+// @Description create Elemento_campo
+// @Param	body		body 	models.Elemento_campo	true		"body for Elemento_campo content"
+// @Success 201 {int} models.Elemento_campo
+// @Failure 403 body is empty
 // @router / [post]
-func (c *EstadoActaController) Post() {
-	var v models.EstadoActa
+func (c *Elemento_campoController) Post() {
+	var v models.Elemento_campo
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if _, err := models.AddEstadoActa(&v); err == nil {
+		if _, err := models.AddElemento_campo(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = v
 		} else {
 			logs.Error(err)
-			//c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
+
 			c.Data["system"] = err
 			c.Abort("400")
 		}
@@ -55,15 +56,15 @@ func (c *EstadoActaController) Post() {
 
 // GetOne ...
 // @Title Get One
-// @Description get EstadoActa by id
+// @Description get Elemento_campo by id
 // @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.EstadoActa
-// @Failure 404 not found resource
+// @Success 200 {object} models.Elemento_campo
+// @Failure 403 :id is empty
 // @router /:id [get]
-func (c *EstadoActaController) GetOne() {
+func (c *Elemento_campoController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v, err := models.GetEstadoActaById(id)
+	v, err := models.GetElemento_campoById(id)
 	if err != nil {
 		logs.Error(err)
 		//c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
@@ -77,17 +78,17 @@ func (c *EstadoActaController) GetOne() {
 
 // GetAll ...
 // @Title Get All
-// @Description get EstadoActa
+// @Description get Elemento_campo
 // @Param	query	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
 // @Param	fields	query	string	false	"Fields returned. e.g. col1,col2 ..."
 // @Param	sortby	query	string	false	"Sorted-by fields. e.g. col1,col2 ..."
 // @Param	order	query	string	false	"Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ..."
 // @Param	limit	query	string	false	"Limit the size of result set. Must be an integer"
 // @Param	offset	query	string	false	"Start position of result set. Must be an integer"
-// @Success 200 {object} models.EstadoActa
-// @Failure 404 not found resource
+// @Success 200 {object} models.Elemento_campo
+// @Failure 403
 // @router / [get]
-func (c *EstadoActaController) GetAll() {
+func (c *Elemento_campoController) GetAll() {
 	var fields []string
 	var sortby []string
 	var order []string
@@ -129,7 +130,7 @@ func (c *EstadoActaController) GetAll() {
 		}
 	}
 
-	l, err := models.GetAllEstadoActa(query, fields, sortby, order, offset, limit)
+	l, err := models.GetAllElemento_campo(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		logs.Error(err)
 		//c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
@@ -147,19 +148,19 @@ func (c *EstadoActaController) GetAll() {
 
 // Put ...
 // @Title Put
-// @Description update the EstadoActa
+// @Description update the Elemento_campo
 // @Param	id		path 	string	true		"The id you want to update"
-// @Param	body		body 	models.EstadoActa	true		"body for EstadoActa content"
-// @Success 200 {object} models.EstadoActa
-// @Failure 400 the request contains incorrect syntax
+// @Param	body		body 	models.Elemento_campo	true		"body for Elemento_campo content"
+// @Success 200 {object} models.Elemento_campo
+// @Failure 403 :id is not int
 // @router /:id [put]
-func (c *EstadoActaController) Put() {
+func (c *Elemento_campoController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v := models.EstadoActa{Id: id}
+	v := models.Elemento_campo{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if err := models.UpdateEstadoActaById(&v); err == nil {
-			c.Data["json"] = v
+		if err := models.UpdateElemento_campoById(&v); err == nil {
+			c.Data["json"] = "OK"
 		} else {
 			logs.Error(err)
 			//c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
@@ -177,16 +178,16 @@ func (c *EstadoActaController) Put() {
 
 // Delete ...
 // @Title Delete
-// @Description delete the EstadoActa
+// @Description delete the Elemento_campo
 // @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
-// @Failure 404 not found resource
+// @Failure 403 id is empty
 // @router /:id [delete]
-func (c *EstadoActaController) Delete() {
+func (c *Elemento_campoController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	if err := models.DeleteEstadoActa(id); err == nil {
-		c.Data["json"] = map[string]interface{}{"Id": id}
+	if err := models.DeleteElemento_campo(id); err == nil {
+		c.Data["json"] = "OK"
 	} else {
 		logs.Error(err)
 		//c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}

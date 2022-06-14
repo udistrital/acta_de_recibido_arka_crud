@@ -3,10 +3,11 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
-	"github.com/udistrital/acta_recibido_crud/models"
 	"strconv"
 	"strings"
+
 	"github.com/astaxie/beego/logs"
+	"github.com/udistrital/acta_recibido_crud/models"
 
 	"github.com/astaxie/beego"
 )
@@ -136,10 +137,11 @@ func (c *ActaRecibidoController) GetAll() {
 		c.Data["system"] = err
 		c.Abort("404")
 	} else {
-		if l == nil {
-			l = append(l, map[string]interface{}{})
+		if len(l) > 0 {
+			c.Data["json"] = l
+		} else {
+			c.Data["json"] = []interface{}{}
 		}
-		c.Data["json"] = l
 	}
 	c.ServeJSON()
 }

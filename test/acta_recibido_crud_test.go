@@ -22,9 +22,9 @@ import (
 
 	"github.com/udistrital/utils_oas/request"
 
-	"github.com/DATA-DOG/godog"
-	"github.com/DATA-DOG/godog/colors"
 	"github.com/astaxie/beego"
+	"github.com/cucumber/godog"
+	"github.com/cucumber/godog/colors"
 	"github.com/xeipuuv/gojsonschema"
 )
 
@@ -88,7 +88,7 @@ func deleteFile(path string) {
 func run_bee() {
 	var resultado map[string]interface{}
 
-	parametros := 	"ACTA_RECIBIDO_HTTP_PORT=" + beego.AppConfig.String("httpport") + " ACTA_RECIBIDO_CRUD__PGUSER=" + beego.AppConfig.String("PGuser") + " ACTA_RECIBIDO_CRUD__PGPASS=" + beego.AppConfig.String("PGpass") + " ACTA_RECIBIDO_CRUD__PGURLS=" + beego.AppConfig.String("PGurls") + " ACTA_RECIBIDO_CRUD__PGDB=" + beego.AppConfig.String("PGdb") + " ACTA_RECIBIDO_CRUD__PGSCHEMA=" + beego.AppConfig.String("PGschemas") + " bee run"
+	parametros := "ACTA_RECIBIDO_HTTP_PORT=" + beego.AppConfig.String("httpport") + " ACTA_RECIBIDO_CRUD__PGUSER=" + beego.AppConfig.String("PGuser") + " ACTA_RECIBIDO_CRUD__PGPASS=" + beego.AppConfig.String("PGpass") + " ACTA_RECIBIDO_CRUD__PGURLS=" + beego.AppConfig.String("PGurls") + " ACTA_RECIBIDO_CRUD__PGDB=" + beego.AppConfig.String("PGdb") + " ACTA_RECIBIDO_CRUD__PGSCHEMA=" + beego.AppConfig.String("PGschemas") + " bee run"
 	file, err := os.Create("script.sh")
 	if err != nil {
 		log.Fatal("Cannot create file", err)
@@ -157,7 +157,7 @@ func gen_files() {
 	fmt.Println("Genera los archivos")
 	t := time.Now()
 
-	nombre := "Prueba_test"// t.Format(especificacion) //se cambia para que cumpla con la especificacion de varying(20)
+	nombre := "Prueba_test" // t.Format(especificacion) //se cambia para que cumpla con la especificacion de varying(20)
 	atributo := Parametrica{
 		Nombre:            nombre,
 		Descripcion:       "string",

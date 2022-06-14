@@ -3,20 +3,21 @@ package controllers
 import (
 	"encoding/json"
 	"errors"
-	"github.com/udistrital/acta_recibido_crud/models"
 	"strconv"
 	"strings"
-	"github.com/astaxie/beego/logs"
+
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/logs"
+	"github.com/udistrital/acta_recibido_crud/models"
 )
 
-// TipoBienController operations for TipoBien
-type TipoBienController struct {
+// TipoActaController operations for TipoActa
+type TipoActaController struct {
 	beego.Controller
 }
 
 // URLMapping ...
-func (c *TipoBienController) URLMapping() {
+func (c *TipoActaController) URLMapping() {
 	c.Mapping("Post", c.Post)
 	c.Mapping("GetOne", c.GetOne)
 	c.Mapping("GetAll", c.GetAll)
@@ -26,15 +27,15 @@ func (c *TipoBienController) URLMapping() {
 
 // Post ...
 // @Title Post
-// @Description create TipoBien
-// @Param	body		body 	models.TipoBien	true		"body for TipoBien content"
-// @Success 201 {int} models.TipoBien
+// @Description create TipoActa
+// @Param	body		body 	models.TipoActa	true		"body for TipoActa content"
+// @Success 201 {int} models.TipoActa
 // @Failure 400 the request contains incorrect syntax
 // @router / [post]
-func (c *TipoBienController) Post() {
-	var v models.TipoBien
+func (c *TipoActaController) Post() {
+	var v models.TipoActa
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if _, err := models.AddTipoBien(&v); err == nil {
+		if _, err := models.AddTipoActa(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = v
 		} else {
@@ -54,15 +55,15 @@ func (c *TipoBienController) Post() {
 
 // GetOne ...
 // @Title Get One
-// @Description get TipoBien by id
+// @Description get TipoActa by id
 // @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.TipoBien
+// @Success 200 {object} models.TipoActa
 // @Failure 404 not found resource
 // @router /:id [get]
-func (c *TipoBienController) GetOne() {
+func (c *TipoActaController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v, err := models.GetTipoBienById(id)
+	v, err := models.GetTipoActaById(id)
 	if err != nil {
 		logs.Error(err)
 		//c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
@@ -76,17 +77,17 @@ func (c *TipoBienController) GetOne() {
 
 // GetAll ...
 // @Title Get All
-// @Description get TipoBien
+// @Description get TipoActa
 // @Param	query	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
 // @Param	fields	query	string	false	"Fields returned. e.g. col1,col2 ..."
 // @Param	sortby	query	string	false	"Sorted-by fields. e.g. col1,col2 ..."
 // @Param	order	query	string	false	"Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ..."
 // @Param	limit	query	string	false	"Limit the size of result set. Must be an integer"
 // @Param	offset	query	string	false	"Start position of result set. Must be an integer"
-// @Success 200 {object} models.TipoBien
+// @Success 200 {object} models.TipoActa
 // @Failure 404 not found resource
 // @router / [get]
-func (c *TipoBienController) GetAll() {
+func (c *TipoActaController) GetAll() {
 	var fields []string
 	var sortby []string
 	var order []string
@@ -128,35 +129,36 @@ func (c *TipoBienController) GetAll() {
 		}
 	}
 
-	l, err := models.GetAllTipoBien(query, fields, sortby, order, offset, limit)
+	l, err := models.GetAllTipoActa(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		logs.Error(err)
 		//c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
 		c.Data["system"] = err
 		c.Abort("404")
 	} else {
-		if l == nil {
-			l = append(l, map[string]interface{}{})
+		if len(l) > 0 {
+			c.Data["json"] = l
+		} else {
+			c.Data["json"] = []interface{}{}
 		}
-		c.Data["json"] = l
 	}
 	c.ServeJSON()
 }
 
 // Put ...
 // @Title Put
-// @Description update the TipoBien
+// @Description update the TipoActa
 // @Param	id		path 	string	true		"The id you want to update"
-// @Param	body		body 	models.TipoBien	true		"body for TipoBien content"
-// @Success 200 {object} models.TipoBien
+// @Param	body		body 	models.TipoActa	true		"body for TipoActa content"
+// @Success 200 {object} models.TipoActa
 // @Failure 400 the request contains incorrect syntax
 // @router /:id [put]
-func (c *TipoBienController) Put() {
+func (c *TipoActaController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v := models.TipoBien{Id: id}
+	v := models.TipoActa{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if err := models.UpdateTipoBienById(&v); err == nil {
+		if err := models.UpdateTipoActaById(&v); err == nil {
 			c.Data["json"] = v
 		} else {
 			logs.Error(err)
@@ -175,15 +177,15 @@ func (c *TipoBienController) Put() {
 
 // Delete ...
 // @Title Delete
-// @Description delete the TipoBien
+// @Description delete the TipoActa
 // @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
 // @Failure 404 not found resource
 // @router /:id [delete]
-func (c *TipoBienController) Delete() {
+func (c *TipoActaController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	if err := models.DeleteTipoBien(id); err == nil {
+	if err := models.DeleteTipoActa(id); err == nil {
 		c.Data["json"] = map[string]interface{}{"Id": id}
 	} else {
 		logs.Error(err)

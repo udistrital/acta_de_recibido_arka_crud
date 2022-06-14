@@ -10,56 +10,58 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
-type SoporteActa struct {
-	Id                int           `orm:"column(id);pk;auto"`
-	Consecutivo       string        `orm:"column(consecutivo);null"`
-	DocumentoId       int           `orm:"column(documento_id);null"`
-	FechaSoporte      time.Time     `orm:"column(fecha_soporte);type(date);null"`
-	ActaRecibidoId    *ActaRecibido `orm:"column(acta_recibido_id);rel(fk)"`
-	Activo            bool          `orm:"column(activo)"`
-	FechaCreacion     time.Time     `orm:"auto_now_add;column(fecha_creacion);type(timestamp without time zone)"`
-	FechaModificacion time.Time     `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone)"`
+type Campo struct {
+	Id                int       `orm:"column(id);pk;auto"`
+	Nombre            string    `orm:"column(nombre);null"`
+	Sigla             string    `orm:"column(sigla);null"`
+	Descripcion       string    `orm:"column(descripcion);null"`
+	Activo            bool      `orm:"column(activo)"`
+	FechaCreacion     time.Time `orm:"auto_now;column(fecha_creacion);type(timestamp without time zone)"`
+	FechaModificacion time.Time `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone)"`
 }
 
-func (t *SoporteActa) TableName() string {
-	return "soporte_acta"
+func (t *Campo) TableName() string {
+	return "campo"
 }
 
 func init() {
-	orm.RegisterModel(new(SoporteActa))
+	orm.RegisterModel(new(Campo))
 }
 
-// AddSoporteActa insert a new SoporteActa into database and returns
+// AddCampo insert a new Campo into database and returns
 // last inserted Id on success.
-func AddSoporteActa(m *SoporteActa) (id int64, err error) {
+func AddCampo(m *Campo) (id int64, err error) {
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
 }
 
-// GetSoporteActaById retrieves SoporteActa by Id. Returns error if
+// GetCampoById retrieves Campo by Id. Returns error if
 // Id doesn't exist
-func GetSoporteActaById(id int) (v *SoporteActa, err error) {
+func GetCampoById(id int) (v *Campo, err error) {
 	o := orm.NewOrm()
-	v = &SoporteActa{Id: id}
+	v = &Campo{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllSoporteActa retrieves all SoporteActa matches certain condition. Returns empty list if
+// GetAllCampo retrieves all Campo matches certain condition. Returns empty list if
 // no records exist
-func GetAllSoporteActa(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllCampo(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(SoporteActa)).RelatedSel()
+	qs := o.QueryTable(new(Campo))
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
 		k = strings.Replace(k, ".", "__", -1)
 		if strings.Contains(k, "isnull") {
 			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else if strings.Contains(k, "__in") {
+			arr := strings.Split(v, "|")
+			qs = qs.Filter(k, arr)
 		} else {
 			qs = qs.Filter(k, v)
 		}
@@ -103,8 +105,8 @@ func GetAllSoporteActa(query map[string]string, fields []string, sortby []string
 		}
 	}
 
-	var l []SoporteActa
-	qs = qs.OrderBy(sortFields...)
+	var l []Campo
+	qs = qs.OrderBy(sortFields...).RelatedSel()
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
 			for _, v := range l {
@@ -126,11 +128,11 @@ func GetAllSoporteActa(query map[string]string, fields []string, sortby []string
 	return nil, err
 }
 
-// UpdateSoporteActa updates SoporteActa by Id and returns error if
+// UpdateCampo updates Campo by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateSoporteActaById(m *SoporteActa) (err error) {
+func UpdateCampoById(m *Campo) (err error) {
 	o := orm.NewOrm()
-	v := SoporteActa{Id: m.Id}
+	v := Campo{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -141,15 +143,15 @@ func UpdateSoporteActaById(m *SoporteActa) (err error) {
 	return
 }
 
-// DeleteSoporteActa deletes SoporteActa by Id and returns error if
+// DeleteCampo deletes Campo by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteSoporteActa(id int) (err error) {
+func DeleteCampo(id int) (err error) {
 	o := orm.NewOrm()
-	v := SoporteActa{Id: id}
+	v := Campo{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&SoporteActa{Id: id}); err == nil {
+		if num, err = o.Delete(&Campo{Id: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

@@ -2,10 +2,11 @@ package controllers
 
 import (
 	"encoding/json"
-	"github.com/udistrital/acta_recibido_crud/models"
-	"github.com/astaxie/beego/logs"
-	"github.com/astaxie/beego"
 	"strconv"
+
+	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/logs"
+	"github.com/udistrital/acta_recibido_crud/models"
 )
 
 // operations for TransaccionActaRecibido
@@ -17,18 +18,23 @@ func (c *TransaccionActaRecibidoController) URLMapping() {
 	c.Mapping("Post", c.Post)
 }
 
-
 // GetAllByPersona ...
 // @Title Get All By id
 // @Description get TransaccionActaRecibidoController
 // @Param	id		path 	string	true		"id"
+// @Param	elementos	query	bool	false	"Traer elementos asociados al acta"
 // @Success 200 {object} models.TransaccionActaRecibidoController
 // @Failure 404 not found resource
 // @router /:id [get]
 func (c *TransaccionActaRecibidoController) GetAllById() {
+	elementos := true
+	if v, err := c.GetBool("elementos"); err == nil {
+		elementos = v
+	}
 	idPersonaStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idPersonaStr)
-	l, err := models.GetTransaccionActaRecibido(id)
+
+	l, err := models.GetTransaccionActaRecibido(id, elementos)
 	if err != nil {
 		logs.Error(err)
 		//c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
@@ -39,7 +45,6 @@ func (c *TransaccionActaRecibidoController) GetAllById() {
 	}
 	c.ServeJSON()
 }
-
 
 // @Title PostTransaccionActaRecibido
 // @Description create the TransaccionActaRecibido

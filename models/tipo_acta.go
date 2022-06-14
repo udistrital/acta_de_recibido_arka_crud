@@ -10,50 +10,49 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
-type TipoBien struct {
+type TipoActa struct {
 	Id                int       `orm:"column(id);pk;auto"`
 	Nombre            string    `orm:"column(nombre)"`
 	Descripcion       string    `orm:"column(descripcion);null"`
 	CodigoAbreviacion string    `orm:"column(codigo_abreviacion);null"`
 	Activo            bool      `orm:"column(activo)"`
-	NumeroOrden       float64   `orm:"column(numero_orden);null"`
 	FechaCreacion     time.Time `orm:"auto_now_add;column(fecha_creacion);type(timestamp without time zone)"`
 	FechaModificacion time.Time `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone)"`
 }
 
-func (t *TipoBien) TableName() string {
-	return "tipo_bien"
+func (t *TipoActa) TableName() string {
+	return "tipo_acta"
 }
 
 func init() {
-	orm.RegisterModel(new(TipoBien))
+	orm.RegisterModel(new(TipoActa))
 }
 
-// AddTipoBien insert a new TipoBien into database and returns
+// AddTipoActa insert a new TipoActa into database and returns
 // last inserted Id on success.
-func AddTipoBien(m *TipoBien) (id int64, err error) {
+func AddTipoActa(m *TipoActa) (id int64, err error) {
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
 }
 
-// GetTipoBienById retrieves TipoBien by Id. Returns error if
+// GetTipoActaById retrieves TipoActa by Id. Returns error if
 // Id doesn't exist
-func GetTipoBienById(id int) (v *TipoBien, err error) {
+func GetTipoActaById(id int) (v *TipoActa, err error) {
 	o := orm.NewOrm()
-	v = &TipoBien{Id: id}
+	v = &TipoActa{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllTipoBien retrieves all TipoBien matches certain condition. Returns empty list if
+// GetAllTipoActa retrieves all TipoActa matches certain condition. Returns empty list if
 // no records exist
-func GetAllTipoBien(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllTipoActa(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(TipoBien)).RelatedSel()
+	qs := o.QueryTable(new(TipoActa)).RelatedSel()
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
@@ -103,7 +102,7 @@ func GetAllTipoBien(query map[string]string, fields []string, sortby []string, o
 		}
 	}
 
-	var l []TipoBien
+	var l []TipoActa
 	qs = qs.OrderBy(sortFields...)
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -126,11 +125,11 @@ func GetAllTipoBien(query map[string]string, fields []string, sortby []string, o
 	return nil, err
 }
 
-// UpdateTipoBien updates TipoBien by Id and returns error if
+// UpdateTipoActa updates TipooActa by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateTipoBienById(m *TipoBien) (err error) {
+func UpdateTipoActaById(m *TipoActa) (err error) {
 	o := orm.NewOrm()
-	v := TipoBien{Id: m.Id}
+	v := TipoActa{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -141,15 +140,15 @@ func UpdateTipoBienById(m *TipoBien) (err error) {
 	return
 }
 
-// DeleteTipoBien deletes TipoBien by Id and returns error if
+// DeleteTipoActa deletes TipoActa by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteTipoBien(id int) (err error) {
+func DeleteTipoActa(id int) (err error) {
 	o := orm.NewOrm()
-	v := TipoBien{Id: id}
+	v := TipoActa{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&TipoBien{Id: id}); err == nil {
+		if num, err = o.Delete(&TipoActa{Id: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

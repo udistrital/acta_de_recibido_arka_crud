@@ -188,6 +188,179 @@
                 }
             }
         },
+        "/campo/": {
+            "get": {
+                "tags": [
+                    "campo"
+                ],
+                "description": "get Campo",
+                "operationId": "CampoController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Campo"
+                        }
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "campo"
+                ],
+                "description": "create Campo",
+                "operationId": "CampoController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Campo content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Campo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.Campo"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/campo/{id}": {
+            "get": {
+                "tags": [
+                    "campo"
+                ],
+                "description": "get Campo by id",
+                "operationId": "CampoController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Campo"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "campo"
+                ],
+                "description": "update the Campo",
+                "operationId": "CampoController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Campo content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Campo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Campo"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "campo"
+                ],
+                "description": "delete the Campo",
+                "operationId": "CampoController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
+                    }
+                }
+            }
+        },
         "/elemento/": {
             "get": {
                 "tags": [
@@ -357,6 +530,179 @@
                     },
                     "404": {
                         "description": "not found resource"
+                    }
+                }
+            }
+        },
+        "/elemento_campo/": {
+            "get": {
+                "tags": [
+                    "elemento_campo"
+                ],
+                "description": "get Elemento_campo",
+                "operationId": "Elemento_campoController.Get All",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "query",
+                        "description": "Filter. e.g. col1:v1,col2:v2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "description": "Fields returned. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sortby",
+                        "description": "Sorted-by fields. e.g. col1,col2 ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "order",
+                        "description": "Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ...",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "description": "Limit the size of result set. Must be an integer",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "description": "Start position of result set. Must be an integer",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Elemento_campo"
+                        }
+                    },
+                    "403": {
+                        "description": ""
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "elemento_campo"
+                ],
+                "description": "create Elemento_campo",
+                "operationId": "Elemento_campoController.Post",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Elemento_campo content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Elemento_campo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "{int} models.Elemento_campo"
+                    },
+                    "403": {
+                        "description": "body is empty"
+                    }
+                }
+            }
+        },
+        "/elemento_campo/{id}": {
+            "get": {
+                "tags": [
+                    "elemento_campo"
+                ],
+                "description": "get Elemento_campo by id",
+                "operationId": "Elemento_campoController.Get One",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The key for staticblock",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Elemento_campo"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is empty"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "elemento_campo"
+                ],
+                "description": "update the Elemento_campo",
+                "operationId": "Elemento_campoController.Put",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "body for Elemento_campo content",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Elemento_campo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/models.Elemento_campo"
+                        }
+                    },
+                    "403": {
+                        "description": ":id is not int"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "elemento_campo"
+                ],
+                "description": "delete the Elemento_campo",
+                "operationId": "Elemento_campoController.Delete",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id you want to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{string} delete success!"
+                    },
+                    "403": {
+                        "description": "id is empty"
                     }
                 }
             }
@@ -1053,13 +1399,13 @@
                 }
             }
         },
-        "/tipo_bien/": {
+        "/tipo_acta/": {
             "get": {
                 "tags": [
-                    "tipo_bien"
+                    "tipo_acta"
                 ],
-                "description": "get TipoBien",
-                "operationId": "TipoBienController.Get All",
+                "description": "get TipoActa",
+                "operationId": "TipoActaController.Get All",
                 "parameters": [
                     {
                         "in": "query",
@@ -1102,7 +1448,7 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.TipoBien"
+                            "$ref": "#/definitions/models.TipoActa"
                         }
                     },
                     "404": {
@@ -1112,24 +1458,24 @@
             },
             "post": {
                 "tags": [
-                    "tipo_bien"
+                    "tipo_acta"
                 ],
-                "description": "create TipoBien",
-                "operationId": "TipoBienController.Post",
+                "description": "create TipoActa",
+                "operationId": "TipoActaController.Post",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "body for TipoBien content",
+                        "description": "body for TipoActa content",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.TipoBien"
+                            "$ref": "#/definitions/models.TipoActa"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.TipoBien"
+                        "description": "{int} models.TipoActa"
                     },
                     "400": {
                         "description": "the request contains incorrect syntax"
@@ -1137,13 +1483,13 @@
                 }
             }
         },
-        "/tipo_bien/{id}": {
+        "/tipo_acta/{id}": {
             "get": {
                 "tags": [
-                    "tipo_bien"
+                    "tipo_acta"
                 ],
-                "description": "get TipoBien by id",
-                "operationId": "TipoBienController.Get One",
+                "description": "get TipoActa by id",
+                "operationId": "TipoActaController.Get One",
                 "parameters": [
                     {
                         "in": "path",
@@ -1157,7 +1503,7 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.TipoBien"
+                            "$ref": "#/definitions/models.TipoActa"
                         }
                     },
                     "404": {
@@ -1167,10 +1513,10 @@
             },
             "put": {
                 "tags": [
-                    "tipo_bien"
+                    "tipo_acta"
                 ],
-                "description": "update the TipoBien",
-                "operationId": "TipoBienController.Put",
+                "description": "update the TipoActa",
+                "operationId": "TipoActaController.Put",
                 "parameters": [
                     {
                         "in": "path",
@@ -1182,10 +1528,10 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "body for TipoBien content",
+                        "description": "body for TipoActa content",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.TipoBien"
+                            "$ref": "#/definitions/models.TipoActa"
                         }
                     }
                 ],
@@ -1193,7 +1539,7 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.TipoBien"
+                            "$ref": "#/definitions/models.TipoActa"
                         }
                     },
                     "400": {
@@ -1203,10 +1549,10 @@
             },
             "delete": {
                 "tags": [
-                    "tipo_bien"
+                    "tipo_acta"
                 ],
-                "description": "delete the TipoBien",
-                "operationId": "TipoBienController.Delete",
+                "description": "delete the TipoActa",
+                "operationId": "TipoActaController.Delete",
                 "parameters": [
                     {
                         "in": "path",
@@ -1268,6 +1614,12 @@
                         "description": "id",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "elementos",
+                        "description": "Traer elementos asociados al acta",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {
@@ -1321,8 +1673,12 @@
         }
     },
     "definitions": {
-        "32419.\u003cnil\u003e.TransaccionSoporteActa": {
-            "title": "TransaccionSoporteActa",
+        "41460.\u003cnil\u003e.SoporteActa": {
+            "title": "SoporteActa",
+            "type": "object"
+        },
+        "41489.\u003cnil\u003e.Elemento": {
+            "title": "Elemento",
             "type": "object"
         },
         "models.ActaRecibido": {
@@ -1340,7 +1696,30 @@
                     "type": "string",
                     "format": "datetime"
                 },
-                "FechaVistoBueno": {
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "TipoActaId": {
+                    "$ref": "#/definitions/models.TipoActa"
+                }
+            }
+        },
+        "models.Campo": {
+            "title": "Campo",
+            "type": "object",
+            "properties": {
+                "Activo": {
+                    "type": "boolean"
+                },
+                "Descripcion": {
+                    "type": "string"
+                },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
                     "type": "string",
                     "format": "datetime"
                 },
@@ -1348,20 +1727,11 @@
                     "type": "integer",
                     "format": "int64"
                 },
-                "Observaciones": {
+                "Nombre": {
                     "type": "string"
                 },
-                "PersonaAsignada": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "RevisorId": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "UbicacionId": {
-                    "type": "integer",
-                    "format": "int64"
+                "Sigla": {
+                    "type": "string"
                 }
             }
         },
@@ -1369,6 +1739,9 @@
             "title": "Elemento",
             "type": "object",
             "properties": {
+                "ActaRecibidoId": {
+                    "$ref": "#/definitions/models.ActaRecibido"
+                },
                 "Activo": {
                     "type": "boolean"
                 },
@@ -1379,6 +1752,10 @@
                 "Descuento": {
                     "type": "number",
                     "format": "double"
+                },
+                "EspacioFisicoId": {
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "EstadoElementoId": {
                     "$ref": "#/definitions/models.EstadoElemento"
@@ -1411,9 +1788,6 @@
                 "Serie": {
                     "type": "string"
                 },
-                "SoporteActaId": {
-                    "$ref": "#/definitions/models.SoporteActa"
-                },
                 "SubgrupoCatalogoId": {
                     "type": "integer",
                     "format": "int64"
@@ -1421,9 +1795,6 @@
                 "Subtotal": {
                     "type": "number",
                     "format": "double"
-                },
-                "TipoBienId": {
-                    "$ref": "#/definitions/models.TipoBien"
                 },
                 "UnidadMedida": {
                     "type": "integer",
@@ -1444,9 +1815,36 @@
                 "ValorUnitario": {
                     "type": "number",
                     "format": "double"
-                },
-                "Verificado": {
+                }
+            }
+        },
+        "models.Elemento_campo": {
+            "title": "Elemento_campo",
+            "type": "object",
+            "properties": {
+                "Activo": {
                     "type": "boolean"
+                },
+                "CampoId": {
+                    "$ref": "#/definitions/models.Campo"
+                },
+                "ElementoId": {
+                    "$ref": "#/definitions/models.Elemento"
+                },
+                "FechaCreacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "FechaModificacion": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Valor": {
+                    "type": "string"
                 }
             }
         },
@@ -1539,7 +1937,30 @@
                     "type": "string",
                     "format": "datetime"
                 },
+                "FechaVistoBueno": {
+                    "type": "string",
+                    "format": "datetime"
+                },
                 "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "Observaciones": {
+                    "type": "string"
+                },
+                "PersonaAsignadaId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "ProveedorId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "RevisorId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "UbicacionId": {
                     "type": "integer",
                     "format": "int64"
                 }
@@ -1577,15 +1998,11 @@
                 "Id": {
                     "type": "integer",
                     "format": "int64"
-                },
-                "ProveedorId": {
-                    "type": "integer",
-                    "format": "int64"
                 }
             }
         },
-        "models.TipoBien": {
-            "title": "TipoBien",
+        "models.TipoActa": {
+            "title": "TipoActa",
             "type": "object",
             "properties": {
                 "Activo": {
@@ -1611,10 +2028,6 @@
                 },
                 "Nombre": {
                     "type": "string"
-                },
-                "NumeroOrden": {
-                    "type": "number",
-                    "format": "double"
                 }
             }
         },
@@ -1625,8 +2038,11 @@
                 "ActaRecibido": {
                     "$ref": "#/definitions/models.ActaRecibido"
                 },
+                "Elementos": {
+                    "$ref": "#/definitions/41489.\u003cnil\u003e.Elemento"
+                },
                 "SoportesActa": {
-                    "$ref": "#/definitions/32419.\u003cnil\u003e.TransaccionSoporteActa"
+                    "$ref": "#/definitions/41460.\u003cnil\u003e.SoporteActa"
                 },
                 "UltimoEstado": {
                     "$ref": "#/definitions/models.HistoricoActa"
@@ -1648,10 +2064,6 @@
             "description": "SoporteActaController operations for SoporteActa\n"
         },
         {
-            "name": "tipo_bien",
-            "description": "TipoBienController operations for TipoBien\n"
-        },
-        {
             "name": "elemento",
             "description": "ElementoController operations for Elemento\n"
         },
@@ -1670,6 +2082,18 @@
         {
             "name": "transaccion_acta_recibido",
             "description": "operations for TransaccionActaRecibido\n"
+        },
+        {
+            "name": "tipo_acta",
+            "description": "TipoActaController operations for TipoActa\n"
+        },
+        {
+            "name": "campo",
+            "description": " CampoController operations for Campo\n"
+        },
+        {
+            "name": "elemento_campo",
+            "description": " Elemento_campoController operations for Elemento_campo\n"
         }
     ]
 }

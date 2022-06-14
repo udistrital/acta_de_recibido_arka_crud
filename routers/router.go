@@ -28,12 +28,6 @@ func init() {
 			),
 		),
 
-		beego.NSNamespace("/tipo_bien",
-			beego.NSInclude(
-				&controllers.TipoBienController{},
-			),
-		),
-
 		beego.NSNamespace("/elemento",
 			beego.NSInclude(
 				&controllers.ElementoController{},
@@ -61,6 +55,24 @@ func init() {
 		beego.NSNamespace("/transaccion_acta_recibido",
 			beego.NSInclude(
 				&controllers.TransaccionActaRecibidoController{},
+			),
+		),
+
+		beego.NSNamespace("/tipo_acta",
+			beego.NSInclude(
+				&controllers.TipoActaController{},
+			),
+		),
+
+		beego.NSNamespace("/campo",
+			beego.NSInclude(
+				&controllers.CampoController{},
+			),
+		),
+
+		beego.NSNamespace("/elemento_campo",
+			beego.NSInclude(
+				&controllers.Elemento_campoController{},
 			),
 		),
 	)

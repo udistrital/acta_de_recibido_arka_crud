@@ -12,6 +12,12 @@ import (
 
 type HistoricoActa struct {
 	Id                int           `orm:"column(id);pk;auto"`
+	ProveedorId       int           `orm:"column(proveedor_id);null"`
+	UbicacionId       int           `orm:"column(ubicacion_id);null"`
+	RevisorId         int           `orm:"column(revisor_id)"`
+	PersonaAsignadaId int           `orm:"column(persona_asignada_id)"`
+	Observaciones     string        `orm:"column(observaciones);null"`
+	FechaVistoBueno   time.Time     `orm:"column(fecha_visto_bueno);type(date);null"`
 	ActaRecibidoId    *ActaRecibido `orm:"column(acta_recibido_id);rel(fk)"`
 	EstadoActaId      *EstadoActa   `orm:"column(estado_acta_id);rel(fk)"`
 	Activo            bool          `orm:"column(activo)"`
@@ -58,6 +64,9 @@ func GetAllHistoricoActa(query map[string]string, fields []string, sortby []stri
 		k = strings.Replace(k, ".", "__", -1)
 		if strings.Contains(k, "isnull") {
 			qs = qs.Filter(k, (v == "true" || v == "1"))
+		} else if strings.Contains(k, "__in") {
+			arr := strings.Split(v, "|")
+			qs = qs.Filter(k, arr)
 		} else {
 			qs = qs.Filter(k, v)
 		}
