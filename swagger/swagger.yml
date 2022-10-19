@@ -1112,10 +1112,10 @@ paths:
         "400":
           description: the request contains incorrect syntax
 definitions:
-  41460.<nil>.SoporteActa:
+  41530.<nil>.SoporteActa:
     title: SoporteActa
     type: object
-  41489.<nil>.Elemento:
+  41559.<nil>.Elemento:
     title: Elemento
     type: object
   models.ActaRecibido:
@@ -1201,6 +1201,9 @@ definitions:
       Subtotal:
         type: number
         format: double
+      TipoBienId:
+        type: integer
+        format: int64
       UnidadMedida:
         type: integer
         format: int64
@@ -1374,9 +1377,9 @@ definitions:
       ActaRecibido:
         $ref: '#/definitions/models.ActaRecibido'
       Elementos:
-        $ref: '#/definitions/41489.<nil>.Elemento'
+        $ref: '#/definitions/41559.<nil>.Elemento'
       SoportesActa:
-        $ref: '#/definitions/41460.<nil>.SoporteActa'
+        $ref: '#/definitions/41530.<nil>.SoporteActa'
       UltimoEstado:
         $ref: '#/definitions/models.HistoricoActa'
   models.TransaccionActaRecibidoController:
