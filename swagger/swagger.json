@@ -1673,11 +1673,11 @@
         }
     },
     "definitions": {
-        "41460.\u003cnil\u003e.SoporteActa": {
+        "41530.\u003cnil\u003e.SoporteActa": {
             "title": "SoporteActa",
             "type": "object"
         },
-        "41489.\u003cnil\u003e.Elemento": {
+        "41559.\u003cnil\u003e.Elemento": {
             "title": "Elemento",
             "type": "object"
         },
@@ -1795,6 +1795,10 @@
                 "Subtotal": {
                     "type": "number",
                     "format": "double"
+                },
+                "TipoBienId": {
+                    "type": "integer",
+                    "format": "int64"
                 },
                 "UnidadMedida": {
                     "type": "integer",
@@ -2039,10 +2043,10 @@
                     "$ref": "#/definitions/models.ActaRecibido"
                 },
                 "Elementos": {
-                    "$ref": "#/definitions/41489.\u003cnil\u003e.Elemento"
+                    "$ref": "#/definitions/41559.\u003cnil\u003e.Elemento"
                 },
                 "SoportesActa": {
-                    "$ref": "#/definitions/41460.\u003cnil\u003e.SoporteActa"
+                    "$ref": "#/definitions/41530.\u003cnil\u003e.SoporteActa"
                 },
                 "UltimoEstado": {
                     "$ref": "#/definitions/models.HistoricoActa"
