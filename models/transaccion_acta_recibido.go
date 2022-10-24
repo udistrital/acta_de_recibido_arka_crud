@@ -119,6 +119,16 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 	v := ActaRecibido{Id: m.ActaRecibido.Id}
 	if err = o.Read(&v); err == nil {
 
+		var actaRecibido_ ActaRecibido
+
+		if err = o.QueryTable(new(ActaRecibido)).RelatedSel().Filter("Activo", true).Filter("Id", m.ActaRecibido.Id).One(&actaRecibido_); err == nil {
+			actaRecibido_.UnidadEjecutoraId = m.ActaRecibido.UnidadEjecutoraId
+
+			if _, err = o.Update(&actaRecibido_); err != nil {
+				panic(err.Error())
+			}
+		}
+
 		var Historico_ HistoricoActa
 
 		if err = o.QueryTable(new(HistoricoActa)).RelatedSel().Filter("Activo", true).Filter("ActaRecibidoId__Id", m.ActaRecibido.Id).One(&Historico_); err == nil {

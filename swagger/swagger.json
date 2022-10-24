@@ -1673,11 +1673,11 @@
         }
     },
     "definitions": {
-        "41530.\u003cnil\u003e.SoporteActa": {
+        "43044.\u003cnil\u003e.SoporteActa": {
             "title": "SoporteActa",
             "type": "object"
         },
-        "41559.\u003cnil\u003e.Elemento": {
+        "43074.\u003cnil\u003e.Elemento": {
             "title": "Elemento",
             "type": "object"
         },
@@ -1702,6 +1702,10 @@
                 },
                 "TipoActaId": {
                     "$ref": "#/definitions/models.TipoActa"
+                },
+                "UnidadEjecutoraId": {
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
@@ -2043,10 +2047,10 @@
                     "$ref": "#/definitions/models.ActaRecibido"
                 },
                 "Elementos": {
-                    "$ref": "#/definitions/41559.\u003cnil\u003e.Elemento"
+                    "$ref": "#/definitions/43074.\u003cnil\u003e.Elemento"
                 },
                 "SoportesActa": {
-                    "$ref": "#/definitions/41530.\u003cnil\u003e.SoporteActa"
+                    "$ref": "#/definitions/43044.\u003cnil\u003e.SoporteActa"
                 },
                 "UltimoEstado": {
                     "$ref": "#/definitions/models.HistoricoActa"
