@@ -29,6 +29,7 @@ type Elemento struct {
 	EspacioFisicoId    int             `orm:"column(espacio_fisico_id)"`
 	ActaRecibidoId     *ActaRecibido   `orm:"column(acta_recibido_id);rel(fk)"`
 	Placa              string          `orm:"column(placa);null"`
+	TipoBienId         int             `orm:"column(tipo_bien_id);null"`
 	Activo             bool            `orm:"column(activo)"`
 	FechaCreacion      time.Time       `orm:"auto_now_add;column(fecha_creacion);type(timestamp without time zone)"`
 	FechaModificacion  time.Time       `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone)"`
