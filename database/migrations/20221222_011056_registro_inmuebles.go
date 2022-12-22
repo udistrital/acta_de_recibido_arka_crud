@@ -9,21 +9,21 @@ import (
 )
 
 // DO NOT MODIFY
-type UnidadEjecutora_20221023_224258 struct {
+type RegistroInmuebles_20221222_011056 struct {
 	migration.Migration
 }
 
 // DO NOT MODIFY
 func init() {
-	m := &UnidadEjecutora_20221023_224258{}
-	m.Created = "20221023_224258"
+	m := &RegistroInmuebles_20221222_011056{}
+	m.Created = "20221222_011056"
 
-	migration.Register("UnidadEjecutora_20221023_224258", m)
+	migration.Register("RegistroInmuebles_20221222_011056", m)
 }
 
 // Run the migrations
-func (m *UnidadEjecutora_20221023_224258) Up() {
-	file, err := ioutil.ReadFile("../scripts/20221023_224258_unidad_ejecutora_up.sql")
+func (m *RegistroInmuebles_20221222_011056) Up() {
+	file, err := ioutil.ReadFile("../scripts/20221222_011056_registro_inmuebles_up.sql")
 
 	if err != nil {
 		// handle error
@@ -31,17 +31,16 @@ func (m *UnidadEjecutora_20221023_224258) Up() {
 	}
 
 	requests := strings.Split(string(file), ";")
-	requests = []string{}
+
 	for _, request := range requests {
 		fmt.Println(request)
 		m.SQL(request)
 	}
-
 }
 
 // Reverse the migrations
-func (m *UnidadEjecutora_20221023_224258) Down() {
-	file, err := ioutil.ReadFile("../scripts/20221023_224258_unidad_ejecutora_down.sql")
+func (m *RegistroInmuebles_20221222_011056) Down() {
+	file, err := ioutil.ReadFile("../scripts/20221222_011056_registro_inmuebles_down.sql")
 
 	if err != nil {
 		// handle error
