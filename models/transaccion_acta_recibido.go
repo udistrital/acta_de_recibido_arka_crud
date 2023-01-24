@@ -15,36 +15,40 @@ type TransaccionActaRecibido struct {
 // GetTransaccionActaRecibido Obtener transacción con la información de un Acta de Recibido
 func GetTransaccionActaRecibido(id int, getElementos bool) (v TransaccionActaRecibido, err error) {
 	o := orm.NewOrm()
+
 	var acta ActaRecibido
-
-	if _, err := o.QueryTable(new(ActaRecibido)).RelatedSel().Filter("Id", id).All(&acta); err == nil {
-		v.ActaRecibido = &acta
-
-		var ultimoEstado HistoricoActa
-
-		if _, err := o.QueryTable(new(HistoricoActa)).RelatedSel().Filter("ActaRecibidoId__Id", id).Filter("Activo", true).All(&ultimoEstado); err == nil {
-			v.UltimoEstado = &ultimoEstado
-
-			var soportes []SoporteActa
-
-			if _, err := o.QueryTable(new(SoporteActa)).RelatedSel().Filter("ActaRecibidoId__Id", id).Filter("Activo", true).All(&soportes); err == nil {
-				v.SoportesActa = &soportes
-
-				if getElementos {
-
-					var elementos []Elemento
-
-					if _, err := o.QueryTable(new(Elemento)).RelatedSel().Filter("ActaRecibidoId__Id", id).Filter("Activo", true).All(&elementos); err == nil {
-
-						v.Elementos = &elementos
-
-						return v, nil
-					}
-				}
-			}
-		}
+	err = o.QueryTable(new(ActaRecibido)).RelatedSel().Filter("Id", id).One(&acta)
+	if err != nil {
+		return
 	}
-	return v, err
+
+	v.ActaRecibido = &acta
+	var ultimoEstado HistoricoActa
+	_, err = o.QueryTable(new(HistoricoActa)).RelatedSel().Filter("ActaRecibidoId__Id", id).Filter("Activo", true).All(&ultimoEstado)
+	if err != nil {
+		return
+	}
+
+	v.UltimoEstado = &ultimoEstado
+	var soportes []SoporteActa
+
+	_, err = o.QueryTable(new(SoporteActa)).RelatedSel().Filter("ActaRecibidoId__Id", id).Filter("Activo", true).All(&soportes)
+	if err != nil {
+		return
+	}
+
+	v.SoportesActa = &soportes
+	if getElementos {
+		var elementos []Elemento
+		_, err = o.QueryTable(new(Elemento)).RelatedSel().Filter("ActaRecibidoId__Id", id).Filter("Activo", true).All(&elementos)
+		if err != nil {
+			return
+		}
+
+		v.Elementos = &elementos
+	}
+
+	return
 }
 
 // AddTransaccionActaRecibido Registrar transacción con toda la información del Acta de Recibido
@@ -65,36 +69,40 @@ func AddTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 		}
 	}()
 
-	if idActa, err := o.Insert(m.ActaRecibido); err == nil {
-		m.UltimoEstado.ActaRecibidoId.Id = int(idActa)
-		m.UltimoEstado.Activo = true
-
-		if _, err := o.Insert(m.UltimoEstado); err == nil {
-
-			for _, v := range *m.SoportesActa {
-				v.ActaRecibidoId.Id = int(idActa)
-
-				if _, err = o.Insert(&v); err != nil {
-					panic(err.Error())
-				}
-			}
-
-			for _, w := range *m.Elementos {
-
-				w.ActaRecibidoId.Id = int(idActa)
-
-				if _, err = o.Insert(&w); err != nil {
-					panic(err.Error())
-				}
-
-			}
-
-		} else {
-			panic(err.Error())
-		}
-	} else {
-		panic(err.Error())
+	if m.ActaRecibido == nil || m.ActaRecibido.UnidadEjecutoraId <= 0 ||
+		m.ActaRecibido.TipoActaId == nil || m.ActaRecibido.TipoActaId.Id <= 0 ||
+		m.UltimoEstado == nil || m.UltimoEstado.EstadoActaId.Id <= 0 {
+		return
 	}
+
+	idActa, err := o.Insert(m.ActaRecibido)
+	if err != nil {
+		return err
+	}
+
+	m.UltimoEstado.ActaRecibidoId.Id = int(idActa)
+	m.UltimoEstado.Activo = true
+	_, err = o.Insert(m.UltimoEstado)
+	if err != nil {
+		return
+	}
+
+	for _, v := range *m.SoportesActa {
+		v.ActaRecibidoId.Id = int(idActa)
+		_, err = o.Insert(&v)
+		if err != nil {
+			return
+		}
+	}
+
+	for _, w := range *m.Elementos {
+		w.ActaRecibidoId.Id = int(idActa)
+		_, err = o.Insert(&w)
+		if err != nil {
+			return
+		}
+	}
+
 	return
 }
 
@@ -117,110 +125,104 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 	}()
 
 	v := ActaRecibido{Id: m.ActaRecibido.Id}
-	if err = o.Read(&v); err == nil {
-
-		var actaRecibido_ ActaRecibido
-
-		if err = o.QueryTable(new(ActaRecibido)).RelatedSel().Filter("Activo", true).Filter("Id", m.ActaRecibido.Id).One(&actaRecibido_); err == nil {
-			actaRecibido_.UnidadEjecutoraId = m.ActaRecibido.UnidadEjecutoraId
-
-			if _, err = o.Update(&actaRecibido_); err != nil {
-				panic(err.Error())
-			}
-		}
-
-		var Historico_ HistoricoActa
-
-		if err = o.QueryTable(new(HistoricoActa)).RelatedSel().Filter("Activo", true).Filter("ActaRecibidoId__Id", m.ActaRecibido.Id).One(&Historico_); err == nil {
-
-			Historico_.Activo = false
-
-			if _, err = o.Update(&Historico_, "Activo"); err == nil {
-
-				m.UltimoEstado.Activo = true
-
-				if _, err = o.Insert(m.UltimoEstado); err != nil {
-					panic(err.Error())
-				}
-			} else {
-				panic(err.Error())
-			}
-		} else {
-			panic(err.Error())
-		}
-
-		var listSoportes orm.ParamsList
-
-		if _, err = o.QueryTable(new(SoporteActa)).RelatedSel().Filter("ActaRecibidoId__Id", m.ActaRecibido.Id).Filter("Activo", true).ValuesFlat(&listSoportes, "Id"); err == nil {
-
-			for _, soporte := range *m.SoportesActa {
-
-				if soporte.Id > 0 {
-
-					if i := findIdInArray(listSoportes, soporte.Id); i > -1 {
-						listSoportes = append(listSoportes[:i], listSoportes[i+1:]...)
-
-						if _, err = o.Update(&soporte); err != nil {
-							panic(err.Error())
-						}
-					}
-				} else {
-					soporte.ActaRecibidoId.Id = m.ActaRecibido.Id
-					if _, err = o.Insert(&soporte); err != nil {
-						panic(err.Error())
-					}
-				}
-
-			}
-
-			for _, id := range listSoportes {
-				id_, _ := id.(int64)
-				soporteInactivo := SoporteActa{Id: int(id_), Activo: false}
-				if _, err = o.Update(&soporteInactivo, "Activo"); err != nil {
-					panic(err.Error())
-				}
-			}
-
-		} else {
-			panic(err.Error())
-		}
-
-		var listElementos orm.ParamsList
-
-		if _, err = o.QueryTable(new(Elemento)).RelatedSel().Filter("ActaRecibidoId__Id", m.ActaRecibido.Id).Filter("Activo", true).ValuesFlat(&listElementos, "Id"); err == nil {
-
-			for _, elemento := range *m.Elementos {
-				if elemento.Id > 0 {
-
-					if i := findIdInArray(listElementos, elemento.Id); i > -1 {
-						listElementos = append(listElementos[:i], listElementos[i+1:]...)
-
-						if _, err = o.Update(&elemento); err != nil {
-							panic(err.Error())
-						}
-					}
-				} else {
-					elemento.ActaRecibidoId.Id = m.ActaRecibido.Id
-					if _, err = o.Insert(&elemento); err != nil {
-						panic(err.Error())
-					}
-				}
-			}
-
-			for _, id := range listElementos {
-				id_, _ := id.(int64)
-				elementoInactivo := Elemento{Id: int(id_), Activo: false}
-				if _, err = o.Update(&elementoInactivo, "Activo"); err != nil {
-					panic(err.Error())
-				}
-			}
-
-		} else {
-			panic(err.Error())
-		}
-	} else {
-		panic(err.Error())
+	err = o.Read(&v)
+	if err != nil {
+		return
 	}
+
+	_, err = o.Update(&v, "UnidadEjecutoraId")
+	if err != nil {
+		return
+	}
+
+	var Historico_ HistoricoActa
+	err = o.QueryTable(new(HistoricoActa)).RelatedSel().Filter("Activo", true).Filter("ActaRecibidoId__Id", m.ActaRecibido.Id).One(&Historico_)
+	if err != nil {
+		return
+	}
+
+	Historico_.Activo = false
+	_, err = o.Update(&Historico_, "Activo")
+	if err != nil {
+		return
+	}
+
+	m.UltimoEstado.Activo = true
+	_, err = o.Insert(m.UltimoEstado)
+	if err != nil {
+		return
+	}
+
+	var listSoportes orm.ParamsList
+	_, err = o.QueryTable(new(SoporteActa)).RelatedSel().Filter("ActaRecibidoId__Id", m.ActaRecibido.Id).Filter("Activo", true).ValuesFlat(&listSoportes, "Id")
+	if err != nil {
+		return
+	}
+
+	for _, soporte := range *m.SoportesActa {
+
+		if soporte.Id > 0 {
+
+			if i := findIdInArray(listSoportes, soporte.Id); i > -1 {
+				listSoportes = append(listSoportes[:i], listSoportes[i+1:]...)
+				_, err = o.Update(&soporte)
+				if err != nil {
+					return
+				}
+			}
+		} else {
+			soporte.ActaRecibidoId.Id = m.ActaRecibido.Id
+			_, err = o.Insert(&soporte)
+			if err != nil {
+				return
+			}
+		}
+
+	}
+
+	for _, id := range listSoportes {
+		id_, _ := id.(int64)
+		soporteInactivo := SoporteActa{Id: int(id_), Activo: false}
+		_, err = o.Update(&soporteInactivo, "Activo")
+		if err != nil {
+			return
+		}
+	}
+
+	var listElementos orm.ParamsList
+	_, err = o.QueryTable(new(Elemento)).RelatedSel().Filter("ActaRecibidoId__Id", m.ActaRecibido.Id).Filter("Activo", true).ValuesFlat(&listElementos, "Id")
+	if err != nil {
+		return
+	}
+
+	for _, elemento := range *m.Elementos {
+		if elemento.Id > 0 {
+
+			if i := findIdInArray(listElementos, elemento.Id); i > -1 {
+				listElementos = append(listElementos[:i], listElementos[i+1:]...)
+				_, err = o.Update(&elemento)
+				if err != nil {
+					return
+				}
+			}
+		} else {
+			elemento.ActaRecibidoId.Id = m.ActaRecibido.Id
+			_, err = o.Insert(&elemento)
+			if err != nil {
+				return
+			}
+		}
+	}
+
+	for _, id := range listElementos {
+		id_, _ := id.(int64)
+		elementoInactivo := Elemento{Id: int(id_), Activo: false}
+		_, err = o.Update(&elementoInactivo, "Activo")
+		if err != nil {
+			return
+		}
+	}
+
 	return
 }
 
