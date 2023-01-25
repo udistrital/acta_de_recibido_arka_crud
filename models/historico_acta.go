@@ -55,7 +55,7 @@ func GetHistoricoActaById(id int) (v *HistoricoActa, err error) {
 // GetAllHistoricoActa retrieves all HistoricoActa matches certain condition. Returns empty list if
 // no records exist
 func GetAllHistoricoActa(query map[string]string, fields []string, sortby []string, order []string,
-	offset int64, limit int64) (ml []interface{}, err error) {
+	offset int64, limit int64) (ml []interface{}, count int64, err error) {
 	o := orm.NewOrm()
 	qs := o.QueryTable(new(HistoricoActa)).RelatedSel()
 	// query k=v
@@ -71,6 +71,11 @@ func GetAllHistoricoActa(query map[string]string, fields []string, sortby []stri
 			qs = qs.Filter(k, v)
 		}
 	}
+
+	count, err = qs.Count()
+	if err != nil {
+		return
+	}
 	// order by:
 	var sortFields []string
 	if len(sortby) != 0 {
@@ -83,7 +88,7 @@ func GetAllHistoricoActa(query map[string]string, fields []string, sortby []stri
 				} else if order[i] == "asc" {
 					orderby = v
 				} else {
-					return nil, errors.New("Error: Invalid order. Must be either [asc|desc]")
+					return nil, 0, errors.New("Error: Invalid order. Must be either [asc|desc]")
 				}
 				sortFields = append(sortFields, orderby)
 			}
@@ -97,16 +102,16 @@ func GetAllHistoricoActa(query map[string]string, fields []string, sortby []stri
 				} else if order[0] == "asc" {
 					orderby = v
 				} else {
-					return nil, errors.New("Error: Invalid order. Must be either [asc|desc]")
+					return nil, 0, errors.New("Error: Invalid order. Must be either [asc|desc]")
 				}
 				sortFields = append(sortFields, orderby)
 			}
 		} else if len(sortby) != len(order) && len(order) != 1 {
-			return nil, errors.New("Error: 'sortby', 'order' sizes mismatch or 'order' size is not 1")
+			return nil, 0, errors.New("Error: 'sortby', 'order' sizes mismatch or 'order' size is not 1")
 		}
 	} else {
 		if len(order) != 0 {
-			return nil, errors.New("Error: unused 'order' fields")
+			return nil, 0, errors.New("Error: unused 'order' fields")
 		}
 	}
 
@@ -128,9 +133,9 @@ func GetAllHistoricoActa(query map[string]string, fields []string, sortby []stri
 				ml = append(ml, m)
 			}
 		}
-		return ml, nil
+		return ml, count, nil
 	}
-	return nil, err
+	return nil, 0, err
 }
 
 // UpdateHistoricoActa updates HistoricoActa by Id and returns error if
