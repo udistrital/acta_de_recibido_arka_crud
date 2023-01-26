@@ -129,7 +129,7 @@ func (c *HistoricoActaController) GetAll() {
 		}
 	}
 
-	l, err := models.GetAllHistoricoActa(query, fields, sortby, order, offset, limit)
+	l, count, err := models.GetAllHistoricoActa(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		logs.Error(err)
 		//c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
@@ -137,6 +137,7 @@ func (c *HistoricoActaController) GetAll() {
 		c.Abort("404")
 	} else {
 		if len(l) > 0 {
+			c.Ctx.Output.Header("total-count", strconv.Itoa(int(count)))
 			c.Data["json"] = l
 		} else {
 			c.Data["json"] = []interface{}{}
