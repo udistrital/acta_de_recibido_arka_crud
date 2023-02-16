@@ -31,7 +31,7 @@ func (m *TipoBienManual_20221014_124608) Up() {
 	}
 
 	requests := strings.Split(string(file), ";")
-
+	requests = []string{}
 	for _, request := range requests {
 		fmt.Println(request)
 		m.SQL(request)
