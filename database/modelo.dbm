@@ -3,45 +3,32 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.1" last-position="0,16" last-zoom="1"
+<dbmodel pgmodeler-ver="0.9.3" use-changelog="false" last-position="0,0" last-zoom="0.85" max-obj-count="10"
 	 default-schema="public" default-owner="postgres">
-<role name="desarrollooas"
-      superuser="true"
-      createdb="true"
-      replication="true"
-      createrole="true"
-      inherit="true"
-      login="true"
-      encrypted="true"
-      password="********">
-</role>
-
-<database name="bd_oas" encoding="UTF8" lc-collate="en_US.UTF-8" lc-ctype="en_US.UTF-8" is-template="false" allow-conns="true">
+<database name="postgres" encoding="UTF8" lc-collate="en_US.UTF-8" lc-ctype="en_US.UTF-8" is-template="false" allow-conns="true">
 	<role name="postgres"/>
 	<tablespace name="pg_default"/>
+	<comment><![CDATA[default administrative connection database]]></comment>
 </database>
 
-<schema name="public" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
+<schema name="public" layer="0" rect-visible="true" fill-color="#e1e1e1" sql-disabled="true">
 </schema>
 
-<schema name="acta_recibido" rect-visible="true" fill-color="#245adf">
+<schema name="acta_recibido" layer="0" rect-visible="true" fill-color="#62a0ea">
 	<role name="postgres"/>
 	<comment><![CDATA[Esquema para la gestión de actas de recibido]]></comment>
 </schema>
 
-<sequence name="acta_recibido_id_seq"
-	 start="1" increment="1"
-	 min-value="1" max-value="2147483647"
-	 cache="1" cycle="false">
+<sequence name="acta_recibido_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 </sequence>
 
-<table name="acta_recibido">
+<table name="acta_recibido" layer="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla para guardar informacion del acta recibido]]></comment>
-	<position x="940" y="500"/>
+	<position x="720" y="500"/>
 	<column name="id" not-null="true" sequence="acta_recibido.acta_recibido_id_seq">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[campo para guardar identificador del acta recibido]]></comment>
@@ -58,27 +45,21 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="tipo_acta_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
-	<column name="unidad_ejecutora_id">
-		<type name="integer" length="0"/>
-	</column>
 	<constraint name="pk_acta_recibido" type="pk-constr" table="acta_recibido.acta_recibido">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
 </table>
 
-<sequence name="elemento_id_seq"
-	 start="1" increment="1"
-	 min-value="1" max-value="2147483647"
-	 cache="1" cycle="false">
+<sequence name="elemento_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 </sequence>
 
-<table name="elemento">
+<table name="elemento" layer="0" collapse-mode="2" max-obj-count="25" z-value="0">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla para guardar los elementos de acta recibido por contrato]]></comment>
-	<position x="1360" y="40"/>
+	<position x="1280" y="300"/>
 	<column name="id" not-null="true" sequence="acta_recibido.elemento_id_seq">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[identificador para acta recibido elemento por contratos]]></comment>
@@ -160,27 +141,21 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<column name="acta_recibido_id" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
-	<column name="tipo_bien_id">
-		<type name="integer" length="0"/>
-	</column>
 	<constraint name="pk_elemento" type="pk-constr" table="acta_recibido.elemento">
 		<columns names="id" ref-type="src-columns"/>
 	</constraint>
 </table>
 
-<sequence name="estado_acta_id_seq"
-	 start="1" increment="1"
-	 min-value="1" max-value="2147483647"
-	 cache="1" cycle="false">
+<sequence name="estado_acta_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 </sequence>
 
-<table name="estado_acta">
+<table name="estado_acta" layer="0" collapse-mode="2" max-obj-count="9" z-value="0">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla para almacenar los estados de acta recibido]]></comment>
-	<position x="100" y="580"/>
+	<position x="20" y="480"/>
 	<column name="id" not-null="true" sequence="acta_recibido.estado_acta_id_seq">
 		<type name="integer" length="0"/>
 		<comment><![CDATA[campo serial para estado acta recibido]]></comment>
@@ -216,18 +191,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<sequence name="estado_elemento_id_seq"
-	 start="1" increment="1"
-	 min-value="1" max-value="2147483647"
-	 cache="1" cycle="false">
+<sequence name="estado_elemento_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 </sequence>
 
-<table name="estado_elemento">
+<table name="estado_elemento" layer="0" collapse-mode="2" max-obj-count="9" z-value="0">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
-	<position x="1920" y="680"/>
+	<position x="1900" y="760"/>
 	<column name="id" not-null="true" sequence="acta_recibido.estado_elemento_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -257,18 +229,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<sequence name="soporte_acta_id_seq"
-	 start="1" increment="1"
-	 min-value="1" max-value="2147483647"
-	 cache="1" cycle="false">
+<sequence name="soporte_acta_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 </sequence>
 
-<table name="soporte_acta">
+<table name="soporte_acta" layer="0" collapse-mode="2" max-obj-count="9" z-value="0">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
-	<position x="480" y="720"/>
+	<position x="280" y="740"/>
 	<column name="id" not-null="true" sequence="acta_recibido.soporte_acta_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -300,19 +269,16 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<sequence name="historico_acta_id_seq"
-	 start="1" increment="1"
-	 min-value="1" max-value="2147483647"
-	 cache="1" cycle="false">
+<sequence name="historico_acta_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 </sequence>
 
-<table name="historico_acta">
+<table name="historico_acta" layer="0" collapse-mode="2" max-obj-count="14" z-value="0">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 	<comment><![CDATA[tabla de rompimiento para la relacion de los estados del acta y el acta de recibido ]]></comment>
-	<position x="480" y="140"/>
+	<position x="260" y="40"/>
 	<column name="id" not-null="true" sequence="acta_recibido.historico_acta_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -354,18 +320,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<sequence name="tipo_acta_id_seq"
-	 start="1" increment="1"
-	 min-value="1" max-value="2147483647"
-	 cache="1" cycle="false">
+<sequence name="tipo_acta_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 </sequence>
 
-<table name="tipo_acta">
+<table name="tipo_acta" layer="0" collapse-mode="2" max-obj-count="8" z-value="0">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
-	<position x="1340" y="700"/>
+	<position x="720" y="80"/>
 	<column name="id" not-null="true" sequence="acta_recibido.tipo_acta_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -392,18 +355,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<sequence name="elemento_campo_id_seq"
-	 start="1" increment="1"
-	 min-value="1" max-value="2147483647"
-	 cache="1" cycle="false">
+<sequence name="elemento_campo_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 </sequence>
 
-<table name="elemento_campo">
+<table name="elemento_campo" layer="0" collapse-mode="2" max-obj-count="8" z-value="0">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
-	<position x="1940" y="80"/>
+	<position x="1900" y="420"/>
 	<column name="id" not-null="true" sequence="acta_recibido.elemento_campo_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -430,18 +390,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</constraint>
 </table>
 
-<sequence name="campo_id_seq"
-	 start="1" increment="1"
-	 min-value="1" max-value="2147483647"
-	 cache="1" cycle="false">
+<sequence name="campo_id_seq" cycle="false" start="1" increment="1" min-value="1" max-value="2147483647" cache="1">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
 </sequence>
 
-<table name="campo" hide-ext-attribs="true">
+<table name="campo" layer="0" collapse-mode="2" max-obj-count="9" z-value="0">
 	<schema name="acta_recibido"/>
 	<role name="postgres"/>
-	<position x="1920" y="440"/>
+	<position x="1900" y="80"/>
 	<column name="id" not-null="true" sequence="acta_recibido.campo_id_seq">
 		<type name="integer" length="0"/>
 	</column>
@@ -519,52 +476,52 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<columns names="id" ref-type="dst-columns"/>
 </constraint>
 
-<relationship name="rel_acta_recibido_tipo_acta" type="relfk"
-	 custom-color="#6c27f7"
+<relationship name="rel_acta_recibido_tipo_acta" type="relfk" layer="0"
+	 custom-color="#c48be8"
 	 src-table="acta_recibido.acta_recibido"
 	 dst-table="acta_recibido.tipo_acta" reference-fk="fk_acta_recibido_tipo_acta"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="true"/>
 
-<relationship name="rel_elemento_estado_elemento" type="relfk"
-	 custom-color="#bfe4f7"
+<relationship name="rel_elemento_estado_elemento" type="relfk" layer="0"
+	 custom-color="#6d7b80"
 	 src-table="acta_recibido.elemento"
 	 dst-table="acta_recibido.estado_elemento" reference-fk="fk_elemento_estado_elemento"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="true"/>
 
-<relationship name="rel_elemento_acta_recibido" type="relfk"
-	 custom-color="#4d71cd"
+<relationship name="rel_elemento_acta_recibido" type="relfk" layer="0"
+	 custom-color="#421bc6"
 	 src-table="acta_recibido.elemento"
 	 dst-table="acta_recibido.acta_recibido" reference-fk="fk_elemento_acta_recibido"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="true"/>
 
-<relationship name="rel_soporte_acta_acta_recibido" type="relfk"
-	 custom-color="#515562"
+<relationship name="rel_soporte_acta_acta_recibido" type="relfk" layer="0"
+	 custom-color="#181ea9"
 	 src-table="acta_recibido.soporte_acta"
 	 dst-table="acta_recibido.acta_recibido" reference-fk="fk_soporte_acta_acta_recibido"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="true"/>
 
-<relationship name="rel_historico_acta_acta_recibido" type="relfk"
-	 custom-color="#49b72d"
+<relationship name="rel_historico_acta_acta_recibido" type="relfk" layer="0"
+	 custom-color="#d04f3d"
 	 src-table="acta_recibido.historico_acta"
 	 dst-table="acta_recibido.acta_recibido" reference-fk="fk_acta_recibido"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="true"/>
 
-<relationship name="rel_historico_acta_estado_acta" type="relfk"
-	 custom-color="#309125"
+<relationship name="rel_historico_acta_estado_acta" type="relfk" layer="0"
+	 custom-color="#eca9ed"
 	 src-table="acta_recibido.historico_acta"
 	 dst-table="acta_recibido.estado_acta" reference-fk="fk_estado_acta"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="true"/>
 
-<relationship name="rel_elemento_campo_elemento" type="relfk"
-	 custom-color="#b830c4"
+<relationship name="rel_elemento_campo_elemento" type="relfk" layer="0"
+	 custom-color="#cb4e15"
 	 src-table="acta_recibido.elemento_campo"
 	 dst-table="acta_recibido.elemento" reference-fk="fk_elemento_campo_elemento"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="true"/>
 
-<relationship name="rel_elemento_campo_campo" type="relfk"
-	 custom-color="#8bcf41"
+<relationship name="rel_elemento_campo_campo" type="relfk" layer="0"
+	 custom-color="#87ac07"
 	 src-table="acta_recibido.elemento_campo"
 	 dst-table="acta_recibido.campo" reference-fk="fk_elemento_campo_campo"
-	 src-required="false" dst-required="false"/>
+	 src-required="false" dst-required="true"/>
 
 </dbmodel>
