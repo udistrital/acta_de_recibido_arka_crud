@@ -72,7 +72,7 @@ func init() {
 
 		beego.NSNamespace("/elemento_campo",
 			beego.NSInclude(
-				&controllers.Elemento_campoController{},
+				&controllers.ElementoCampoController{},
 			),
 		),
 	)

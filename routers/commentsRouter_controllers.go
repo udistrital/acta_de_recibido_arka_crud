@@ -97,7 +97,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"],
+    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoCampoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoCampoController"],
         beego.ControllerComments{
             Method: "Post",
             Router: "/",
@@ -106,7 +106,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"],
+    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoCampoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoCampoController"],
         beego.ControllerComments{
             Method: "GetAll",
             Router: "/",
@@ -115,7 +115,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"],
+    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoCampoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoCampoController"],
         beego.ControllerComments{
             Method: "GetOne",
             Router: "/:id",
@@ -124,7 +124,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"],
+    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoCampoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoCampoController"],
         beego.ControllerComments{
             Method: "Put",
             Router: "/:id",
@@ -133,7 +133,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"],
+    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoCampoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoCampoController"],
         beego.ControllerComments{
             Method: "Delete",
             Router: "/:id",
@@ -142,7 +142,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:Elemento_campoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:Elemento_campoController"],
+    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"],
         beego.ControllerComments{
             Method: "Post",
             Router: "/",
@@ -151,7 +151,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:Elemento_campoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:Elemento_campoController"],
+    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"],
         beego.ControllerComments{
             Method: "GetAll",
             Router: "/",
@@ -160,7 +160,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:Elemento_campoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:Elemento_campoController"],
+    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"],
         beego.ControllerComments{
             Method: "GetOne",
             Router: "/:id",
@@ -169,7 +169,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:Elemento_campoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:Elemento_campoController"],
+    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"],
         beego.ControllerComments{
             Method: "Put",
             Router: "/:id",
@@ -178,7 +178,7 @@ func init() {
             Filters: nil,
             Params: nil})
 
-    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:Elemento_campoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:Elemento_campoController"],
+    beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"] = append(beego.GlobalControllerRouter["github.com/udistrital/acta_recibido_crud/controllers:ElementoController"],
         beego.ControllerComments{
             Method: "Delete",
             Router: "/:id",
