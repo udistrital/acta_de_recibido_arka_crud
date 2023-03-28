@@ -12,13 +12,13 @@ import (
 	"github.com/astaxie/beego/logs"
 )
 
-//  Elemento_campoController operations for Elemento_campo
-type Elemento_campoController struct {
+// ElementoCampoController operations for ElementoCampo
+type ElementoCampoController struct {
 	beego.Controller
 }
 
 // URLMapping ...
-func (c *Elemento_campoController) URLMapping() {
+func (c *ElementoCampoController) URLMapping() {
 	c.Mapping("Post", c.Post)
 	c.Mapping("GetOne", c.GetOne)
 	c.Mapping("GetAll", c.GetAll)
@@ -28,15 +28,15 @@ func (c *Elemento_campoController) URLMapping() {
 
 // Post ...
 // @Title Post
-// @Description create Elemento_campo
-// @Param	body		body 	models.Elemento_campo	true		"body for Elemento_campo content"
-// @Success 201 {int} models.Elemento_campo
+// @Description create ElementoCampo
+// @Param	body		body 	models.ElementoCampo	true		"body for ElementoCampo content"
+// @Success 201 {int} models.ElementoCampo
 // @Failure 403 body is empty
 // @router / [post]
-func (c *Elemento_campoController) Post() {
-	var v models.Elemento_campo
+func (c *ElementoCampoController) Post() {
+	var v models.ElementoCampo
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if _, err := models.AddElemento_campo(&v); err == nil {
+		if _, err := models.AddElementoCampo(&v); err == nil {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = v
 		} else {
@@ -56,15 +56,15 @@ func (c *Elemento_campoController) Post() {
 
 // GetOne ...
 // @Title Get One
-// @Description get Elemento_campo by id
+// @Description get ElementoCampo by id
 // @Param	id		path 	string	true		"The key for staticblock"
-// @Success 200 {object} models.Elemento_campo
+// @Success 200 {object} models.ElementoCampo
 // @Failure 403 :id is empty
 // @router /:id [get]
-func (c *Elemento_campoController) GetOne() {
+func (c *ElementoCampoController) GetOne() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v, err := models.GetElemento_campoById(id)
+	v, err := models.GetElementoCampoById(id)
 	if err != nil {
 		logs.Error(err)
 		//c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
@@ -78,17 +78,17 @@ func (c *Elemento_campoController) GetOne() {
 
 // GetAll ...
 // @Title Get All
-// @Description get Elemento_campo
+// @Description get ElementoCampo
 // @Param	query	query	string	false	"Filter. e.g. col1:v1,col2:v2 ..."
 // @Param	fields	query	string	false	"Fields returned. e.g. col1,col2 ..."
 // @Param	sortby	query	string	false	"Sorted-by fields. e.g. col1,col2 ..."
 // @Param	order	query	string	false	"Order corresponding to each sortby field, if single value, apply to all sortby fields. e.g. desc,asc ..."
 // @Param	limit	query	string	false	"Limit the size of result set. Must be an integer"
 // @Param	offset	query	string	false	"Start position of result set. Must be an integer"
-// @Success 200 {object} models.Elemento_campo
+// @Success 200 {object} models.ElementoCampo
 // @Failure 403
 // @router / [get]
-func (c *Elemento_campoController) GetAll() {
+func (c *ElementoCampoController) GetAll() {
 	var fields []string
 	var sortby []string
 	var order []string
@@ -130,7 +130,7 @@ func (c *Elemento_campoController) GetAll() {
 		}
 	}
 
-	l, err := models.GetAllElemento_campo(query, fields, sortby, order, offset, limit)
+	l, err := models.GetAllElementoCampo(query, fields, sortby, order, offset, limit)
 	if err != nil {
 		logs.Error(err)
 		//c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
@@ -148,19 +148,19 @@ func (c *Elemento_campoController) GetAll() {
 
 // Put ...
 // @Title Put
-// @Description update the Elemento_campo
+// @Description update the ElementoCampo
 // @Param	id		path 	string	true		"The id you want to update"
-// @Param	body		body 	models.Elemento_campo	true		"body for Elemento_campo content"
-// @Success 200 {object} models.Elemento_campo
+// @Param	body		body 	models.ElementoCampo	true		"body for ElementoCampo content"
+// @Success 200 {object} models.ElementoCampo
 // @Failure 403 :id is not int
 // @router /:id [put]
-func (c *Elemento_campoController) Put() {
+func (c *ElementoCampoController) Put() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	v := models.Elemento_campo{Id: id}
+	v := models.ElementoCampo{Id: id}
 	if err := json.Unmarshal(c.Ctx.Input.RequestBody, &v); err == nil {
-		if err := models.UpdateElemento_campoById(&v); err == nil {
-			c.Data["json"] = "OK"
+		if err := models.UpdateElementoCampoById(&v); err == nil {
+			c.Data["json"] = v
 		} else {
 			logs.Error(err)
 			//c.Data["development"] = map[string]interface{}{"Code": "000", "Body": err.Error(), "Type": "error"}
@@ -178,15 +178,15 @@ func (c *Elemento_campoController) Put() {
 
 // Delete ...
 // @Title Delete
-// @Description delete the Elemento_campo
+// @Description delete the ElementoCampo
 // @Param	id		path 	string	true		"The id you want to delete"
 // @Success 200 {string} delete success!
 // @Failure 403 id is empty
 // @router /:id [delete]
-func (c *Elemento_campoController) Delete() {
+func (c *ElementoCampoController) Delete() {
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
-	if err := models.DeleteElemento_campo(id); err == nil {
+	if err := models.DeleteElementoCampo(id); err == nil {
 		c.Data["json"] = "OK"
 	} else {
 		logs.Error(err)

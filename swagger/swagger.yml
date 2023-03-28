@@ -360,8 +360,8 @@ paths:
     get:
       tags:
       - elemento_campo
-      description: get Elemento_campo
-      operationId: Elemento_campoController.Get All
+      description: get ElementoCampo
+      operationId: ElementoCampoController.Get All
       parameters:
       - in: query
         name: query
@@ -392,32 +392,32 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/models.Elemento_campo'
+            $ref: '#/definitions/models.ElementoCampo'
         "403":
           description: ""
     post:
       tags:
       - elemento_campo
-      description: create Elemento_campo
-      operationId: Elemento_campoController.Post
+      description: create ElementoCampo
+      operationId: ElementoCampoController.Post
       parameters:
       - in: body
         name: body
-        description: body for Elemento_campo content
+        description: body for ElementoCampo content
         required: true
         schema:
-          $ref: '#/definitions/models.Elemento_campo'
+          $ref: '#/definitions/models.ElementoCampo'
       responses:
         "201":
-          description: '{int} models.Elemento_campo'
+          description: '{int} models.ElementoCampo'
         "403":
           description: body is empty
   /elemento_campo/{id}:
     get:
       tags:
       - elemento_campo
-      description: get Elemento_campo by id
-      operationId: Elemento_campoController.Get One
+      description: get ElementoCampo by id
+      operationId: ElementoCampoController.Get One
       parameters:
       - in: path
         name: id
@@ -428,14 +428,14 @@ paths:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/models.Elemento_campo'
+            $ref: '#/definitions/models.ElementoCampo'
         "403":
           description: :id is empty
     put:
       tags:
       - elemento_campo
-      description: update the Elemento_campo
-      operationId: Elemento_campoController.Put
+      description: update the ElementoCampo
+      operationId: ElementoCampoController.Put
       parameters:
       - in: path
         name: id
@@ -444,22 +444,22 @@ paths:
         type: string
       - in: body
         name: body
-        description: body for Elemento_campo content
+        description: body for ElementoCampo content
         required: true
         schema:
-          $ref: '#/definitions/models.Elemento_campo'
+          $ref: '#/definitions/models.ElementoCampo'
       responses:
         "200":
           description: ""
           schema:
-            $ref: '#/definitions/models.Elemento_campo'
+            $ref: '#/definitions/models.ElementoCampo'
         "403":
           description: :id is not int
     delete:
       tags:
       - elemento_campo
-      description: delete the Elemento_campo
-      operationId: Elemento_campoController.Delete
+      description: delete the ElementoCampo
+      operationId: ElementoCampoController.Delete
       parameters:
       - in: path
         name: id
@@ -1222,8 +1222,8 @@ definitions:
       ValorUnitario:
         type: number
         format: double
-  models.Elemento_campo:
-    title: Elemento_campo
+  models.ElementoCampo:
+    title: ElementoCampo
     type: object
     properties:
       Activo:
@@ -1417,5 +1417,5 @@ tags:
   description: |2
      CampoController operations for Campo
 - name: elemento_campo
-  description: |2
-     Elemento_campoController operations for Elemento_campo
+  description: |
+    ElementoCampoController operations for ElementoCampo
