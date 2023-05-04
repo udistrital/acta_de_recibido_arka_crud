@@ -539,8 +539,8 @@
                 "tags": [
                     "elemento_campo"
                 ],
-                "description": "get Elemento_campo",
-                "operationId": "Elemento_campoController.Get All",
+                "description": "get ElementoCampo",
+                "operationId": "ElementoCampoController.Get All",
                 "parameters": [
                     {
                         "in": "query",
@@ -583,7 +583,7 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Elemento_campo"
+                            "$ref": "#/definitions/models.ElementoCampo"
                         }
                     },
                     "403": {
@@ -595,22 +595,22 @@
                 "tags": [
                     "elemento_campo"
                 ],
-                "description": "create Elemento_campo",
-                "operationId": "Elemento_campoController.Post",
+                "description": "create ElementoCampo",
+                "operationId": "ElementoCampoController.Post",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "body for Elemento_campo content",
+                        "description": "body for ElementoCampo content",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Elemento_campo"
+                            "$ref": "#/definitions/models.ElementoCampo"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.Elemento_campo"
+                        "description": "{int} models.ElementoCampo"
                     },
                     "403": {
                         "description": "body is empty"
@@ -623,8 +623,8 @@
                 "tags": [
                     "elemento_campo"
                 ],
-                "description": "get Elemento_campo by id",
-                "operationId": "Elemento_campoController.Get One",
+                "description": "get ElementoCampo by id",
+                "operationId": "ElementoCampoController.Get One",
                 "parameters": [
                     {
                         "in": "path",
@@ -638,7 +638,7 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Elemento_campo"
+                            "$ref": "#/definitions/models.ElementoCampo"
                         }
                     },
                     "403": {
@@ -650,8 +650,8 @@
                 "tags": [
                     "elemento_campo"
                 ],
-                "description": "update the Elemento_campo",
-                "operationId": "Elemento_campoController.Put",
+                "description": "update the ElementoCampo",
+                "operationId": "ElementoCampoController.Put",
                 "parameters": [
                     {
                         "in": "path",
@@ -663,10 +663,10 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "body for Elemento_campo content",
+                        "description": "body for ElementoCampo content",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Elemento_campo"
+                            "$ref": "#/definitions/models.ElementoCampo"
                         }
                     }
                 ],
@@ -674,7 +674,7 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Elemento_campo"
+                            "$ref": "#/definitions/models.ElementoCampo"
                         }
                     },
                     "403": {
@@ -686,8 +686,8 @@
                 "tags": [
                     "elemento_campo"
                 ],
-                "description": "delete the Elemento_campo",
-                "operationId": "Elemento_campoController.Delete",
+                "description": "delete the ElementoCampo",
+                "operationId": "ElementoCampoController.Delete",
                 "parameters": [
                     {
                         "in": "path",
@@ -1826,8 +1826,8 @@
                 }
             }
         },
-        "models.Elemento_campo": {
-            "title": "Elemento_campo",
+        "models.ElementoCampo": {
+            "title": "ElementoCampo",
             "type": "object",
             "properties": {
                 "Activo": {
@@ -2101,7 +2101,7 @@
         },
         {
             "name": "elemento_campo",
-            "description": " Elemento_campoController operations for Elemento_campo\n"
+            "description": "ElementoCampoController operations for ElementoCampo\n"
         }
     ]
 }

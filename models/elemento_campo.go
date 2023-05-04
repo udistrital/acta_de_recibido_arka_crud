@@ -10,7 +10,7 @@ import (
 	"github.com/astaxie/beego/orm"
 )
 
-type Elemento_campo struct {
+type ElementoCampo struct {
 	Id                int       `orm:"column(id);pk;auto"`
 	ElementoId        *Elemento `orm:"column(elemento_id);rel(fk)"`
 	CampoId           *Campo    `orm:"column(campo_id);rel(fk)"`
@@ -20,39 +20,39 @@ type Elemento_campo struct {
 	FechaModificacion time.Time `orm:"auto_now;column(fecha_modificacion);type(timestamp without time zone)"`
 }
 
-func (t *Elemento_campo) TableName() string {
+func (t *ElementoCampo) TableName() string {
 	return "elemento_campo"
 }
 
 func init() {
-	orm.RegisterModel(new(Elemento_campo))
+	orm.RegisterModel(new(ElementoCampo))
 }
 
-// AddElemento_campo insert a new Elemento_campo into database and returns
+// AddElementoCampo insert a new ElementoCampo into database and returns
 // last inserted Id on success.
-func AddElemento_campo(m *Elemento_campo) (id int64, err error) {
+func AddElementoCampo(m *ElementoCampo) (id int64, err error) {
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
 }
 
-// GetElemento_campoById retrieves Elemento_campo by Id. Returns error if
+// GetElementoCampoById retrieves ElementoCampo by Id. Returns error if
 // Id doesn't exist
-func GetElemento_campoById(id int) (v *Elemento_campo, err error) {
+func GetElementoCampoById(id int) (v *ElementoCampo, err error) {
 	o := orm.NewOrm()
-	v = &Elemento_campo{Id: id}
+	v = &ElementoCampo{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllElemento_campo retrieves all Elemento_campo matches certain condition. Returns empty list if
+// GetAllElementoCampo retrieves all ElementoCampo matches certain condition. Returns empty list if
 // no records exist
-func GetAllElemento_campo(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllElementoCampo(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Elemento_campo))
+	qs := o.QueryTable(new(ElementoCampo))
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
@@ -105,7 +105,7 @@ func GetAllElemento_campo(query map[string]string, fields []string, sortby []str
 		}
 	}
 
-	var l []Elemento_campo
+	var l []ElementoCampo
 	qs = qs.OrderBy(sortFields...).RelatedSel()
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -128,11 +128,11 @@ func GetAllElemento_campo(query map[string]string, fields []string, sortby []str
 	return nil, err
 }
 
-// UpdateElemento_campo updates Elemento_campo by Id and returns error if
+// UpdateElementoCampoById updates ElementoCampo by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateElemento_campoById(m *Elemento_campo) (err error) {
+func UpdateElementoCampoById(m *ElementoCampo) (err error) {
 	o := orm.NewOrm()
-	v := Elemento_campo{Id: m.Id}
+	v := ElementoCampo{Id: m.Id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -143,15 +143,15 @@ func UpdateElemento_campoById(m *Elemento_campo) (err error) {
 	return
 }
 
-// DeleteElemento_campo deletes Elemento_campo by Id and returns error if
+// DeleteElementoCampo deletes ElementoCampo by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteElemento_campo(id int) (err error) {
+func DeleteElementoCampo(id int) (err error) {
 	o := orm.NewOrm()
-	v := Elemento_campo{Id: id}
+	v := ElementoCampo{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&Elemento_campo{Id: id}); err == nil {
+		if num, err = o.Delete(&ElementoCampo{Id: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}
