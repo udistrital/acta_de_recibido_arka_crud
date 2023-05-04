@@ -1,11 +1,11 @@
 module github.com/udistrital/acta_recibido_crud
 
-go 1.17
+go 1.20
 
 require (
 	github.com/astaxie/beego v1.12.3
-	github.com/cucumber/godog v0.12.5
-	github.com/lib/pq v1.10.7
+	github.com/cucumber/godog v0.12.6
+	github.com/lib/pq v1.10.9
 	github.com/udistrital/utils_oas v0.0.0-20220521085529-fbd949fcf4e2
 	github.com/xeipuuv/gojsonschema v1.2.0
 )
@@ -15,10 +15,10 @@ require (
 	github.com/cespare/xxhash/v2 v2.1.1 // indirect
 	github.com/cucumber/gherkin-go/v19 v19.0.3 // indirect
 	github.com/cucumber/messages-go/v16 v16.0.1 // indirect
-	github.com/gofrs/uuid v4.0.0+incompatible // indirect
+	github.com/gofrs/uuid v4.2.0+incompatible // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
-	github.com/hashicorp/go-immutable-radix v1.3.0 // indirect
-	github.com/hashicorp/go-memdb v1.3.0 // indirect
+	github.com/hashicorp/go-immutable-radix v1.3.1 // indirect
+	github.com/hashicorp/go-memdb v1.3.2 // indirect
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
 	github.com/patrickmn/go-cache v2.1.0+incompatible // indirect

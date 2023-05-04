@@ -62,7 +62,6 @@ func (c *ActaRecibidoController) Post() {
 // @Failure 404 not found resource
 // @router /:id [get]
 func (c *ActaRecibidoController) GetOne() {
-	logs.Info("Consulta de acta")
 	idStr := c.Ctx.Input.Param(":id")
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetActaRecibidoById(id)
