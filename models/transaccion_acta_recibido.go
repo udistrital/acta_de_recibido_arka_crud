@@ -130,7 +130,7 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 		return
 	}
 
-	_, err = o.Update(&v, "UnidadEjecutoraId")
+	_, err = o.Update(m.ActaRecibido, "UnidadEjecutoraId")
 	if err != nil {
 		return
 	}
