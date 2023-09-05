@@ -8,8 +8,8 @@ import (
 type TransaccionActaRecibido struct {
 	ActaRecibido *ActaRecibido
 	UltimoEstado *HistoricoActa
-	SoportesActa *[]SoporteActa
-	Elementos    *[]Elemento
+	SoportesActa []SoporteActa
+	Elementos    []Elemento
 }
 
 // GetTransaccionActaRecibido Obtener transacción con la información de un Acta de Recibido
@@ -37,7 +37,7 @@ func GetTransaccionActaRecibido(id int, getElementos bool) (v TransaccionActaRec
 		return
 	}
 
-	v.SoportesActa = &soportes
+	v.SoportesActa = soportes
 	if getElementos {
 		var elementos []Elemento
 		_, err = o.QueryTable(new(Elemento)).RelatedSel().Filter("ActaRecibidoId__Id", id).Filter("Activo", true).All(&elementos)
@@ -45,7 +45,7 @@ func GetTransaccionActaRecibido(id int, getElementos bool) (v TransaccionActaRec
 			return
 		}
 
-		v.Elementos = &elementos
+		v.Elementos = elementos
 	}
 
 	return
@@ -53,21 +53,24 @@ func GetTransaccionActaRecibido(id int, getElementos bool) (v TransaccionActaRec
 
 // AddTransaccionActaRecibido Registrar transacción con toda la información del Acta de Recibido
 func AddTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
-	o := orm.NewOrm()
-	err = o.Begin()
 
-	if err != nil {
-		return
-	}
+	o := orm.NewOrm()
 
 	defer func() {
-		if r := recover(); r != nil {
+		r := recover()
+		if r != nil {
+			err = r.(error)
 			o.Rollback()
 			logs.Error(r)
 		} else {
 			o.Commit()
 		}
 	}()
+
+	err = o.Begin()
+	if err != nil {
+		return
+	}
 
 	if m.ActaRecibido == nil || m.ActaRecibido.UnidadEjecutoraId <= 0 ||
 		m.ActaRecibido.TipoActaId == nil || m.ActaRecibido.TipoActaId.Id <= 0 ||
@@ -80,23 +83,23 @@ func AddTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 		return err
 	}
 
-	m.UltimoEstado.ActaRecibidoId.Id = int(idActa)
+	m.UltimoEstado.ActaRecibidoId = &ActaRecibido{Id: int(idActa)}
 	m.UltimoEstado.Activo = true
 	_, err = o.Insert(m.UltimoEstado)
 	if err != nil {
 		return
 	}
 
-	for _, v := range *m.SoportesActa {
-		v.ActaRecibidoId.Id = int(idActa)
+	for _, v := range m.SoportesActa {
+		v.ActaRecibidoId = &ActaRecibido{Id: int(idActa)}
 		_, err = o.Insert(&v)
 		if err != nil {
 			return
 		}
 	}
 
-	for _, w := range *m.Elementos {
-		w.ActaRecibidoId.Id = int(idActa)
+	for _, w := range m.Elementos {
+		w.ActaRecibidoId = &ActaRecibido{Id: int(idActa)}
 		_, err = o.Insert(&w)
 		if err != nil {
 			return
@@ -109,20 +112,21 @@ func AddTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 // UpdateTransaccionActaRecibido Actualiza información de un Acta de recibido
 func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 	o := orm.NewOrm()
-	err = o.Begin()
-
-	if err != nil {
-		return
-	}
 
 	defer func() {
 		if r := recover(); r != nil {
+			err = r.(error)
 			o.Rollback()
 			logs.Error(r)
 		} else {
 			o.Commit()
 		}
 	}()
+
+	err = o.Begin()
+	if err != nil {
+		return
+	}
 
 	v := ActaRecibido{Id: m.ActaRecibido.Id}
 	err = o.Read(&v)
@@ -159,7 +163,7 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 		return
 	}
 
-	for _, soporte := range *m.SoportesActa {
+	for _, soporte := range m.SoportesActa {
 
 		if soporte.Id > 0 {
 
@@ -171,7 +175,7 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 				}
 			}
 		} else {
-			soporte.ActaRecibidoId.Id = m.ActaRecibido.Id
+			soporte.ActaRecibidoId = &ActaRecibido{Id: m.ActaRecibido.Id}
 			_, err = o.Insert(&soporte)
 			if err != nil {
 				return
@@ -195,7 +199,7 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 		return
 	}
 
-	for _, elemento := range *m.Elementos {
+	for _, elemento := range m.Elementos {
 		if elemento.Id > 0 {
 
 			if i := findIdInArray(listElementos, elemento.Id); i > -1 {
@@ -206,7 +210,7 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 				}
 			}
 		} else {
-			elemento.ActaRecibidoId.Id = m.ActaRecibido.Id
+			elemento.ActaRecibidoId = &ActaRecibido{Id: m.ActaRecibido.Id}
 			_, err = o.Insert(&elemento)
 			if err != nil {
 				return
