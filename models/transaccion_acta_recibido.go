@@ -8,8 +8,8 @@ import (
 type TransaccionActaRecibido struct {
 	ActaRecibido *ActaRecibido
 	UltimoEstado *HistoricoActa
-	SoportesActa []SoporteActa
-	Elementos    []Elemento
+	SoportesActa []*SoporteActa
+	Elementos    []*Elemento
 }
 
 // GetTransaccionActaRecibido Obtener transacción con la información de un Acta de Recibido
@@ -30,7 +30,7 @@ func GetTransaccionActaRecibido(id int, getElementos bool) (v TransaccionActaRec
 	}
 
 	v.UltimoEstado = &ultimoEstado
-	var soportes []SoporteActa
+	var soportes []*SoporteActa
 
 	_, err = o.QueryTable(new(SoporteActa)).RelatedSel().Filter("ActaRecibidoId__Id", id).Filter("Activo", true).All(&soportes)
 	if err != nil {
@@ -39,7 +39,7 @@ func GetTransaccionActaRecibido(id int, getElementos bool) (v TransaccionActaRec
 
 	v.SoportesActa = soportes
 	if getElementos {
-		var elementos []Elemento
+		var elementos []*Elemento
 		_, err = o.QueryTable(new(Elemento)).RelatedSel().Filter("ActaRecibidoId__Id", id).Filter("Activo", true).All(&elementos)
 		if err != nil {
 			return
@@ -92,7 +92,7 @@ func AddTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 
 	for _, v := range m.SoportesActa {
 		v.ActaRecibidoId = &ActaRecibido{Id: int(idActa)}
-		_, err = o.Insert(&v)
+		_, err = o.Insert(v)
 		if err != nil {
 			return
 		}
@@ -100,7 +100,7 @@ func AddTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 
 	for _, w := range m.Elementos {
 		w.ActaRecibidoId = &ActaRecibido{Id: int(idActa)}
-		_, err = o.Insert(&w)
+		_, err = o.Insert(w)
 		if err != nil {
 			return
 		}
@@ -169,14 +169,14 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 
 			if i := findIdInArray(listSoportes, soporte.Id); i > -1 {
 				listSoportes = append(listSoportes[:i], listSoportes[i+1:]...)
-				_, err = o.Update(&soporte)
+				_, err = o.Update(soporte)
 				if err != nil {
 					return
 				}
 			}
 		} else {
 			soporte.ActaRecibidoId = &ActaRecibido{Id: m.ActaRecibido.Id}
-			_, err = o.Insert(&soporte)
+			_, err = o.Insert(soporte)
 			if err != nil {
 				return
 			}
@@ -187,7 +187,7 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 	for _, id := range listSoportes {
 		id_, _ := id.(int64)
 		soporteInactivo := SoporteActa{Id: int(id_), Activo: false}
-		_, err = o.Update(&soporteInactivo, "Activo")
+		_, err = o.Update(soporteInactivo, "Activo")
 		if err != nil {
 			return
 		}
@@ -204,14 +204,14 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 
 			if i := findIdInArray(listElementos, elemento.Id); i > -1 {
 				listElementos = append(listElementos[:i], listElementos[i+1:]...)
-				_, err = o.Update(&elemento)
+				_, err = o.Update(elemento)
 				if err != nil {
 					return
 				}
 			}
 		} else {
 			elemento.ActaRecibidoId = &ActaRecibido{Id: m.ActaRecibido.Id}
-			_, err = o.Insert(&elemento)
+			_, err = o.Insert(elemento)
 			if err != nil {
 				return
 			}
@@ -221,7 +221,7 @@ func UpdateTransaccionActaRecibido(m *TransaccionActaRecibido) (err error) {
 	for _, id := range listElementos {
 		id_, _ := id.(int64)
 		elementoInactivo := Elemento{Id: int(id_), Activo: false}
-		_, err = o.Update(&elementoInactivo, "Activo")
+		_, err = o.Update(elementoInactivo, "Activo")
 		if err != nil {
 			return
 		}
