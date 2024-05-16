@@ -31,7 +31,6 @@ func (m *UnidadEjecutora_20221023_224258) Up() {
 	}
 
 	requests := strings.Split(string(file), ";")
-	requests = []string{}
 	for _, request := range requests {
 		fmt.Println(request)
 		m.SQL(request)
